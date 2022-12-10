@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+<div style="display:flex;">
+    <button type="button" class="collapsible">Open Section 1</button>
+    <div class="content">
+        <div><p>!!!!!</p></div>
+    </div>
+</div>
+
+
+
+
+    <div >
+        <h1>Editable</h1>
+        {% for i in mod_list %}
+                <!-- ^ name of 'model_list' var in 'Edit_list' func in views.py-->
+            <div style="display:flex;">
+                <button type="button" class="collapsible">{% trans i.0 %}</button>
+                <div class="content">
+                    {% for j in i.1  %}
+                        <h4 id="data_value">
+                            <a style="  text-decoration: none;
+                                        color: blue;"
+                                        href="{% url 'Main_site:edit_data' i.0 j.id %}">
+                                        {{j}}
+                            </a>
+                        </h4>
+                    {% endfor %}
+                    <h5 id="low_margin" style=" background-color: rgb(218, 218, 218);
+                                                width: max-content;">
+                        <a href="{% url 'Main_site:add_data' i.0 %}">{% trans 'добавить' %}</a>
+                                        <!-- ^ 1)    ^ 2):   1) - name in urls.py, 2) - "Add_data" argument in views.py -->
+                                        <!-- 2) - also can be repr like <a href="{% url 'Main_site:add_data' model_name=i.0 %}">add </a> -->
+                    </h5>
+                </div>
+            </div>
+            <!-- <hr> -->
+        {% endfor %}
+
+    </div>
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+              content.style.display = "none";
+            } else {
+              content.style.display = "block";
+            }
+          });
+        }
+        </script>
+
+
+{% endblock %}

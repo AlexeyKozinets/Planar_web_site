@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div style="    margin-right: 40%;
+                    margin-left: 5%;">
+        <h1>Add data</h1>
+        <form   method="POST"
+                enctype="multipart/form-data"
+                id = "multiForm"
+                data-class-url="{% url 'Main_site:ajax_load_classes' %}"
+                data-category-url="{% url 'Main_site:ajax_load_categories' %}">
+
+
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">
+                submit
+            </button>
+        </form>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>
+
+            $("#id_company").change(function () {
+                const url = $("#multiForm").attr("data-class-url");  // get the url of the `load_cities` view
+                const companyId = $(this).val();    // get the selected country ID from the HTML input
+
+                $.ajax({            // initialize an AJAX request
+                    url: url,       // set the url of the request (= /persons/ajax/load-cities/ )
+
+                    data: {
+                        'company_id': companyId     // add the country id to the GET parameters
+                    },
+
+                    success: function (data) {                  // `data` is the return of the `load_cities` view function
+                        $("#id_equipment_class").html(data);    // replace the contents of the city input with the data that came from the server
+                        $("#id_equipment_category").html('<option value="">---------</option>');
+                    }
+
+                });
+
+            });
+        </script>
+
+
+        <script>
+            $("#id_equipment_class").change(function () {
+                const url = $("#multiForm").attr("data-category-url");  // get the url of the `load_cities` view
+                const categoryId = $(this).val();    // get the selected country ID from the HTML input
+
+                $.ajax({            // initialize an AJAX request
+                    url: url,       // set the url of the request (= /persons/ajax/load-cities/ )
+
+                    data: {
+                        'class_id': categoryId     // add the country id to the GET parameters
+                    },
+
+                    success: function (data) {                  // `data` is the return of the `load_cities` view function
+                        $("#id_equipment_category").html(data);    // replace the contents of the city input with the data that came from the server
+                    }
+
+                });
+
+            });
+        </script>
+
+
+
+{% endblock %}
