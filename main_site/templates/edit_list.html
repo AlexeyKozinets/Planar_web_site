@@ -8,7 +8,14 @@
 
         <div class="buttons_container">
             {% for i in mod_list %}
-                <button class="tablinks" onclick="openCity(event, '{% trans i.0 %}')" id="defaultOpen">{% trans i.0 %}</button>
+                <button class="tablinks" onclick="openCity(event, '{% trans i.0 %}')" id="defaultOpen">
+                    <div style="display: flex; justify-content: space-between;">
+                        {% trans i.0 %}
+                        <a class="add" class href="{% url 'Main_site:add_data' i.0 %}">
+                            +
+                        </a>
+                    </div>
+                </button>
             {% endfor %}
         </div>
 
@@ -16,14 +23,12 @@
         {% for i in mod_list %}
             <div id="{% trans i.0 %}" class="tabcontent">
                 {% for j in i.1  %}
-                    <p>
-                        <a href="{% url 'Main_site:edit_data' i.0 j.id %}"> {{j}} </a>
-                    </p>
+                    <a href="{% url 'Main_site:edit_data' i.0 j.id %}">
+                        <p class="content">
+                            {{j}}
+                        </p>
+                    </a>
                 {% endfor %}
-
-                <a id="href" href="{% url 'Main_site:add_data' i.0 %}">
-                    {% trans 'добавить' %}
-                </a>
             </div>
         {% endfor %}
 
