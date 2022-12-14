@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-08 16:08+0300\n"
+"POT-Creation-Date: 2022-12-13 15:12+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: .\Planar\settings.py:119
+
+#: .\Planar\settings.py:120
 msgid "Russian"
 msgstr ""
 
-#: .\Planar\settings.py:120
+#: .\Planar\settings.py:121
 msgid "English"
 msgstr ""
 
@@ -30,29 +31,33 @@ msgid "Комания"
 msgstr "Company"
 
 #: .\main_site\models.py:22
-msgid "Название класса оборудования"
-msgstr "Equipment class name"
+msgid "Название"
+msgstr "Name"
 
 #: .\main_site\models.py:23
-msgid "Предназанчение класса оборудования"
+msgid "Предназанчение"
 msgstr "Short description"
 
 #: .\main_site\models.py:24
-msgid "Полное описание класса оборудования"
+msgid "Полное описание"
 msgstr "Full description"
 
 #: .\main_site\models.py:33
-msgid "Наименования классов оборудования"
+msgid "Классы оборудования"
 msgstr "Equipment classes"
 
 #: .\main_site\models.py:53
-msgid "Наименование категорий оборудования"
+msgid "Категории оборудования"
 msgstr "Equipment categories"
 
 #: .\main_site\models.py:73
 msgid "Наименования оборудования"
 msgstr "Equipment items"
 
-#: .\main_site\templates\edit_list.html:20
+#: .\main_site\models.py:90
+msgid "Наименования аксессуаров"
+msgstr "Equipment accessory"
+
+#: .\main_site\templates\edit_list.html:29
 msgid "добавить"
 msgstr "add"

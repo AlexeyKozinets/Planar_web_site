@@ -19,9 +19,9 @@ class Company(models.Model):
 class Equipment_Class(models.Model):
     #which have name of holding
     company = models.ForeignKey('Company', on_delete=models.CASCADE, verbose_name = _('Комания'))
-    class_name = models.CharField(blank = False, max_length = 150, verbose_name = _('Название класса оборудования'))
-    short_description =  models.CharField(blank = False,max_length = 150, verbose_name = _('Предназанчение класса оборудования'))
-    full_description = models.TextField(blank = False, max_length = 1500, verbose_name = _('Полное описание класса оборудования'))
+    class_name = models.CharField(blank = False, max_length = 150, verbose_name = _('Название'))
+    short_description =  models.CharField(blank = False,max_length = 150, verbose_name = _('Предназанчение'))
+    full_description = models.TextField(blank = False, max_length = 1500, verbose_name = _('Полное описание'))
     img = models.ImageField(upload_to = 'equipment_class_uploads', verbose_name = 'Изображение', null=True, blank=True)
     is_published = models.BooleanField(default=True, verbose_name = 'Отображение')
 
@@ -29,18 +29,18 @@ class Equipment_Class(models.Model):
         return self.class_name
 
     class Meta:
-        verbose_name = 'Наименование классов оборудования'
-        verbose_name_plural = _('Наименования классов оборудования')
+        verbose_name = 'Класс оборудования'
+        verbose_name_plural = _('Классы оборудования')
         ordering = ['class_name',]
 
 
 class Equipment_Category(models.Model):
     #refference to class (one to many)
     company = models.ForeignKey('Company', on_delete=models.CASCADE, verbose_name = 'Комания')
-    equipment_class = models.ForeignKey('Equipment_Class', on_delete=models.CASCADE, verbose_name = 'Класс оборудования')
-    category_name = models.CharField(max_length=150, blank=False, verbose_name='Название категории')
-    short_description =  models.CharField(blank = False,max_length = 150, verbose_name = 'Предназанчение категории оборудования')
-    full_description = models.TextField(blank = False, max_length = 1500, verbose_name = 'Полное описание категории оборудования')
+    equipment_class = models.ForeignKey('Equipment_Class', on_delete=models.CASCADE, verbose_name = 'Класс')
+    category_name = models.CharField(max_length=150, blank=False, verbose_name='Название')
+    short_description =  models.CharField(blank = False,max_length = 150, verbose_name = 'Предназанчение')
+    full_description = models.TextField(blank = False, max_length = 1500, verbose_name = 'Полное описание')
     is_published = models.BooleanField(default=True, verbose_name = 'Отображение')
 
 
@@ -49,19 +49,19 @@ class Equipment_Category(models.Model):
         return self.category_name
 
     class Meta:
-        verbose_name = 'Наименование категорий оборудования'
-        verbose_name_plural = _('Наименование категорий оборудования')
+        verbose_name = 'Категория оборудования'
+        verbose_name_plural = _('Категории оборудования')
         ordering = ['category_name',]
 
 
 class Equipment_Item(models.Model):
     #refference to category (one to many)
     company = models.ForeignKey('Company', on_delete=models.CASCADE, verbose_name = 'Комания')
-    equipment_class = models.ForeignKey('Equipment_Class', on_delete=models.CASCADE, verbose_name = 'Класс оборудования')
-    equipment_category = models.ForeignKey('Equipment_Category', on_delete=models.CASCADE, verbose_name = 'Категория оборудования')
-    item_name = models.CharField(max_length=150, blank=False, verbose_name='Название оборудования')
-    short_description =  models.CharField(blank = False,max_length = 150, verbose_name = 'Предназанчение оборудования')
-    full_description = models.TextField(blank = False, max_length = 1500, verbose_name = 'Полное описание оборудования')
+    equipment_class = models.ForeignKey('Equipment_Class', on_delete=models.CASCADE, verbose_name = 'Класс')
+    equipment_category = models.ForeignKey('Equipment_Category', on_delete=models.CASCADE, verbose_name = 'Категория')
+    item_name = models.CharField(max_length=150, blank=False, verbose_name='Название')
+    short_description =  models.CharField(blank = False,max_length = 150, verbose_name = 'Предназанчение')
+    full_description = models.TextField(blank = False, max_length = 1500, verbose_name = 'Полное описание')
     is_published = models.BooleanField(default=True, verbose_name = 'Отображение')
     pass
 
@@ -77,9 +77,9 @@ class Equipment_Acessory(models.Model):
     #refference to items (many to many)
     company = models.ForeignKey('Company', on_delete=models.CASCADE,verbose_name = 'Комания')
     equipment = models.ManyToManyField('Equipment_Item', verbose_name='Oборудование')
-    acessory_name = models.CharField(max_length=150, blank=False, verbose_name='Название аксессуара')
-    short_description =  models.CharField(blank = False,max_length = 150, verbose_name = 'Предназанчение аксессуара')
-    full_description = models.TextField(blank = False, max_length = 1500, verbose_name = 'Полное описание аксессуара')
+    acessory_name = models.CharField(max_length=150, blank=False, verbose_name='Название')
+    short_description =  models.CharField(blank = False,max_length = 150, verbose_name = 'Предназанчение')
+    full_description = models.TextField(blank = False, max_length = 1500, verbose_name = 'Полное описание')
     is_published = models.BooleanField(default=True, verbose_name = 'Отображение')
 
     def __str__(self):
