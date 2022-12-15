@@ -1,23 +1,56 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% load static %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/data_form_styles.css' %}">
 
-    <div style="    margin-right: 40%;
-                    margin-left: 5%;">
-        <h1>Add data</h1>
+    {% if form.equipment_class and not form.equipment_category  %}
+        <h1 class="Add--chapterName--">{% trans 'Категория' %}</h1>
+    {% elif form.equipment_category %}
+            <h1 class="Add--chapterName--">{% trans 'Объект' %}</h1>
+    {% elif form.equipment %}
+        <h1 class="Add--chapterName--">{% trans 'Аксессуар' %}</h1>
+    {% else %}
+        <h1 class="Add--chapterName--">{% trans 'Класс' %}</h1>
+    {% endif %}
+
+    <div class="form_container">
         <form   method="POST"
                 enctype="multipart/form-data"
                 id = "multiForm"
                 data-class-url="{% url 'Main_site:ajax_load_classes' %}"
-                data-category-url="{% url 'Main_site:ajax_load_categories' %}">
+                data-category-url="{% url 'Main_site:ajax_load_categories' %}"
+                class="form">
 
 
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">
-                submit
+
+
+            <!-- ++++++++ working ++++++++ -->
+            <!-- {{form.non_field_errors}}
+            {%if form.company %}
+                <div>
+                    {{ form.company.errors }}
+                    {{ form.company.label_tag }}
+                    {{ form.company }}
+                </div>
+            {% endif %}
+            {%if form.equipment_class %}
+                <div>
+                    {{ form.equipment_class.errors }}
+                    {{ form.equipment_class.label_tag }}
+                    {{ form.equipment_class }}
+                </div>
+            {% endif %} -->
+            <!-- ++++++++ +++++++ ++++++++ -->
+
+            <button class="formButton" type="submit">
+                Ok
             </button>
         </form>
+    </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script>

@@ -2,12 +2,14 @@
     justify-content: space-between;
     display: flex;
     background: linear-gradient(to right, rgb(152, 47, 223), rgb(0, 149, 248));
+    min-width: 500px;
 }
 
 
 
 .chapters_container{
-    margin: 2em 1em;
+    margin: 2em 2em;
+    margin-right: 3em;
     display: grid;
     grid-template-columns: max-content minmax(200px, 1fr);
     grid-gap: 1em
@@ -18,6 +20,12 @@
     display: flex;
     flex-direction: column;
     min-width: max-content;
+}
+
+.tab_container{
+    display: flex;
+    justify-content: space-between;
+    line-height: 2em;
 }
 
 .tablinks{
@@ -32,39 +40,65 @@
     font-family: Calibri;
     font-size: 1em;
     justify-content: space-between;
-
 }
 
 
-.add{
+.tablinks.active{
+    background-color:rgb(230, 229, 229);
+    color: black;
+    transform: translateX(10px);
+}
+
+
+.add_place_holder{
+    width: 2em;
+    position: relative;
+    right: -8px;
+
+}
+
+.tab_add{
     display: none;
 }
 
-.tablinks.active{
-    background-color: rgb(187, 187, 187);
-}
-
-.tablinks.active > div > .add {
+.tablinks.active > .tab_container > .add_place_holder > .tab_add {
     display: block;
-    color: blue;
-    margin-left: 0.5em;
+    color: rgb(128, 128, 128);
     font-size: 1em;
     font-weight: 800;
+    height: 2em;
     width: 2em;
     text-align: center;
-    /* background-color: aqua; */
+    background-color:rgb(211, 211, 211);
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
 }
+
+
 
 .tablinks:hover{
-    background-color: rgb(230, 229, 229);
+    background-color: rgb(0, 140, 255);
     transform: translateX(10px);
+    color: white;
     transition: 0.3s;
-    
 }
 
+.tablinks:hover > .tab_container > .add_place_holder > .tab_add {
+    background-color: rgb(0, 128, 233);
+    color: white;
+    transition: 0.3s;
 
+}
+
+.tablinks:hover > .tab_container > .add_place_holder > .tab_add:hover {
+    background-color: rgb(131, 180, 138);
+    color: white;
+    transition: 0.3s;
+}
 
 .content{
+    display: flex;
+
     margin: 0px 0px;
     margin-bottom: 2px;
     height: 2em;
@@ -72,14 +106,43 @@
     line-height: 2em;
     border-radius: 0.5em;
     text-indent: 0.5em;
-    padding-inline: 2em;
 }
 
 .content:hover{
     background-color: rgb(230, 229, 229);
+    transform: translateX(2.8em);
     transition: 0.3s;
 }
 
+
+.edit_content{
+    position: absolute;
+    color: transparent;
+    z-index: -2;
+    padding-left: 0.1em;
+    padding-right: 1em;
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+    
+}
+
+.data_content{
+    width: 100%;
+    border-radius: 0.5em;
+}
+
+.content:hover > .edit_content{
+    transform: translateX(-2.8em);
+    transition: 0.3s;
+    color: black;
+    background-color: rgb(255, 249, 167);
+}
+
+
+.content:hover > .data_content{
+    background-color: rgb(230, 229, 229);
+    transition: 0.3s;
+}
 
 a{
     text-decoration: none;

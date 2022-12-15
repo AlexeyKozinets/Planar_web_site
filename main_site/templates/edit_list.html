@@ -8,12 +8,14 @@
 
         <div class="buttons_container">
             {% for i in mod_list %}
-                <button class="tablinks" onclick="openCity(event, '{% trans i.0 %}')" id="defaultOpen">
-                    <div style="display: flex; justify-content: space-between;">
+                <button class="tablinks" onclick="openDataList(event, '{% trans i.0 %}')" id="defaultOpen">
+                    <div class="tab_container">
                         {% trans i.0 %}
-                        <a class="add" class href="{% url 'Main_site:add_data' i.0 %}">
-                            +
-                        </a>
+                        <div class="add_place_holder">
+                            <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">
+                                +
+                            </a>
+                        </div>
                     </div>
                 </button>
             {% endfor %}
@@ -24,9 +26,10 @@
             <div id="{% trans i.0 %}" class="tabcontent">
                 {% for j in i.1  %}
                     <a href="{% url 'Main_site:edit_data' i.0 j.id %}">
-                        <p class="content">
-                            {{j}}
-                        </p>
+                        <div class="content">
+                            <div class="edit_content">edit</div>
+                            <div class="data_content"> {{j}} </div>
+                        </div>
                     </a>
                 {% endfor %}
             </div>
@@ -37,7 +40,7 @@
 
 
     <script>
-        function openCity(evt, cityName) {
+        function openDataList(evt, chapterName) {
           var i, tabcontent, tablinks;
           tabcontent = document.getElementsByClassName("tabcontent");
           for (i = 0; i < tabcontent.length; i++) {
@@ -47,7 +50,7 @@
           for (i = 0; i < tablinks.length; i++) {
             tablinks[i].className = tablinks[i].className.replace(" active", "");
           }
-          document.getElementById(cityName).style.display = "block";
+          document.getElementById(chapterName).style.display = "block";
           evt.currentTarget.className += " active";
         }
 

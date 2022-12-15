@@ -1,0 +1,129 @@
+.form_container{
+    margin: 2em 5em;
+    min-width: 400px;
+}
+
+.Add--chapterName--{
+    font-family: Calibri;
+    margin-left: 3em;
+}
+
+label{
+    font-family: Calibri;
+}
+
+/* foreign keys */
+#id_company,
+#id_equipment_class,
+#id_equipment_category{
+    width: 100%;
+    height: 2em;
+    font-size: 1em;
+    border-radius: 0.5em;
+    padding-left: 0.5em;
+    background-color: rgb(245, 245, 245);
+    border: solid 3px white;
+}
+
+#id_company:hover,
+#id_equipment_class:hover,
+#id_equipment_category:hover{
+    border-color: rgb(0, 140, 255);
+    transition: 0.3s;
+}
+
+#id_company:focus,
+#id_equipment_class:focus,
+#id_equipment_category:focus{
+    outline: none;
+    border: solid 3px rgb(0, 140, 255);
+}
+
+
+/* names */
+#id_class_name_ru,      #id_class_name_en,
+#id_category_name_ru,   #id_category_name_en,
+#id_item_name_ru,       #id_item_name_en,
+#id_acessory_name_ru,   #id_acessory_name_en{
+    background-color: rgb(245, 245, 245);
+    width: 100%;
+    box-sizing: border-box;
+    height: 2em;
+    font-size: 1em;
+    border: solid 3px white;
+    border-radius: 0.5em;
+    padding-left: 0.5em;
+}
+
+#id_class_name_ru:hover,      #id_class_name_en:hover,
+#id_category_name_ru:hover,   #id_category_name_en:hover,
+#id_item_name_ru:hover,       #id_item_name_en:hover,
+#id_acessory_name_ru:hover,   #id_acessory_name_en:hover{
+    border-color: rgb(0, 140, 255);
+    transition: 0.3s;
+}
+
+#id_class_name_ru:focus,      #id_class_name_en:focus,
+#id_category_name_ru:focus,   #id_category_name_en:focus,
+#id_item_name_ru:focus,       #id_item_name_en:focus,
+#id_acessory_name_ru:focus,   #id_acessory_name_en:focus{
+    outline: none;
+    border: solid 3px rgb(0, 140, 255);
+}
+
+
+/* descriptions */
+#id_short_description_ru,
+#id_short_description_en{
+    background-color: rgb(245, 245, 245);
+    width: 100%;
+    box-sizing: border-box;
+    height: 2em;
+    font-size: 1em;
+    border-radius: 0.5em;
+    padding-left: 0.5em;
+    border: solid 3px white;
+}
+
+
+#id_full_description_ru,
+#id_full_description_en{
+    background-color: rgb(245, 245, 245);
+    min-width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    font-family: Calibri;
+    font-size: 1em;
+    border-radius: 0.5em;
+    border: solid 3px white;
+}
+
+#id_short_description_ru:hover,   #id_short_description_en:hover,
+#id_full_description_ru:hover,    #id_full_description_en:hover{
+    border-color: rgb(0, 140, 255);
+    transition: 0.3s;
+}
+
+#id_short_description_ru:focus,   #id_short_description_en:focus,
+#id_full_description_ru:focus,    #id_full_description_en:focus{
+    outline: none;
+    border: solid 3px rgb(0, 140, 255);
+}
+
+.formButton{
+    font-family: Calibri;
+    width: 100%;
+    height: 2em;
+    font-size: 1em;
+    border-radius: 0.5em;
+    border: none;
+    -webkit-border-radius: 0.5em;
+
+}
+
+.formButton:hover{
+    background-color: rgb(0, 140, 255);
+    border-color: rgb(1, 65, 117);
+    color: white;
+    transition: 0.3s;
+}
