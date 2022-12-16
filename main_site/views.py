@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .eq_forms import Equipment_Class_Form, Equipment_Category_Form, Equipment_Item_Form, Equipment_Acessory_Form
 from .models import Equipment_Class, Equipment_Category, Equipment_Item, Equipment_Acessory
+from django.urls import reverse
 
 
 
@@ -31,12 +32,16 @@ def Add_data(request,model_name):
             #_______________________________________________________________(
             if model_name == Equipment_Class._meta.verbose_name_plural:
                 form = Equipment_Class_Form(request.user,request.POST, request.FILES)
+                modelId=1
             elif model_name == Equipment_Category._meta.verbose_name_plural:
                 form = Equipment_Category_Form(request.user,request.POST, request.FILES)
+                modelId=2
             elif model_name == Equipment_Item._meta.verbose_name_plural:
                 form = Equipment_Item_Form(request.user,request.POST, request.FILES)
+                modelId=3
             elif model_name == Equipment_Acessory._meta.verbose_name_plural:
                 form = Equipment_Acessory_Form(request.user,request.POST, request.FILES)
+                modelId=4
             #_______________________________________________________________)
 
             if form.is_valid():
@@ -47,7 +52,7 @@ def Add_data(request,model_name):
                 if model_name == Equipment_Acessory._meta.verbose_name_plural:
                     form.save_m2m()     # <-- saving "many to many" fields (must be final step of savin the form)
 
-                return redirect('Main_site:edit_list')
+                return redirect(reverse('Main_site:edit_list', kwargs={ 'modelId': modelId })) #add modelId to request.path
 
         context = {'form':form}
 
@@ -80,12 +85,16 @@ def Edit_data(request,model_name,pk):
             #_______________________________________________________________(
             if model_name == Equipment_Class._meta.verbose_name_plural:
                 form = Equipment_Class_Form(request.user,request.POST, request.FILES, instance=editable)
+                modelId=1
             elif model_name == Equipment_Category._meta.verbose_name_plural:
                 form = Equipment_Category_Form(request.user,request.POST, request.FILES, instance=editable)
+                modelId=2
             elif model_name == Equipment_Item._meta.verbose_name_plural:
                 form = Equipment_Item_Form(request.user,request.POST, request.FILES, instance=editable)
+                modelId=3
             elif model_name == Equipment_Acessory._meta.verbose_name_plural:
                 form = Equipment_Acessory_Form(request.user,request.POST, request.FILES, instance=editable)
+                modelId=4
             #_______________________________________________________________)
 
             if form.is_valid():
@@ -96,7 +105,8 @@ def Edit_data(request,model_name,pk):
                 if model_name == Equipment_Acessory._meta.verbose_name_plural:
                     form.save_m2m()
 
-                return redirect('Main_site:edit_list')
+                return redirect(reverse('Main_site:edit_list', kwargs={ 'modelId': modelId })) #add modelId to request.path
+                # return redirect('Main_site:edit_list')
 
         context = {'form':form}
 
@@ -120,7 +130,7 @@ def load_categories(request):
 #++++++++++++++++++++++++++++++++++++++++++
 
 
-def Edit_list(request):
+def Edit_list(request, modelId):
     models = [
         Equipment_Class,
         Equipment_Category,
@@ -150,7 +160,8 @@ def Edit_list(request):
             #                   ....,
             #                   ]
 
-        context = {'mod_list': models_list,}
+        context = { 'mod_list': models_list,
+                    }
 
         return render(request, 'edit_list.html', context)
     else:

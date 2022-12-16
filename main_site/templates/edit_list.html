@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% load i18n %}
 
 {% block content %}
@@ -8,16 +9,40 @@
 
         <div class="buttons_container">
             {% for i in mod_list %}
-                <button class="tablinks" onclick="openDataList(event, '{% trans i.0 %}')" id="defaultOpen">
-                    <div class="tab_container">
-                        {% trans i.0 %}
-                        <div class="add_place_holder">
-                            <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">
-                                +
-                            </a>
+            <!-- forloop.counter - var which exist in for-tag and means number of iteration (1,2,3,...,end).
+                There exist different vars ( https://docs.djangoproject.com/en/4.1/ref/templates/builtins/ )-->
+
+            <!-- |stringformat:"i" - formating to the string
+                (https://docs.python.org/2/library/stdtypes.html#string-formatting-operations) -->
+
+            <!-- if-condition is need for setting of >id="defaultOpen"<, which used by script below.
+                When str(forloop.counter) in url.path or str(0) in url.path then >id="defaultOpen"< is added to
+                 button properties and script toggle the button to active -->
+            <!-- ???? need think about using js insted django ???? -->
+
+                {% if forloop.counter|stringformat:"i" in request.path or '0' in request.path %}
+                    <button class="tablinks" onclick="openDataList(event, '{% trans i.0 %}')" id="defaultOpen">
+                        <div class="tab_container">
+                            {% trans i.0 %}
+                            <div class="add_place_holder">
+                                <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">
+                                    +
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </button>
+                    </button>
+                {% else %}
+                    <button class="tablinks" onclick="openDataList(event, '{% trans i.0 %}')">
+                        <div class="tab_container">
+                            {% trans i.0 %}
+                            <div class="add_place_holder">
+                                <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">
+                                    +
+                                </a>
+                            </div>
+                        </div>
+                    </button>
+                {% endif %}
             {% endfor %}
         </div>
 
@@ -27,15 +52,32 @@
                 {% for j in i.1  %}
                     <a href="{% url 'Main_site:edit_data' i.0 j.id %}">
                         <div class="content">
-                            <div class="edit_content">edit</div>
-                            <div class="data_content"> {{j}} </div>
+                            <div class="edit_content">
+                                <img src="{% static 'icons/edit_note_FILL0_wght700_GRAD0_opsz48.svg' %}" class="edit_icon">
+                            </div>
+                            <div class="data_content">
+                                <div class="data_name">
+                                    {{j}}
+                                </div>
+                                <div class="data_path">
+                                    {%if j.equipment_category%}
+                                        / {{j.equipment_category}}
+                                    {% endif %}
+
+                                    {%if j.equipment_class%}
+                                        / {{j.equipment_class}}
+                                    {% endif %}
+
+                                    {%if user.is_superuser %}
+                                        / {{j.company}}
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
                     </a>
                 {% endfor %}
             </div>
         {% endfor %}
-
-
     </div>
 
 
@@ -56,7 +98,7 @@
 
         // Get the element with id="defaultOpen" and click on it
         document.getElementById("defaultOpen").click();
-        </script>
+    </script>
 
 
 {% endblock %}

@@ -9,7 +9,7 @@
 
 .chapters_container{
     margin: 2em 2em;
-    margin-right: 3em;
+    margin-right: 5em;
     display: grid;
     grid-template-columns: max-content minmax(200px, 1fr);
     grid-gap: 1em
@@ -98,7 +98,6 @@
 
 .content{
     display: flex;
-
     margin: 0px 0px;
     margin-bottom: 2px;
     height: 2em;
@@ -110,38 +109,64 @@
 
 .content:hover{
     background-color: rgb(230, 229, 229);
-    transform: translateX(2.8em);
+
     transition: 0.3s;
 }
 
 
 .edit_content{
+    height: 2em;
     position: absolute;
-    color: transparent;
-    z-index: -2;
+    z-index: -1;
     padding-left: 0.1em;
     padding-right: 1em;
     border-top-left-radius: 0.5em;
     border-bottom-left-radius: 0.5em;
-    
+}
+
+.edit_icon{
+    max-height: 80%;
+    max-width: 80%;
+    padding-top: 3px;
+    filter: invert(100%) sepia(7%) saturate(241%) hue-rotate(248deg) brightness(115%) contrast(100%);
+    /* change color of .svg files https://codepen.io/sosuke/pen/Pjoqqp */
 }
 
 .data_content{
+    display: flex;
     width: 100%;
+    background-color: white;
     border-radius: 0.5em;
 }
 
+.data_name{
+    width: fit-content;
+    min-width: fit-content;
+}
+
+.data_path{
+    color: rgb(124, 124, 124);
+    width: fit-content;      /* % not working with "text-overflow: ellipsis" */
+    white-space: nowrap;     /* need to overflow is work */
+    overflow: hidden;        /* hide string when it's doesen't fit */
+    text-overflow: ellipsis; /* add "..." to string when it's doesen't fit */
+    /* https://stackoverflow.com/questions/17779293/css-text-overflow-ellipsis-not-working */
+}
+
 .content:hover > .edit_content{
-    transform: translateX(-2.8em);
+    /* transform: translateX(-2.8em); */
+    color: white;
+    background-color: rgb(0, 128, 233);
+    z-index: 0;
     transition: 0.3s;
-    color: black;
-    background-color: rgb(255, 249, 167);
 }
 
 
 .content:hover > .data_content{
     background-color: rgb(230, 229, 229);
+    transition-delay: 0.1s;
     transition: 0.3s;
+    transform: translateX(2.5em);
 }
 
 a{

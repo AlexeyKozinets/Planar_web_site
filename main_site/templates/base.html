@@ -23,7 +23,7 @@
 
             {% if user.is_authenticated %}
             <div class="test1">
-                <a href = "{% url 'Main_site:edit_list' %}">
+                <a href = "{% url 'Main_site:edit_list' 0 %}">
                     <h1 style="margin: 0em 1em;color: white;"> {% trans 'Данные' %} </h1>
                 </a>
             </div>
