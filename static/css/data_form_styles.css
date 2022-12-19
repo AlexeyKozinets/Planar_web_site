@@ -1,5 +1,6 @@
 .form_container{
-    margin: 2em 5em;
+    margin: 5em 5em;
+    margin-top: 2em;
     min-width: 400px;
 }
 
@@ -114,7 +115,7 @@ label{
     font-family: Calibri;
     font-weight: 800;
     width: 100%;
-    height: 2em;
+    height: 3em;
     font-size: 1em;
     border-radius: 0.5em;
     border: none;

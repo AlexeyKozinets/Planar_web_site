@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block content %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/chapters_styles' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/chapters_styles.css' %}">
 
     <div class="chapters_container">
 
@@ -62,15 +62,15 @@
                                 </div>
                                 <div class="data_path">
                                     {%if j.equipment_category%}
-                                        / {{j.equipment_category}}
+                                        \ {{j.equipment_category}}
                                     {% endif %}
 
                                     {%if j.equipment_class%}
-                                        / {{j.equipment_class}}
+                                        \ {{j.equipment_class}}
                                     {% endif %}
 
                                     {%if user.is_superuser %}
-                                        / {{j.company}}
+                                        \ {{j.company}}
                                     {% endif %}
                                 </div>
                             </div>

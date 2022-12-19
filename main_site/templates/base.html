@@ -8,65 +8,54 @@
     <title>Base</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/header_styles.css' %}">
 </head>
-<body style="margin: 0px">
+<body style="margin: 0px;">
 
 
     <div class="base_header">
-        <div style="display: flex;
-                    align-items: center
-                        ">
+        <div class="left_side">
             <div>
                 <a>
-                    <h1 style="margin: 0em 1em;color: white;"> {% trans 'Каталог' %} </h1>
+                    {% trans 'Каталог' %}
                 </a>
             </div>
 
             {% if user.is_authenticated %}
             <div class="test1">
                 <a href = "{% url 'Main_site:edit_list' 0 %}">
-                    <h1 style="margin: 0em 1em;color: white;"> {% trans 'Данные' %} </h1>
+                    {% trans 'Данные' %}
                 </a>
             </div>
             {% endif %}
         </div>
 
-        <div style="margin-right: 2%;">
+        <div class="right_side" >
             {% if user.is_authenticated %}
-                <div>
-                    <p style="  margin-bottom: 0px;
-                                margin-left: 1cm;">
-                        {{user.get_username}}
-                    </p>
+                <div class="right_content">
+                    <img class="icon" src="{% static 'icons/person_FILL0_wght400_GRAD0_opsz48.svg' %}">
+                    {{user.get_username}}
                 </div>
 
-                <div>
-                    <p style="  margin-bottom: 0px;
-                                margin-left: 1cm;">
-                        {{user.company}}
-                    </p>
+                <div class="right_content">
+                    <img class="icon" src="{% static 'icons/domain_FILL0_wght400_GRAD0_opsz48.svg' %}">
+                    {{user.company}}
                 </div>
 
-                <div>
-                    <a href="{% url 'logout' %}?next={{ request.path }}", style="text-decoration: none;">
-                        <h4 style=" margin-bottom: 0px;
-                                    margin-left: 1cm;
-                                    color: white;">
-                            logout
-                        </h4>
+                <div class="right_content">
+                    <a href="{% url 'logout' %}?next={{ request.path }}">
+                        <img class="icon" src="{% static 'icons/logout_FILL0_wght400_GRAD0_opsz48.svg' %}">
+                        logout
                     </a>
                 </div>
             {% else %}
-                <a href="{% url 'login' %}?next={{ request.path }}", style="text-decoration: none;">
-                    <h4 style=" margin-bottom: 0px;
-                                margin-left: 1cm;
-                                color: white;">
+                <div class="right_content">
+                    <a href="{% url 'login' %}?next={{ request.path }}">
+                        <img class="icon" src="{% static 'icons/login_FILL0_wght400_GRAD0_opsz48.svg' %}">
                         login
-                    </h4>
-                </a>
+                    </a>
+                </div>
             {% endif %}
-            <div>
+            <div class="form">
                 <!-- form for multilang:23) -->
-                {% load i18n %}
 
                 <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
                     <input name="next" type="hidden" value="{{ redirect_to }}">
