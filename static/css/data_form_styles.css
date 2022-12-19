@@ -42,6 +42,7 @@ label{
 
 
 /* names */
+#id_company_name_ru,    #id_company_name_en,
 #id_class_name_ru,      #id_class_name_en,
 #id_category_name_ru,   #id_category_name_en,
 #id_item_name_ru,       #id_item_name_en,
@@ -55,7 +56,7 @@ label{
     border-radius: 0.5em;
     padding-left: 0.5em;
 }
-
+#id_company_name_ru:hover,    #id_company_name_en:hover,
 #id_class_name_ru:hover,      #id_class_name_en:hover,
 #id_category_name_ru:hover,   #id_category_name_en:hover,
 #id_item_name_ru:hover,       #id_item_name_en:hover,
@@ -63,7 +64,7 @@ label{
     border-color: rgb(0, 140, 255);
     transition: 0.3s;
 }
-
+#id_company_name_ru:focus,    #id_company_name_en:focus,
 #id_class_name_ru:focus,      #id_class_name_en:focus,
 #id_category_name_ru:focus,   #id_category_name_en:focus,
 #id_item_name_ru:focus,       #id_item_name_en:focus,

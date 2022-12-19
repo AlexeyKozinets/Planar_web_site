@@ -9,7 +9,7 @@ from .models import (
     Equipment_Class,
     Equipment_Category,
     Equipment_Item,
-    Equipment_Acessory,
+    Equipment_Accessory,
 )                                                                       # <- multiLang:9) import models from model.py which fields
                                                                         # is need to be tansladed  (next: translation.py)
 
@@ -36,9 +36,9 @@ class Equipment_CategoryTranslationOptions(TranslationOptions):
     fields = ('item_name', 'short_description', 'full_description',)
     required_languages = ('ru', 'en')
 
-@register(Equipment_Acessory)
-class Equipment_AcessoryTranslationOptions(TranslationOptions):
-    fields = ('acessory_name', 'short_description', 'full_description',)
+@register(Equipment_Accessory)
+class Equipment_AccessoryTranslationOptions(TranslationOptions):
+    fields = ('accessory_name', 'short_description', 'full_description',)
     required_languages = ('ru', 'en')
 
 

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .eq_forms import Equipment_Class_Form, Equipment_Category_Form, Equipment_Item_Form, Equipment_Acessory_Form
-from .models import Equipment_Class, Equipment_Category, Equipment_Item, Equipment_Acessory
+from .eq_forms import Company_Form, Equipment_Class_Form, Equipment_Category_Form, Equipment_Item_Form, Equipment_Accessory_Form
+from .models import  Company, Equipment_Class, Equipment_Category, Equipment_Item, Equipment_Accessory
 from django.urls import reverse
 
 
@@ -16,32 +16,37 @@ def Add_data(request,model_name):
     if str(request.user) != 'AnonymousUser':            # checking in case that user is not log in
 
         #_______________________________________________________________(
-        if model_name == Equipment_Class._meta.verbose_name_plural:     # <-- cheking the name of the model to add data to
+        if model_name == Company.__name__:
+            form = Company_Form()
+        elif model_name == Equipment_Class.__name__:     # <-- cheking the name of the model to add data to
             form = Equipment_Class_Form(request.user)                   # <-- "request.user" go to forms.py in def __init__()
                                                                         # of "Equipment_Class_Form"
             # as "user" to set condition to render of fields (means 'company' field) to users and admin
-        elif model_name == Equipment_Category._meta.verbose_name_plural:
+        elif model_name == Equipment_Category.__name__:
             form = Equipment_Category_Form(request.user)
-        elif model_name == Equipment_Item._meta.verbose_name_plural:
+        elif model_name == Equipment_Item.__name__:
             form = Equipment_Item_Form(request.user)
-        elif model_name == Equipment_Acessory._meta.verbose_name_plural:
-            form = Equipment_Acessory_Form(request.user)
+        elif model_name == Equipment_Accessory.__name__:
+            form = Equipment_Accessory_Form(request.user)
         #_______________________________________________________________)
 
         if request.method == 'POST':
             #_______________________________________________________________(
-            if model_name == Equipment_Class._meta.verbose_name_plural:
+            if model_name == Company.__name__:
+                form = Company_Form(request.POST, request.FILES)
+                modelId=0 if request.user.is_superuser == False else 1
+            elif model_name == Equipment_Class.__name__:
                 form = Equipment_Class_Form(request.user,request.POST, request.FILES)
-                modelId=1
-            elif model_name == Equipment_Category._meta.verbose_name_plural:
+                modelId=1 if request.user.is_superuser == False else 2
+            elif model_name == Equipment_Category.__name__:
                 form = Equipment_Category_Form(request.user,request.POST, request.FILES)
-                modelId=2
-            elif model_name == Equipment_Item._meta.verbose_name_plural:
+                modelId=2 if request.user.is_superuser == False else 3
+            elif model_name == Equipment_Item.__name__:
                 form = Equipment_Item_Form(request.user,request.POST, request.FILES)
-                modelId=3
-            elif model_name == Equipment_Acessory._meta.verbose_name_plural:
-                form = Equipment_Acessory_Form(request.user,request.POST, request.FILES)
-                modelId=4
+                modelId=3 if request.user.is_superuser == False else 4
+            elif model_name == Equipment_Accessory.__name__:
+                form = Equipment_Accessory_Form(request.user,request.POST, request.FILES)
+                modelId=4 if request.user.is_superuser == False else 5
             #_______________________________________________________________)
 
             if form.is_valid():
@@ -49,7 +54,7 @@ def Add_data(request,model_name):
                 if request.user.is_superuser == False:
                     new_data.company = request.user.company             # <- auto set of "company" field if user in not superuser(admin)
                 new_data.save()
-                if model_name == Equipment_Acessory._meta.verbose_name_plural:
+                if model_name == Equipment_Accessory._meta.verbose_name_plural:
                     form.save_m2m()     # <-- saving "many to many" fields (must be final step of savin the form)
 
                 return redirect(reverse('Main_site:edit_list', kwargs={ 'modelId': modelId })) #add modelId to request.path
@@ -63,38 +68,44 @@ def Add_data(request,model_name):
 
 
 
-def Edit_data(request,model_name,pk):
+def Edit_data(request,model_name,data_slug):
     #                   ^_________^ _____________________________________ created arguments, which come from edit_list.html thru urls.py
     if str(request.user) != 'AnonymousUser':
         #_______________________________________________________________(
-        if model_name == Equipment_Class._meta.verbose_name_plural:
-            editable = Equipment_Class.objects.get(id=pk)               # <- !! change on get_object_or_404(Equipment_Category, id=pk)
+        if model_name == Company.__name__:
+            editable = Company.objects.get(slug=data_slug)
+            form = Company_Form(instance=editable)
+        elif model_name == Equipment_Class.__name__:
+            editable = Equipment_Class.objects.get(slug=data_slug)               # <- !! change on get_object_or_404(Equipment_Category, id=pk)
             form = Equipment_Class_Form(request.user,instance=editable) # <- 'instace=editable' puts existing data into the form
-        elif model_name == Equipment_Category._meta.verbose_name_plural:
-            editable = Equipment_Category.objects.get(id=pk)
+        elif model_name == Equipment_Category.__name__:
+            editable = Equipment_Category.objects.get(slug=data_slug)
             form = Equipment_Category_Form(request.user,instance=editable)
-        elif model_name == Equipment_Item._meta.verbose_name_plural:
-            editable = Equipment_Item.objects.get(id=pk)
+        elif model_name == Equipment_Item.__name__:
+            editable = Equipment_Item.objects.get(slug=data_slug)
             form = Equipment_Item_Form(request.user,instance=editable)
-        elif model_name == Equipment_Acessory._meta.verbose_name_plural:
-            editable = Equipment_Acessory.objects.get(id=pk)
-            form = Equipment_Acessory_Form(request.user,instance=editable)
+        elif model_name == Equipment_Accessory.__name__:
+            editable = Equipment_Accessory.objects.get(slug=data_slug)
+            form = Equipment_Accessory_Form(request.user,instance=editable)
             #_______________________________________________________________)
 
         if request.method == 'POST':
             #_______________________________________________________________(
-            if model_name == Equipment_Class._meta.verbose_name_plural:
+            if model_name == Company.__name__:
+                form = Company_Form(request.POST, request.FILES, instance=editable)
+                modelId=0 if request.user.is_superuser == False else 1
+            elif model_name == Equipment_Class.__name__:
                 form = Equipment_Class_Form(request.user,request.POST, request.FILES, instance=editable)
-                modelId=1
-            elif model_name == Equipment_Category._meta.verbose_name_plural:
+                modelId=1 if request.user.is_superuser == False else 2
+            elif model_name == Equipment_Category.__name__:
                 form = Equipment_Category_Form(request.user,request.POST, request.FILES, instance=editable)
-                modelId=2
-            elif model_name == Equipment_Item._meta.verbose_name_plural:
+                modelId=2 if request.user.is_superuser == False else 3
+            elif model_name == Equipment_Item.__name__:
                 form = Equipment_Item_Form(request.user,request.POST, request.FILES, instance=editable)
-                modelId=3
-            elif model_name == Equipment_Acessory._meta.verbose_name_plural:
-                form = Equipment_Acessory_Form(request.user,request.POST, request.FILES, instance=editable)
-                modelId=4
+                modelId=3 if request.user.is_superuser == False else 4
+            elif model_name == Equipment_Accessory.__name__:
+                form = Equipment_Accessory_Form(request.user,request.POST, request.FILES, instance=editable)
+                modelId=4 if request.user.is_superuser == False else 5
             #_______________________________________________________________)
 
             if form.is_valid():
@@ -102,7 +113,7 @@ def Edit_data(request,model_name,pk):
                 if request.user.is_superuser == False:
                     upd_data.company = request.user.company
                 upd_data.save()
-                if model_name == Equipment_Acessory._meta.verbose_name_plural:
+                if model_name == Equipment_Accessory.__name__:
                     form.save_m2m()
 
                 return redirect(reverse('Main_site:edit_list', kwargs={ 'modelId': modelId })) #add modelId to request.path
@@ -132,31 +143,34 @@ def load_categories(request):
 
 def Edit_list(request, modelId):
     models = [
+        Company,
         Equipment_Class,
         Equipment_Category,
         Equipment_Item,
-        Equipment_Acessory,
+        Equipment_Accessory,
         ]
+
+    if request.user.is_superuser == False:
+        del models[0]
 
     if str(request.user) != 'AnonymousUser':        # checking in case that user is not log in
     #   ^____________________________________________ crutch! need to know how get 'AnonymousUser' without string converting
         if request.user.is_superuser == False:      # checking in case that user is not admin and data is need to be filtered
-
-            models_list = [[i._meta.verbose_name_plural, i.objects.filter(company=request.user.company)] for i in models]
-            #   |               ^_____________________ ref to the meta class in models.py
+            models_list = [[i.__name__, i._meta.verbose_name_plural, i.objects.filter(company=request.user.company)] for i in models]
+            #   |             ^_model_name   ^_____________________ ref to the meta class in models.py
             #   |
             # models_list = [
-            #                   [class_name, <filtered_class_names_set>],
-            #                   [cat_name, <filtered_cat_names_set>],
-            #                   [item_name, <filtered_item_names_set>],
+            #                   [model_name,    class_metaVerboseName,  <filtered_class_names_set>],
+            #                   [cat_nam,       cat_metaVerboseName,    <filtered_cat_names_set>],
+            #                   [item_name,     item_metaVerboseName,   <filtered_item_names_set>],
             #                   ....,
             #                   ]
         else:
-            models_list = [[i._meta.verbose_name_plural, i.objects.all()] for i in models]
+            models_list = [[i.__name__, i._meta.verbose_name_plural, i.objects.all()] for i in models]
             # models_list = [
-            #                   [class_name, <all_class_names_set>],
-            #                   [cat_name, <all_cat_names_set>],
-            #                   [item_name, <all_item_names_set>],
+            #                   [model_name,    class_metaVerboseName,  <all_class_names_set>],
+            #                   [cat_nam,       cat_metaVerboseName,    <all_cat_names_set>],
+            #                   [item_name,     item_metaVerboseName,   <all_item_names_set>],
             #                   ....,
             #                   ]
 

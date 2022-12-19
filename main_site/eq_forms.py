@@ -1,5 +1,12 @@
 from django import forms
-from .models import Equipment_Class, Equipment_Category, Equipment_Item, Equipment_Acessory
+from .models import Company, Equipment_Class, Equipment_Category, Equipment_Item, Equipment_Accessory
+
+
+class Company_Form(forms.ModelForm):
+    class Meta:
+        model = Company
+        fields = (  'company_name_ru', 'company_name_en',
+                    )
 
 
 class Equipment_Class_Form(forms.ModelForm):
@@ -99,11 +106,11 @@ class Equipment_Item_Form(forms.ModelForm):
 
 
 
-class Equipment_Acessory_Form(forms.ModelForm):
+class Equipment_Accessory_Form(forms.ModelForm):
     class Meta:
-        model = Equipment_Acessory
+        model = Equipment_Accessory
         fields = (  'company','equipment',
-                    'acessory_name_ru', 'acessory_name_en',
+                    'accessory_name_ru', 'accessory_name_en',
                     'short_description_ru', 'short_description_en',
                     'full_description_ru', 'full_description_en',
                     )
@@ -112,7 +119,7 @@ class Equipment_Acessory_Form(forms.ModelForm):
         }
 
     def __init__(self,user,*args, **kwargs):
-        super(Equipment_Acessory_Form,self).__init__(*args, **kwargs)
+        super(Equipment_Accessory_Form,self).__init__(*args, **kwargs)
 
         if user.is_superuser == False:
             self.fields['equipment'].queryset = Equipment_Item.objects.filter(company=user.company_id)

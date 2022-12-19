@@ -22,9 +22,9 @@
             <!-- ???? need think about using js insted django ???? -->
 
                 {% if forloop.counter|stringformat:"i" in request.path or '0' in request.path %}
-                    <button class="tablinks" onclick="openDataList(event, '{% trans i.0 %}')" id="defaultOpen">
+                    <button class="tablinks" onclick="openDataList(event, '{% trans i.1 %}')" id="defaultOpen">
                         <div class="tab_container">
-                            {% trans i.0 %}
+                            {% trans i.1 %}
                             <div class="add_place_holder">
                                 <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">
                                     +
@@ -33,9 +33,9 @@
                         </div>
                     </button>
                 {% else %}
-                    <button class="tablinks" onclick="openDataList(event, '{% trans i.0 %}')">
+                    <button class="tablinks" onclick="openDataList(event, '{% trans i.1 %}')">
                         <div class="tab_container">
-                            {% trans i.0 %}
+                            {% trans i.1 %}
                             <div class="add_place_holder">
                                 <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">
                                     +
@@ -49,9 +49,9 @@
 
 
         {% for i in mod_list %}
-            <div id="{% trans i.0 %}" class="tabcontent">
-                {% for j in i.1  %}
-                    <a href="{% url 'Main_site:edit_data' i.0 j.id %}">
+            <div id="{% trans i.1 %}" class="tabcontent">
+                {% for j in i.2  %}
+                    <a href="{% url 'Main_site:edit_data' i.0 j.slug %}">
                         <div class="content">
                             <div class="edit_content">
                                 <img src="{% static 'icons/edit_note_FILL0_wght700_GRAD0_opsz48.svg' %}" class="edit_icon">
@@ -70,7 +70,9 @@
                                     {% endif %}
 
                                     {%if user.is_superuser %}
-                                        \ {{j.company}}
+                                        {% if j.company %}
+                                            \ {{j.company}}
+                                        {% endif %}
                                     {% endif %}
                                 </div>
                             </div>

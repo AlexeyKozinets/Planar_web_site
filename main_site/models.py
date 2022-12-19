@@ -3,27 +3,42 @@ from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _ # <-- for translation of verbose names
+from django.utils.text import slugify
+import datetime
 
 class Company(models.Model):
     company_name = models.CharField(blank = False, max_length = 150, verbose_name = 'Название комании')
+    slug = models.SlugField(max_length=150, unique=True, db_index=True, verbose_name="URL")
     is_published = models.BooleanField(default=True, verbose_name = 'Отображение')
+
+    def save(self, *args, **kwargs):  # new
+        date_time = '-' + str(datetime.datetime.now()).replace('.','-').replace(':','-')
+        self.slug = slugify(self.company_name_en + '-ymd-hms-' + date_time[:len(date_time)-1-6])
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         return self.company_name
 
     class Meta:
         verbose_name = 'Наименование команий'
-        verbose_name_plural = 'Наименования компаний'
+        verbose_name_plural = _('Наименования компаний')
         ordering = ['company_name',]
 
 class Equipment_Class(models.Model):
     #which have name of holding
     company = models.ForeignKey('Company', on_delete=models.CASCADE, verbose_name = _('Комания'))
     class_name = models.CharField(blank = False, max_length = 150, verbose_name = _('Название'))
+    slug = models.SlugField(max_length=150, unique=True, db_index=True, verbose_name="URL")
     short_description =  models.CharField(blank = False,max_length = 150, verbose_name = _('Предназанчение'))
     full_description = models.TextField(blank = False, max_length = 1500, verbose_name = _('Полное описание'))
     img = models.ImageField(upload_to = 'equipment_class_uploads', verbose_name = 'Изображение', null=True, blank=True)
     is_published = models.BooleanField(default=True, verbose_name = 'Отображение')
+
+
+    def save(self, *args, **kwargs):  # new
+        date_time = str(datetime.datetime.now()).replace('.','-').replace(':','-')
+        self.slug = slugify(self.class_name_en + '-ymd-hms-' + date_time[:len(date_time)-1-6])
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         return self.class_name
@@ -39,11 +54,15 @@ class Equipment_Category(models.Model):
     company = models.ForeignKey('Company', on_delete=models.CASCADE, verbose_name = 'Комания')
     equipment_class = models.ForeignKey('Equipment_Class', on_delete=models.CASCADE, verbose_name = 'Класс')
     category_name = models.CharField(max_length=150, blank=False, verbose_name='Название')
+    slug = models.SlugField(max_length=150, unique=True, db_index=True, verbose_name="URL")
     short_description =  models.CharField(blank = False,max_length = 150, verbose_name = 'Предназанчение')
     full_description = models.TextField(blank = False, max_length = 1500, verbose_name = 'Полное описание')
     is_published = models.BooleanField(default=True, verbose_name = 'Отображение')
 
-
+    def save(self, *args, **kwargs):  # new
+        date_time = str(datetime.datetime.now()).replace('.','-').replace(':','-')
+        self.slug = slugify(self.category_name_en + '-ymd-hms-' + date_time[:len(date_time)-1-6])
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         return self.category_name
@@ -60,10 +79,16 @@ class Equipment_Item(models.Model):
     equipment_class = models.ForeignKey('Equipment_Class', on_delete=models.CASCADE, verbose_name = 'Класс')
     equipment_category = models.ForeignKey('Equipment_Category', on_delete=models.CASCADE, verbose_name = 'Категория')
     item_name = models.CharField(max_length=150, blank=False, verbose_name='Название')
+    slug = models.SlugField(max_length=150, unique=True, db_index=True, verbose_name="URL")
     short_description =  models.CharField(blank = False,max_length = 150, verbose_name = 'Предназанчение')
     full_description = models.TextField(blank = False, max_length = 1500, verbose_name = 'Полное описание')
     is_published = models.BooleanField(default=True, verbose_name = 'Отображение')
     pass
+
+    def save(self, *args, **kwargs):  # new
+        date_time = str(datetime.datetime.now()).replace('.','-').replace(':','-')
+        self.slug = slugify(self.item_name_en + '-ymd-hms-' + date_time[:len(date_time)-1-6])
+        return super().save(*args, **kwargs)
 
     def __str__(self):
             return self.item_name
@@ -73,19 +98,25 @@ class Equipment_Item(models.Model):
         verbose_name_plural = _('Наименования оборудования')
         ordering = ['item_name',]
 
-class Equipment_Acessory(models.Model):
+class Equipment_Accessory(models.Model):
     #refference to items (many to many)
     company = models.ForeignKey('Company', on_delete=models.CASCADE,verbose_name = 'Комания')
     equipment = models.ManyToManyField('Equipment_Item', verbose_name='Oборудование')
-    acessory_name = models.CharField(max_length=150, blank=False, verbose_name='Название')
+    accessory_name = models.CharField(max_length=150, blank=False, verbose_name='Название')
+    slug = models.SlugField(max_length=150, unique=True, db_index=True, verbose_name="URL")
     short_description =  models.CharField(blank = False,max_length = 150, verbose_name = 'Предназанчение')
     full_description = models.TextField(blank = False, max_length = 1500, verbose_name = 'Полное описание')
     is_published = models.BooleanField(default=True, verbose_name = 'Отображение')
 
+    def save(self, *args, **kwargs):  # new
+        date_time = str(datetime.datetime.now()).replace('.','-').replace(':','-')
+        self.slug = slugify(self.accessory_name_en + '-ymd-hms-' + date_time[:len(date_time)-1-6])
+        return super().save(*args, **kwargs)
+
     def __str__(self):
-        return self.acessory_name
+        return self.accessory_name
 
     class Meta:
         verbose_name = 'Наименование аксессуара'
         verbose_name_plural = _('Наименования аксессуаров')
-        ordering = ['acessory_name',]
+        ordering = ['accessory_name',]
