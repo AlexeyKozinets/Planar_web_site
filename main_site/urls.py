@@ -11,6 +11,7 @@ urlpatterns = [                                                 # <- multiLang:1
     path('list/<str:model_name>:<slug:data_slug>/', views.Edit_data, name='edit_data'),
                     # ^_______________^___variables from edit_list.html, which relate with views.py
     path('list_default:<str:modelId>/', views.Edit_list, name='edit_list'),
+    path('sign/', views.Edit_list, name='edit_list'),
 ]
 
 

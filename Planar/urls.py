@@ -12,10 +12,11 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(                                       # <- multiLang:21) add to the "urlpatterns" i18n_patterns()
     path('', include('main_site.urls', namespace='Main_site')),     # which will include urls from *app_name*/urls.py ["namespace="
-    path('i18n/', include('django.conf.urls.i18n')),                # is required (name of app urls {step:16})] and "i18n/" path
-)                                                                   # (this add http://.../*lang*/app_urls/, but "admin/" path
-                                                                    # will not have http://.../*lang(ru,en,fr,...)*/admin/ )
+    path('', include('users.urls', namespace='Users')),             # is required (name of app urls {step:16})] and "i18n/" path
+    path('i18n/', include('django.conf.urls.i18n')),                # (this add http://.../*lang*/app_urls/, but "admin/" path
+)                                                                   # will not have http://.../*lang(ru,en,fr,...)*/admin/ )
                                                                     # (next: *project_name*/urls.py)
+
 
 
 urlpatterns += [path('accounts/', include('django.contrib.auth.urls'))]

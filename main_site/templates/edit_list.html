@@ -8,6 +8,7 @@
     <div class="chapters_container">
 
 
+
         <div class="buttons_container">
             {% for i in mod_list %}
             <!-- forloop.counter - var which exist in for-tag and means number of iteration (1,2,3,...,end).
@@ -20,15 +21,16 @@
                 When str(forloop.counter) in url.path or str(0) in url.path then >id="defaultOpen"< is added to
                  button properties and script toggle the button to active -->
             <!-- ???? need think about using js insted django ???? -->
-
                 {% if forloop.counter|stringformat:"i" in request.path or '0' in request.path %}
                     <button class="tablinks" onclick="openDataList(event, '{% trans i.1 %}')" id="defaultOpen">
                         <div class="tab_container">
                             {% trans i.1 %}
                             <div class="add_place_holder">
-                                <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">
-                                    +
-                                </a>
+                                {% if i.0 == 'CustomUser' %}
+                                    <a class="tab_add" class href="{% url 'Users:signUp' %}">+</a>
+                                {% else%}
+                                    <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">+</a>
+                                {% endif %}
                             </div>
                         </div>
                     </button>
@@ -37,9 +39,11 @@
                         <div class="tab_container">
                             {% trans i.1 %}
                             <div class="add_place_holder">
-                                <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">
-                                    +
-                                </a>
+                                {% if i.0 == 'CustomUser' %}
+                                    <a class="tab_add" class href="{% url 'Users:signUp' %}">+</a>
+                                {% else%}
+                                    <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">+</a>
+                                {% endif %}
                             </div>
                         </div>
                     </button>
@@ -51,33 +55,63 @@
         {% for i in mod_list %}
             <div id="{% trans i.1 %}" class="tabcontent">
                 {% for j in i.2  %}
-                    <a href="{% url 'Main_site:edit_data' i.0 j.slug %}">
-                        <div class="content">
-                            <div class="edit_content">
-                                <img src="{% static 'icons/edit_note_FILL0_wght700_GRAD0_opsz48.svg' %}" class="edit_icon">
-                            </div>
-                            <div class="data_content">
-                                <div class="data_name">
-                                    {{j}}
+                    {% if i.0 == 'CustomUser' %}
+                        <a href="{% url 'Users:signUpEdit' j.id  %}">
+                            <div class="content">
+                                <div class="edit_content">
+                                    <img src="{% static 'icons/edit_note_FILL0_wght700_GRAD0_opsz48.svg' %}" class="edit_icon">
                                 </div>
-                                <div class="data_path">
-                                    {%if j.equipment_category%}
-                                        \ {{j.equipment_category}}
-                                    {% endif %}
-
-                                    {%if j.equipment_class%}
-                                        \ {{j.equipment_class}}
-                                    {% endif %}
-
-                                    {%if user.is_superuser %}
-                                        {% if j.company %}
-                                            \ {{j.company}}
+                                <div class="data_content">
+                                    <div class="data_name">
+                                        {{j}}
+                                    </div>
+                                    <div class="data_path">
+                                        {%if j.equipment_category%}
+                                            \ {{j.equipment_category}}
                                         {% endif %}
-                                    {% endif %}
+
+                                        {%if j.equipment_class%}
+                                            \ {{j.equipment_class}}
+                                        {% endif %}
+
+                                        {%if user.is_superuser %}
+                                            {% if j.company %}
+                                                \ {{j.company}}
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'Main_site:edit_data' i.0 j.slug %}">
+                            <div class="content">
+                                <div class="edit_content">
+                                    <img src="{% static 'icons/edit_note_FILL0_wght700_GRAD0_opsz48.svg' %}" class="edit_icon">
+                                </div>
+                                <div class="data_content">
+                                    <div class="data_name">
+                                        {{j}}
+                                    </div>
+                                    <div class="data_path">
+                                        {%if j.equipment_category%}
+                                            \ {{j.equipment_category}}
+                                        {% endif %}
+
+                                        {%if j.equipment_class%}
+                                            \ {{j.equipment_class}}
+                                        {% endif %}
+
+                                        {%if user.is_superuser %}
+                                            {% if j.company %}
+                                                \ {{j.company}}
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    {% endif %}
                 {% endfor %}
             </div>
         {% endfor %}
