@@ -1,16 +1,13 @@
-from random import choices
-from unittest.util import _MAX_LENGTH
 from django.db import models
-from django.contrib.auth.models import User
-from django.utils.translation import gettext_lazy as _ # <-- for translation of verbose names
 from django_unique_slugify import unique_slugify #<- installed module
 from random import randint
+from .model_verbose_transtatios import *
 
 
 class Company(models.Model):
-    company_name = models.CharField(blank = False, max_length = 150, verbose_name = 'Название комании')
+    company_name = models.CharField(blank = False, max_length = 150, verbose_name = name_verb)
     slug = models.SlugField(max_length=150, unique=True, db_index=True, verbose_name="URL")
-    is_published = models.BooleanField(default=True, verbose_name = 'Отображение')
+    is_published = models.BooleanField(default=True, verbose_name = showing_verb)
 
     def save(self, *args, **kwargs):  # new
         rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
@@ -31,19 +28,19 @@ class Company(models.Model):
         return self.company_name
 
     class Meta:
-        verbose_name = 'Наименование команий'
-        verbose_name_plural = _('Наименования компаний')
+        verbose_name = company_meta_verb
+        verbose_name_plural = company_meta_verb_plr
         ordering = ['company_name',]
 
 class Equipment_Class(models.Model):
     #which have name of holding
-    company = models.ForeignKey('Company', on_delete=models.CASCADE, verbose_name = _('Комания'))
-    class_name = models.CharField(blank = False, max_length = 150, verbose_name = _('Название'))
+    company = models.ForeignKey('Company', on_delete=models.CASCADE, verbose_name = company_verb)
+    class_name = models.CharField(blank = False, max_length = 150, verbose_name = name_verb)
     slug = models.SlugField(max_length=150, unique=True, db_index=True, verbose_name="URL")
-    short_description =  models.CharField(blank = False,max_length = 150, verbose_name = _('Предназанчение'))
-    full_description = models.TextField(blank = False, max_length = 1500, verbose_name = _('Полное описание'))
-    img = models.ImageField(upload_to = 'equipment_class_uploads', verbose_name = 'Изображение', null=True, blank=True)
-    is_published = models.BooleanField(default=True, verbose_name = 'Отображение')
+    short_description =  models.CharField(blank = False,max_length = 150, verbose_name = short_verb)
+    full_description = models.TextField(blank = False, max_length = 1500, verbose_name = full_verb)
+    img = models.ImageField(upload_to = 'equipment_class_uploads', null=True, blank=True, verbose_name = 'Изображение',)
+    is_published = models.BooleanField(default=True, verbose_name = showing_verb)
 
     def save(self, *args, **kwargs):  # new
         rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
@@ -54,20 +51,20 @@ class Equipment_Class(models.Model):
         return self.class_name
 
     class Meta:
-        verbose_name = 'Класс оборудования'
-        verbose_name_plural = _('Классы оборудования')
+        verbose_name = class_meta_verb
+        verbose_name_plural = class_meta_verb_plr
         ordering = ['class_name',]
 
 
 class Equipment_Category(models.Model):
     #refference to class (one to many)
-    company = models.ForeignKey('Company', on_delete=models.CASCADE, verbose_name = 'Комания')
-    equipment_class = models.ForeignKey('Equipment_Class', on_delete=models.CASCADE, verbose_name = 'Класс')
-    category_name = models.CharField(max_length=150, blank=False, verbose_name='Название')
+    company = models.ForeignKey('Company', on_delete=models.CASCADE, verbose_name = company_verb)
+    equipment_class = models.ForeignKey('Equipment_Class', on_delete=models.CASCADE, verbose_name = class_verb)
+    category_name = models.CharField(max_length=150, blank=False, verbose_name = name_verb)
     slug = models.SlugField(max_length=150, unique=True, db_index=True, verbose_name="URL")
-    short_description =  models.CharField(blank = False,max_length = 150, verbose_name = 'Предназанчение')
-    full_description = models.TextField(blank = False, max_length = 1500, verbose_name = 'Полное описание')
-    is_published = models.BooleanField(default=True, verbose_name = 'Отображение')
+    short_description =  models.CharField(blank = False,max_length = 150, verbose_name = short_verb)
+    full_description = models.TextField(blank = False, max_length = 1500, verbose_name = full_verb)
+    is_published = models.BooleanField(default=True, verbose_name = short_verb)
 
     def save(self, *args, **kwargs):
         rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
@@ -78,21 +75,21 @@ class Equipment_Category(models.Model):
         return self.category_name
 
     class Meta:
-        verbose_name = 'Категория оборудования'
-        verbose_name_plural = _('Категории оборудования')
+        verbose_name = category_meta_verb
+        verbose_name_plural = category_meta_verb_plr
         ordering = ['category_name',]
 
 
 class Equipment_Item(models.Model):
     #refference to category (one to many)
-    company = models.ForeignKey('Company', on_delete=models.CASCADE, verbose_name = 'Комания')
-    equipment_class = models.ForeignKey('Equipment_Class', on_delete=models.CASCADE, verbose_name = 'Класс')
-    equipment_category = models.ForeignKey('Equipment_Category', on_delete=models.CASCADE, verbose_name = 'Категория')
-    item_name = models.CharField(max_length=150, blank=False, verbose_name='Название')
+    company = models.ForeignKey('Company', on_delete=models.CASCADE, verbose_name = company_verb)
+    equipment_class = models.ForeignKey('Equipment_Class', on_delete=models.CASCADE, verbose_name = class_verb)
+    equipment_category = models.ForeignKey('Equipment_Category', on_delete=models.CASCADE, verbose_name = category_verb)
+    item_name = models.CharField(max_length=150, blank=False, verbose_name = item_verb)
     slug = models.SlugField(max_length=150, unique=True, db_index=True, verbose_name="URL")
-    short_description =  models.CharField(blank = False,max_length = 150, verbose_name = 'Предназанчение')
-    full_description = models.TextField(blank = False, max_length = 1500, verbose_name = 'Полное описание')
-    is_published = models.BooleanField(default=True, verbose_name = 'Отображение')
+    short_description =  models.CharField(blank = False,max_length = 150, verbose_name = short_verb)
+    full_description = models.TextField(blank = False, max_length = 1500, verbose_name = full_verb)
+    is_published = models.BooleanField(default=True, verbose_name = showing_verb)
     pass
 
     def save(self, *args, **kwargs):  # new
@@ -104,19 +101,19 @@ class Equipment_Item(models.Model):
             return self.item_name
 
     class Meta:
-        verbose_name = 'Наименование оборудования'
-        verbose_name_plural = _('Наименования оборудования')
+        verbose_name = item_meta_verb
+        verbose_name_plural = item_meta_verb_plr
         ordering = ['item_name',]
 
 class Equipment_Accessory(models.Model):
     #refference to items (many to many)
-    company = models.ForeignKey('Company', on_delete=models.CASCADE,verbose_name = 'Комания')
-    equipment = models.ManyToManyField('Equipment_Item', verbose_name='Oборудование')
-    accessory_name = models.CharField(max_length=150, blank=False, verbose_name='Название')
+    company = models.ForeignKey('Company', on_delete=models.CASCADE,verbose_name = company_verb)
+    equipment = models.ManyToManyField('Equipment_Item', verbose_name = item_verb)
+    accessory_name = models.CharField(max_length=150, blank=False, verbose_name = name_verb)
     slug = models.SlugField(max_length=150, unique=True, db_index=True, verbose_name="URL")
-    short_description =  models.CharField(blank = False,max_length = 150, verbose_name = 'Предназанчение')
-    full_description = models.TextField(blank = False, max_length = 1500, verbose_name = 'Полное описание')
-    is_published = models.BooleanField(default=True, verbose_name = 'Отображение')
+    short_description =  models.CharField(blank = False,max_length = 150, verbose_name = short_verb)
+    full_description = models.TextField(blank = False, max_length = 1500, verbose_name = full_verb)
+    is_published = models.BooleanField(default=True, verbose_name = showing_verb)
 
     def save(self, *args, **kwargs):  # new
         rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
@@ -127,6 +124,6 @@ class Equipment_Accessory(models.Model):
         return self.accessory_name
 
     class Meta:
-        verbose_name = 'Наименование аксессуара'
-        verbose_name_plural = _('Наименования аксессуаров')
+        verbose_name = accessory_meta_verb
+        verbose_name_plural = accessory_meta_verb_plr
         ordering = ['accessory_name',]

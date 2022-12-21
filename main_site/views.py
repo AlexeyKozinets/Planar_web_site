@@ -12,8 +12,9 @@ def Home(request):
 
 
 def Add_data(request,model_name):
+    print(request.POST)
     #                   ^ _______________________________ created argument, which come from edit_list.html thru urls.py
-    if str(request.user) != 'AnonymousUser':            # checking in case that user is not log in
+    if request.user.is_authenticated:               # checking in case that user is not log in
 
         #_______________________________________________________________(
         if model_name == Company.__name__:
@@ -69,8 +70,9 @@ def Add_data(request,model_name):
 
 
 def Edit_data(request,model_name,data_slug):
+    print('!!!!!!!!!!', request.POST)
     #                   ^_________^ _____________________________________ created arguments, which come from edit_list.html thru urls.py
-    if str(request.user) != 'AnonymousUser':
+    if request.user.is_authenticated:
         #_______________________________________________________________(
         if model_name == Company.__name__:
             editable = Company.objects.get(slug=data_slug)
@@ -117,7 +119,7 @@ def Edit_data(request,model_name,data_slug):
                 upd_data.save()
                 if model_name == Equipment_Accessory.__name__:
                     form.save_m2m()
-
+                print('!!!!!!!!!!', request.POST)
                 return redirect(reverse('Main_site:edit_list', kwargs={ 'modelId': modelId })) #add modelId to request.path
                 # return redirect('Main_site:edit_list')
 
@@ -157,8 +159,8 @@ def Edit_list(request, modelId):
     if request.user.is_superuser == False:
         selected_models = models[2:]
 
-    if str(request.user) != 'AnonymousUser':        # checking in case that user is not log in
-    #   ^____________________________________________ crutch! need to know how get 'AnonymousUser' without string converting
+    if request.user.is_authenticated:        # checking in case that user is not log in
+
         if request.user.is_superuser == False:      # checking in case that user is not admin and data is need to be filtered
             models_list = [[i.__name__, i._meta.verbose_name_plural, i.objects.filter(company=request.user.company)] for i in selected_models]
             #   |             ^_model_name   ^_____________________ ref to the meta class in models.py

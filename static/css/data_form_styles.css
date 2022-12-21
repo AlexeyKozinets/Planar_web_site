@@ -46,7 +46,7 @@ label{
 #id_class_name_ru,      #id_class_name_en,
 #id_category_name_ru,   #id_category_name_en,
 #id_item_name_ru,       #id_item_name_en,
-#id_acessory_name_ru,   #id_acessory_name_en{
+#id_accessory_name_ru,   #id_accessory_name_en{
     background-color: rgb(245, 245, 245);
     width: 100%;
     box-sizing: border-box;
@@ -60,7 +60,7 @@ label{
 #id_class_name_ru:hover,      #id_class_name_en:hover,
 #id_category_name_ru:hover,   #id_category_name_en:hover,
 #id_item_name_ru:hover,       #id_item_name_en:hover,
-#id_acessory_name_ru:hover,   #id_acessory_name_en:hover{
+#id_accessory_name_ru:hover,   #id_accessory_name_en:hover{
     border-color: rgb(0, 140, 255);
     transition: 0.3s;
 }
@@ -68,7 +68,7 @@ label{
 #id_class_name_ru:focus,      #id_class_name_en:focus,
 #id_category_name_ru:focus,   #id_category_name_en:focus,
 #id_item_name_ru:focus,       #id_item_name_en:focus,
-#id_acessory_name_ru:focus,   #id_acessory_name_en:focus{
+#id_accessory_name_ru:focus,   #id_accessory_name_en:focus{
     outline: none;
     border: solid 3px rgb(0, 140, 255);
 }

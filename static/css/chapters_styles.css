@@ -3,7 +3,10 @@
     margin-right: 5em;
     display: grid;
     grid-template-columns: max-content minmax(200px, 1fr);
-    grid-gap: 1em
+    grid-gap: 1em;
+    font-family: Calibri;
+    font-size: 1.1em;
+    color: rgb(61, 61, 61);
 
 }
 
@@ -30,6 +33,7 @@
     transition: 0.3s;
     font-family: Calibri;
     font-size: 1em;
+    color: rgb(61, 61, 61);
     justify-content: space-between;
 }
 
@@ -44,7 +48,7 @@
 .add_place_holder{
     width: 2em;
     position: relative;
-    right: -8px;
+    right: -0.5em;
 
 }
 
@@ -89,6 +93,7 @@
 
 .content{
     display: flex;
+    position: relative;
     margin: 0px 0px;
     margin-bottom: 2px;
     height: 2em;
@@ -96,6 +101,7 @@
     line-height: 2em;
     border-radius: 0.5em;
     text-indent: 0.5em;
+
 }
 
 .content:hover{
@@ -118,7 +124,7 @@
 .edit_icon{
     max-height: 80%;
     max-width: 80%;
-    padding-top: 3px;
+    padding-top: 0.3em;
     filter: invert(100%) sepia(7%) saturate(241%) hue-rotate(248deg) brightness(115%) contrast(100%);
     /* change color of .svg files https://codepen.io/sosuke/pen/Pjoqqp */
 }
@@ -166,3 +172,10 @@ a{
     color: rgb(61, 61, 61);
 }
 
+.href{
+    position: absolute;
+    z-index: 2;
+    color: transparent;
+    width: 100%;
+
+}
