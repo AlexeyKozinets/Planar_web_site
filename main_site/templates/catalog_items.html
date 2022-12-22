@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+
+    <div class="catalog_container" style="margin: 0em 3em">
+        {% for item in items_list|slice:":1" %}
+        <p>
+            <div>{{item.company}}</div>
+            <div>{{item.equipment_class}}</div>
+            <div>{{item.equipment_category}}</div>
+        </p>
+        {% endfor %}
+
+        {% for item in items_list %}
+            <div class="item_container">
+                <div calss="item">
+                    <a href="{% url 'Main_site:catalog_item'  item.equipment_class.slug  item.equipment_category.slug  item.slug %}">
+                        {{ item }}
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

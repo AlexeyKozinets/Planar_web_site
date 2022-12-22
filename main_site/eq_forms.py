@@ -5,7 +5,8 @@ from .models import Company, Equipment_Class, Equipment_Category, Equipment_Item
 class Company_Form(forms.ModelForm):
     class Meta:
         model = Company
-        fields = (  'company_name_ru', 'company_name_en',
+        fields = (  'head_img', 'is_published',
+                    'company_name_ru', 'company_name_en',
                     )
 
 

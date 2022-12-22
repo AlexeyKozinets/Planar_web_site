@@ -2,6 +2,8 @@
 from django.conf.urls.i18n import i18n_patterns                     # <- multiLang:20) import "i18n_patterns","admin",
 from django.contrib import admin                                    # "path" and " include" (next: *project_name*/urls.py)
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 
@@ -17,9 +19,10 @@ urlpatterns += i18n_patterns(                                       # <- multiLa
 )                                                                   # will not have http://.../*lang(ru,en,fr,...)*/admin/ )
                                                                     # (next: *project_name*/urls.py)
 
-
+urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
 
 urlpatterns += [path('accounts/', include('django.contrib.auth.urls'))]
+
 
                                                                     # multiLang:22) in templates instead {% url 'urls_name' i.0 %}
                                                                     # need write {% url '*urls_app_name*:urls_name' i.0 %}

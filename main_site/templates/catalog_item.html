@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+
+
+    <div class="catalog_container" style="margin: 0em 3em">
+        <p>
+            <div>{{item.company}}</div>
+            <div>{{item.equipment_class}}</div>
+            <div>{{item.equipment_category}}</div>
+        </p>
+
+        <h1> {{item}} </h1>
+
+        {% for accessory in accessories_list %}
+            <div class="accessory_container">
+                <div calss="accessory">
+                    
+                        {{ accessory }}
+                   
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+
+    <div class="catalog_container" style="margin: 0em 3em">
+        {% for Company in companies_list %}
+            <div class="company_container">
+            <p>{{ Company}}</p>
+            {% for class in classes_list %}
+                {% if class.company == Company %}
+                    <div calss="class">
+                        <a href="{% url 'Main_site:catalog_categories' class.slug %}">
+                            {{ class }}
+                        </a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            </div>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

@@ -16,6 +16,9 @@ item_meta_verb_plr = _('Объекты данных')
 accessory_meta_verb = _('Атрибут объекта')
 accessory_meta_verb_plr = _('Атрибуты объектов')
 
+user_meta_verb = _('Пользователь')
+user_meta_verb_plr = _('Пользователи')
+
 
 
 company_verb = _('Комания')
@@ -26,3 +29,4 @@ name_verb = _('Название')
 short_verb = _('Предназанчение')
 full_verb = _('Полное описание')
 showing_verb = _('Отображение')
+img_verb =  _('Изображение')

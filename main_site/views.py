@@ -10,6 +10,7 @@ def Home(request):
     #       ^ ___________________________________________ httpRequest object that contains metadata about the request
     return render(request, 'base.html')
 
+#============================= SETTINGS =============================
 
 def Add_data(request,model_name):
     print(request.POST)
@@ -172,7 +173,7 @@ def Edit_list(request, modelId):
             #                   ....,
             #                   ]
         else:
-            models_list = [[i.__name__, i._meta.verbose_name_plural, i.objects.all()] for i in models]  # need change all models names fields on "name"
+            models_list = [[i.__name__, i._meta.verbose_name_plural, i.objects.all().order_by('slug')] for i in models]  # need change all models names fields on "name"
             # models_list = [                                                                           # instead "company_name", "class_name", etc
             #                   [model_name,    class_metaVerboseName,  <all_class_names_set>],
             #                   [cat_nam,       cat_metaVerboseName,    <all_cat_names_set>],
@@ -187,3 +188,42 @@ def Edit_list(request, modelId):
     else:
         return redirect('Main_site:home')
                         # ^___________________________ name of path in urls.py
+
+#============================= SETTINGS =============================
+
+
+#============================= CATALOG =============================
+
+def Catalog_home(request):
+    companies = Company.objects.all()
+    classes = Equipment_Class.objects.all()
+    context = { 'classes_list' : classes,
+                'companies_list': companies,
+                }
+    return render(request, 'catalog_home.html', context)
+
+
+
+def Catalog_categories(request, slug1):
+    categories = Equipment_Category.objects.filter(equipment_class__slug=slug1)
+    context = {'categories_list' : categories,}
+    return render(request, 'catalog_categories.html', context)
+
+
+
+def Catalog_items(request, slug1, slug2):
+    items = Equipment_Item.objects.filter(equipment_category__slug=slug2)
+    context = {'items_list' : items,}
+    return render(request, 'catalog_items.html', context)
+
+
+def Catalog_item(request, slug1, slug2, slug3):
+    item = Equipment_Item.objects.get(slug=slug3)
+    accessories = Equipment_Accessory.objects.filter(equipment__slug=slug3)
+    context = { 'item' : item,
+                'accessories_list':accessories
+                }
+    return render(request, 'catalog_item.html', context)
+
+
+#============================= CATALOG =============================
