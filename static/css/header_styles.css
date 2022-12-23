@@ -4,6 +4,7 @@
     display: flex;
     background: linear-gradient(to right, rgb(152, 47, 223), rgb(0, 149, 248));
     min-width: 500px;
+    box-shadow: 0px  2px 10px rgb(168, 168, 168);
 }
 
 

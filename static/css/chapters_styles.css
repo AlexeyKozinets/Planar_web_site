@@ -30,11 +30,15 @@
     padding: 0em 0.5em;
     margin-bottom: 2px;
     border-radius: 0.5em;
-    transition: 0.3s;
     font-family: Calibri;
     font-size: 1em;
     color: rgb(61, 61, 61);
     justify-content: space-between;
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
 }
 
 
@@ -42,6 +46,11 @@
     background-color:rgb(230, 229, 229);
     color: black;
     transform: translateX(10px);
+    -webkit-transform: translateX(10px);
+    -moz-transform: translateX(10px);
+    -ms-transform: translateX(10px);
+    -o-transform: translateX(10px);
+
 }
 
 
@@ -73,22 +82,38 @@
 
 .tablinks:hover{
     background-color: rgb(0, 140, 255);
-    transform: translateX(10px);
     color: white;
+    transform: translateX(10px);
+    -webkit-transform: translateX(10px);
+    -moz-transform: translateX(10px);
+    -ms-transform: translateX(10px);
+    -o-transform: translateX(10px);
     transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+
 }
 
 .tablinks:hover > .tab_container > .add_place_holder > .tab_add {
     background-color: rgb(0, 128, 233);
     color: white;
     transition: 0.3s;
-
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
 }
 
 .tablinks:hover > .tab_container > .add_place_holder > .tab_add:hover {
     background-color: rgb(131, 180, 138);
     color: white;
     transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
 }
 
 .content{
@@ -101,13 +126,17 @@
     line-height: 2em;
     border-radius: 0.5em;
     text-indent: 0.5em;
+    z-index: 0;
 
 }
 
 .content:hover{
     background-color: rgb(230, 229, 229);
-
     transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
 }
 
 
@@ -128,6 +157,111 @@
     filter: invert(100%) sepia(7%) saturate(241%) hue-rotate(248deg) brightness(115%) contrast(100%);
     /* change color of .svg files https://codepen.io/sosuke/pen/Pjoqqp */
 }
+
+
+
+
+
+
+.data_status{
+    display: flex;
+    position: relative;
+}
+
+
+.status_active, .status_not_active, .status_hide{
+    visibility: hidden;
+    position: absolute;
+    padding-left: 0.5em;
+    padding-right: 1em;
+    top: -2em;
+    left: 1.5em;
+    font-size: 0.8em;
+    font-weight:bolder;
+    width: max-content;
+    height: min-content;
+    border-radius: 2em;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    -ms-border-radius: 2em;
+    -o-border-radius: 2em;
+    border-bottom-left-radius: 0em;
+
+}
+
+.status_active{
+    color: black;
+    box-shadow: 0px 3px 10px rgb(0, 87, 14);
+}
+
+.status_not_active{
+    color: white;
+    box-shadow: 0px 3px 10px rgb(87, 0, 14);
+}
+
+.status_hide{
+    color: black;
+    box-shadow: 0px 3px 10px rgb(87, 71, 0);
+}
+
+
+
+
+
+.content:hover .status_active{
+    visibility: visible;
+    background-color: rgb(0, 155, 77);
+    transition-delay: 1s;
+}
+
+.content:hover .status_not_active{
+    visibility: visible;
+    background-color: rgb(185, 0, 56);
+    transition-delay: 1s;
+}
+
+
+.content:hover .status_hide{
+    visibility: visible;
+    background-color: rgb(240, 196, 0);
+    transition-delay: 1s;
+}
+
+
+
+
+.status_active_icon{
+    margin: 0.75em 0.5em;
+    max-height: 0.5em;
+    max-width: 0.5em;
+    filter: invert(62%) sepia(89%) saturate(5474%) hue-rotate(130deg) brightness(96%) contrast(101%);
+    -webkit-filter: invert(62%) sepia(89%) saturate(5474%) hue-rotate(130deg) brightness(96%) contrast(101%);
+
+}
+
+.status_not_active_icon{
+    margin: 0.75em 0.5em;
+    max-height: 0.5em;
+    max-width: 0.5em;
+    filter: invert(8%) sepia(91%) saturate(7450%) hue-rotate(6deg) brightness(84%) contrast(109%);
+    -webkit-filter: invert(8%) sepia(91%) saturate(7450%) hue-rotate(6deg) brightness(84%) contrast(109%);
+}
+
+.status_hide_icon{
+    margin: 0.75em 0.5em;
+    max-height: 0.5em;
+    max-width: 0.5em;
+    filter: invert(71%) sepia(90%) saturate(1296%) hue-rotate(358deg) brightness(102%) contrast(106%);
+    -webkit-filter: invert(71%) sepia(90%) saturate(1296%) hue-rotate(358deg) brightness(102%) contrast(106%);
+}
+
+
+.content:hover .status_active{
+    visibility: visible;
+    background-color: rgb(0, 219, 110);
+    transition-delay: 1s;
+}
+
 
 .data_content{
     display: flex;
@@ -151,20 +285,32 @@
 }
 
 .content:hover > .edit_content{
-    /* transform: translateX(-2.8em); */
     color: white;
     background-color: rgb(0, 128, 233);
-    z-index: 0;
     transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
 }
 
 
 .content:hover > .data_content{
     background-color: rgb(230, 229, 229);
     transition-delay: 0.1s;
-    transition: 0.3s;
     transform: translateX(2.5em);
+    -webkit-transform: translateX(2.5em);
+    -moz-transform: translateX(2.5em);
+    -ms-transform: translateX(2.5em);
+    -o-transform: translateX(2.5em);
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
 }
+
+
 
 a{
     text-decoration: none;
@@ -179,3 +325,4 @@ a{
     width: 100%;
 
 }
+

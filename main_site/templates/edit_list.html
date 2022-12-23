@@ -26,7 +26,7 @@
                         <div class="tab_container">
                             {% trans i.1 %}
                             <div class="add_place_holder">
-                                {% if i.0 == 'CustomUser' %}
+                                {% if i.0 == 'CustomUser' %} <!-- 'CustomUser' is the model name from users/models.py -->
                                     <a class="tab_add" class href="{% url 'Users:signUp' %}">+</a>
                                 {% else%}
                                     <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">+</a>
@@ -39,7 +39,7 @@
                         <div class="tab_container">
                             {% trans i.1 %}
                             <div class="add_place_holder">
-                                {% if i.0 == 'CustomUser' %}
+                                 {% if i.0 == 'CustomUser' %} <!-- 'CustomUser' is the model name from users/models.py -->
                                     <a class="tab_add" class href="{% url 'Users:signUp' %}">+</a>
                                 {% else%}
                                     <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">+</a>
@@ -58,16 +58,101 @@
                     <div class="content">
 
                         {% if i.0 == 'CustomUser' %}
-                            <a href="{% url 'Users:signUpEditMult' j.id  %}" class="href">href</a>
+                            <a class="href" href="{% url 'Users:signUpEditMult' j.id  %}" >href</a>
                         {% else %}
-                            <a href="{% url 'Main_site:edit_data' i.0 j.slug %}" class="href">href</a>
+                            <a class="href" href="{% url 'Main_site:edit_data' i.0 j.slug %}" >href</a>
                         {% endif %}
 
                         <div class="edit_content">
                             <img src="{% static 'icons/edit_note_FILL0_wght700_GRAD0_opsz48.svg' %}" class="edit_icon">
                         </div>
 
+
                         <div class="data_content">
+
+                            <div class="data_status">
+                                {% if i.0 == 'CustomUser'%} <!-- 'CustomUser' is the model name from users/models.py -->
+                                    {%if j.is_active  %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_active_icon">
+                                        <div class="status_active">{% trans 'данные активны' %}</div>
+                                    {% else %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_not_active_icon">
+                                        <div class="status_not_active">{% trans 'данные не активны' %}</div>
+                                    {% endif %}
+                                {% endif %}
+
+                                {% if i.0 == 'Company' %} <!-- 'Company' is the model name from users/models.py -->
+                                    {%if j.is_published  %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_active_icon">
+                                        <div class="status_active">{% trans 'данные активны' %}</div>
+                                    {% else %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_not_active_icon">
+                                        <div class="status_not_active">{% trans 'данные не активны' %}</div>
+                                    {% endif %}
+                                {% endif %}
+
+                                {% if i.0 == 'Equipment_Class' %} <!-- 'Equipment_Class' is the model name from users/models.py -->
+                                    {% if j.is_published and j.company.is_published %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_active_icon">
+                                        <div class="status_active">{% trans 'данные активны' %}</div>
+                                    {% elif j.is_published and not j.company.is_published %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_hide_icon">
+                                        <div class="status_hide">данные скрыты: компания не активна</div>
+                                    {% else %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_not_active_icon">
+                                        <div class="status_not_active">данные не активны</div>
+                                    {% endif %}
+                                {% endif %}
+
+                                {% if i.0 == 'Equipment_Category' %} <!-- 'Equipment_Category' is the model name from users/models.py -->
+                                    {% if j.is_published and j.equipment_class.is_published and j.company.is_published %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_active_icon">
+                                        <div class="status_active">{% trans 'данные активны' %}</div>
+                                    {% elif j.is_published and j.equipment_class.is_published and not j.company.is_published %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_hide_icon">
+                                        <div class="status_hide">данные скрыты: компания не активна</div>
+                                    {% elif j.is_published and not j.equipment_class.is_published %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_hide_icon">
+                                        <div class="status_hide">данные скрыты: класс не активен</div>
+                                    {% else %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_not_active_icon">
+                                        <div class="status_not_active">данные не активны</div>
+                                    {% endif %}
+                                {% endif %}
+
+                                {% if i.0 == 'Equipment_Item' %} <!-- 'Equipment_Item' is the model name from users/models.py -->
+                                    {% if j.is_published and j.equipment_category.is_published and j.equipment_class.is_published and j.company.is_published %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_active_icon">
+                                        <div class="status_active">{% trans 'данные активны' %}</div>
+                                    {% elif j.is_published and j.equipment_category.is_published and j.equipment_class.is_published and not j.company.is_published %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_hide_icon">
+                                        <div class="status_hide">данные скрыты: компания не активна</div>
+                                    {% elif j.is_published and j.equipment_category.is_published and not j.equipment_class.is_published %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_hide_icon">
+                                        <div class="status_hide">данные скрыты: класс не активен</div>
+                                    {% elif j.is_published and not j.equipment_category.is_published  %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_hide_icon">
+                                        <div class="status_hide">данные скрыты: категория не активна</div>
+                                    {% else %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_not_active_icon">
+                                        <div class="status_not_active">данные не активны</div>
+                                    {% endif %}
+                                {% endif %}
+
+                                {% if i.0 == 'Equipment_Accessory' %} <!-- 'Equipment_Accessory' is the model name from users/models.py -->
+                                    {% if j.is_published and j.company.is_published %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_active_icon">
+                                        <div class="status_active">{% trans 'данные активны' %}</div>
+                                    {% elif j.is_published and not j.company.is_published %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_hide_icon">
+                                        <div class="status_hide">данные скрыты: компания не активна</div>
+                                    {% else %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_not_active_icon">
+                                        <div class="status_not_active">данные не активны</div>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+
                             <div class="data_name">
                                 {{j}}
                             </div>
@@ -86,9 +171,10 @@
                                         \ {{j.company}}
                                     {% endif %}
                                 {% endif %}
-
                             </div>
+
                         </div>
+
                     </div>
                 {% endfor %}
             </div>
@@ -114,6 +200,7 @@
         // Get the element with id="defaultOpen" and click on it
         document.getElementById("defaultOpen").click();
     </script>
+
 
 
 {% endblock %}

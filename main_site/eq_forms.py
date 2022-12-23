@@ -5,7 +5,7 @@ from .models import Company, Equipment_Class, Equipment_Category, Equipment_Item
 class Company_Form(forms.ModelForm):
     class Meta:
         model = Company
-        fields = (  'head_img', 'is_published',
+        fields = (  'is_published', 'head_img',
                     'company_name_ru', 'company_name_en',
                     )
 
@@ -13,7 +13,7 @@ class Company_Form(forms.ModelForm):
 class Equipment_Class_Form(forms.ModelForm):
     class Meta:
         model = Equipment_Class
-        fields = (  'company',
+        fields = (  'is_published', 'company',
                     'class_name_ru', 'class_name_en',                   # <- multiLang:16) now we can indicate model field
                     'short_description_ru', 'short_description_en',     # with different languages (next: create *app_name*/urls.py)
                     'full_description_ru', 'full_description_en',
@@ -32,7 +32,7 @@ class Equipment_Class_Form(forms.ModelForm):
 class Equipment_Category_Form(forms.ModelForm):
     class Meta:
         model = Equipment_Category
-        fields = (  'company','equipment_class',
+        fields = (  'is_published', 'company','equipment_class',
                     'category_name_ru', 'category_name_en',
                     'short_description_ru', 'short_description_en',
                     'full_description_ru', 'full_description_en',
@@ -55,8 +55,14 @@ class Equipment_Category_Form(forms.ModelForm):
                 self.fields['equipment_class'].queryset = Equipment_Class.objects.filter(company_id=company_id).order_by('company')
             except (ValueError, TypeError):
                 pass  # invalid input from the client; ignore and fallback to empty City queryset
-        elif self.instance.pk: #self.instance.pk
+        #-------------------------------------------------------------------------------------------------------------------------------------
+        elif self.instance.slug: # <- "slug" (field of models.py) from views.py: "editable = Company(or another).objects.get(slug=data_slug)"
             self.fields['equipment_class'].queryset = self.instance.company.equipment_class_set.order_by('class_name')
+            #                                                           ^        ^           ^--- "_set" means get set
+            #                                                           |        '--- filtered on "equipment_class" set
+            #                                                           '--- filtered on "company" set
+            # https://www.youtube.com/watch?v=LmYDXgYK1so&list=LL&index=44&t=1452s <-- explanation on 25:30
+        #-------------------------------------------------------------------------------------------------------------------------------------
         #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -66,7 +72,7 @@ class Equipment_Category_Form(forms.ModelForm):
 class Equipment_Item_Form(forms.ModelForm):
     class Meta:
         model = Equipment_Item
-        fields = (  'company','equipment_class', 'equipment_category',  #
+        fields = (  'is_published', 'company','equipment_class', 'equipment_category',  #
                     'item_name_ru', 'item_name_en',
                     'short_description_ru', 'short_description_en',
                     'full_description_ru', 'full_description_en',
@@ -90,9 +96,8 @@ class Equipment_Item_Form(forms.ModelForm):
                 self.fields['equipment_class'].queryset = Equipment_Class.objects.filter(company_id=company_id).order_by('company')
             except (ValueError, TypeError):
                 pass
-        elif self.instance.pk:
+        elif self.instance.slug:
             self.fields['equipment_class'].queryset = self.instance.company.equipment_class_set.order_by('class_name')
-
 
          #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         if 'equipment_category' in self.data:
@@ -101,8 +106,8 @@ class Equipment_Item_Form(forms.ModelForm):
                 self.fields['equipment_category'].queryset = Equipment_Category.objects.filter(equipment_class_id=equipment_class_id).order_by('equipment_class')
             except (ValueError, TypeError):
                 pass
-        elif self.instance.pk:
-            self.fields['equipment_category'].queryset = self.instance.company.equipment_category_set.order_by('category_name')
+        elif self.instance.slug:
+            self.fields['equipment_category'].queryset = self.instance.equipment_class.equipment_category_set.order_by('category_name')
         #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -110,7 +115,7 @@ class Equipment_Item_Form(forms.ModelForm):
 class Equipment_Accessory_Form(forms.ModelForm):
     class Meta:
         model = Equipment_Accessory
-        fields = (  'company','equipment',
+        fields = (  'is_published', 'company','equipment',
                     'accessory_name_ru', 'accessory_name_en',
                     'short_description_ru', 'short_description_en',
                     'full_description_ru', 'full_description_en',
