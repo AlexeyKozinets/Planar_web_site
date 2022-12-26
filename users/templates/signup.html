@@ -1,14 +1,16 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-    <div style="    margin-right: 40%;
-                    margin-left: 5%;">
-        <h1>Signup</h1>
+<link rel="stylesheet" type="text/css" href="{% static 'css/user_form_styles.css' %}">
+
+    <div class="forms_container">
+        <h1>Регистрация профиля</h1>
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">
-                Sign
+            <button  class="addFormButton" type="submit">
+                Ok
             </button>
         </form>
 

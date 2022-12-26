@@ -10,7 +10,6 @@
 
 
         <div class="buttons_container">
-            {% for i in mod_list %}
             <!-- forloop.counter - var which exist in for-tag and means number of iteration (1,2,3,...,end).
                 There exist different vars ( https://docs.djangoproject.com/en/4.1/ref/templates/builtins/ )-->
 
@@ -21,6 +20,7 @@
                 When str(forloop.counter) in url.path or str(0) in url.path then >id="defaultOpen"< is added to
                  button properties and script toggle the button to active -->
             <!-- ???? need think about using js insted django ???? -->
+            {% for i in mod_list %}
                 {% if forloop.counter|stringformat:"i" in request.path or '0' in request.path %}
                     <button class="tablinks" onclick="openDataList(event, '{% trans i.1 %}')" id="defaultOpen">
                         <div class="tab_container">

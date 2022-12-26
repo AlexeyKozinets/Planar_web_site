@@ -1,5 +1,7 @@
 from django.utils.translation import gettext_lazy as _
 
+#====== Meta attr translation ======
+
 company_meta_verb = _('Комания')
 company_meta_verb_plr = _('Компании')
 
@@ -19,7 +21,12 @@ accessory_meta_verb_plr = _('Атрибуты объектов')
 user_meta_verb = _('Пользователь')
 user_meta_verb_plr = _('Пользователи')
 
+#====== Meta attr translation ======
 
+
+
+
+#====== verbose names translation ======
 
 company_verb = _('Комания')
 class_verb = _('Класс')
@@ -30,3 +37,17 @@ short_verb = _('Предназанчение')
 full_verb = _('Полное описание')
 showing_verb = _('Отображение')
 img_verb =  _('Изображение')
+priority_verb = _('Приоритет отображения')
+
+#====== verbose names translation ======
+
+
+
+
+
+#====== help texts translation ======
+
+publishing_help = _('Отображение данных на странице сайта.')
+priority_help = _('Определяет очередность отображения информации на странице сайта (1 - 99).')
+
+#====== help texts translation ======

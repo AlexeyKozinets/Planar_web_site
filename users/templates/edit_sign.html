@@ -1,27 +1,41 @@
 {% extends "base.html" %}
+{% load static %}
+{% load i18n %}
 
 {% block content %}
-    <div style="    margin-right: 40%;
-                    margin-left: 5%;">
-        <h1>Signup</h1>
-        <form method="POST" autocomplete="off">
-            {% csrf_token %}
-            {{ user_form.as_p }}
-            <button type="submit">
-                Sign
-            </button>
-        </form>
-        <form method="POST">
-            {% csrf_token %}
-            {{ password_form.as_p }}
-            <button type="submit">
-                Sign
-            </button>
-        </form>
+<link rel="stylesheet" type="text/css" href="{% static 'css/user_form_styles.css' %}">
 
-        <a href = "{% url 'Main_site:edit_list' 0 %}">
-            ok
+    <div class="forms_container">
+        <h1>Настройка профиля</h1>
+        <div class="user_data">
+            <h3 class="form_name">Данные пользователя</h3>
+            <form method="POST" >
+                {% csrf_token %}
+                {{ user_form.as_p }}
+                <button class="editFormButton" type="submit">
+                    {% trans 'Обновить' %}
+                </button>
+            </form>
+
+        </div>
+
+        <div class="user_password">
+            <h3 class="form_name" >Пароль</h3>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ password_form.as_p }}
+                    <button class="editFormButton" type="submit">
+                        {% trans 'Обновить' %}
+                    </button>
+                </form>
+        </div>
+
+        <a href = "{% url 'Main_site:edit_list' 0 %}" class="formRef">
+            <div class="formRef">
+                Ok
+            </div>
         </a>
+
     </div>
 
 

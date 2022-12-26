@@ -1,0 +1,171 @@
+.forms_container{
+    margin: 5em 5em;
+    margin-top: 2em;
+    min-width: 400px;
+    font-family: Calibri;
+}
+
+
+.user_data,
+.user_password{
+    margin: 3em 0em;
+    padding: 0.5em 1em;
+    border-style: solid;
+    border: 2px 2px;
+    border-color: rgb(170, 217, 255);
+    border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    -moz-border-radius: 0.5em;
+    -ms-border-radius: 0.5em;
+    -o-border-radius: 0.5em;
+}
+
+.form_container{
+    margin: 1em 1em;
+    height: 100%;
+}
+
+
+.form_name{
+    margin-left: 1em;
+}
+
+
+label{
+    font-family: Calibri;
+}
+
+.helptext{
+    /* display: none; */
+    font-family: Calibri;
+    color: rgb(114, 114, 114);
+}
+
+/* foreign keys */
+#id_company{
+    width: 100%;
+    height: 2em;
+    font-size: 1em;
+    border-radius: 0.5em;
+    padding-left: 0.5em;
+    background-color: rgb(245, 245, 245);
+    border: solid 3px white;
+}
+
+#id_company:hover{
+    border-color: rgb(0, 140, 255);
+    transition: 0.3s;
+}
+
+#id_company:focus{
+    outline: none;
+    border: solid 3px rgb(0, 140, 255);
+}
+
+
+/* names */
+#id_username,
+#id_first_name,
+#id_last_name,
+#id_email,
+#id_password1,
+#id_password2,
+#id_old_password,
+#id_new_password1,
+#id_new_password2{
+    background-color: rgb(245, 245, 245);
+    width: 100%;
+    box-sizing: border-box;
+    height: 2em;
+    font-size: 1em;
+    border: solid 3px white;
+    border-radius: 0.5em;
+    padding-left: 0.5em;
+}
+
+
+#id_username:hover,
+#id_first_name:hover,
+#id_last_name:hover,
+#id_email:hover,
+#id_password1:hover,
+#id_password2:hover,
+#id_old_password:hover,
+#id_new_password1:hover,
+#id_new_password2:hover{
+    border-color: rgb(0, 140, 255);
+    transition: 0.3s;
+}
+#id_username:focus,
+#id_first_name:focus,
+#id_last_name:focus,
+#id_email:focus,
+#id_password1:focus,
+#id_password2:focus,
+#id_old_password:focus,
+#id_new_password1:focus,
+#id_new_password2:focus{
+    outline: none;
+    border: solid 3px rgb(0, 140, 255);
+}
+
+
+#id_is_active{
+    position: relative;
+    height: 1.5em;
+    width: 1.5em;
+    top: 0.4em;
+    margin-bottom: 0em;
+}
+
+
+
+
+.addFormButton, .editFormButton{
+    font-family: Calibri;
+    font-weight: 800;
+    width: 100%;
+    height: 3em;
+    font-size: 1em;
+    border-radius: 0.5em;
+    border: none;
+    margin-bottom: 0.3em;
+}
+
+
+.editFormButton {
+    height: 2em;
+}
+
+.editFormButton:hover{
+    background-color: rgb(0, 140, 255);
+    color: white;
+    transition: 0.3s;
+}
+
+.addFormButton:hover{
+    background-color: rgb(131, 180, 138);
+    color: white;
+    transition: 0.3s;
+}
+
+.formRef{
+    font-family: Calibri;
+    font-weight: 800;
+    font-size: 1em;
+    color: black;
+    border-radius: 0.5em;
+    width: 100%;
+    background-color: rgb(245, 245, 245);
+    text-align: center;
+    padding: 1em 0em;
+}
+
+
+.formRef:hover{
+    background-color: rgb(131, 180, 138);
+    color: white;
+    transition: 0.3s;
+}
+
+

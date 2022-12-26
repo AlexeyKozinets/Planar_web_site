@@ -2,15 +2,32 @@
     margin: 5em 5em;
     margin-top: 2em;
     min-width: 400px;
+    font-family: Calibri;
 }
 
-.Add--chapterName--{
-    font-family: Calibri;
-    margin-left: 3em;
+#id_is_published{
+    position: relative;
+    height: 1.5em;
+    width: 1.5em;
+    top: 0.4em;
+    margin-bottom: 0em;
 }
+
+#head_img-clear_id{
+    position: relative;
+    top: 0.2em;
+    margin-bottom: 0em;
+}
+
 
 label{
     font-family: Calibri;
+}
+
+.helptext{
+    /* display: none; */
+    font-family: Calibri;
+    color: rgb(114, 114, 114);
 }
 
 /* foreign keys */
@@ -42,6 +59,7 @@ label{
 
 
 /* names */
+#id_priority,
 #id_company_name_ru,    #id_company_name_en,
 #id_class_name_ru,      #id_class_name_en,
 #id_category_name_ru,   #id_category_name_en,
@@ -56,6 +74,8 @@ label{
     border-radius: 0.5em;
     padding-left: 0.5em;
 }
+
+#id_priority:hover,
 #id_company_name_ru:hover,    #id_company_name_en:hover,
 #id_class_name_ru:hover,      #id_class_name_en:hover,
 #id_category_name_ru:hover,   #id_category_name_en:hover,
@@ -64,6 +84,8 @@ label{
     border-color: rgb(0, 140, 255);
     transition: 0.3s;
 }
+
+#id_priority:focus,
 #id_company_name_ru:focus,    #id_company_name_en:focus,
 #id_class_name_ru:focus,      #id_class_name_en:focus,
 #id_category_name_ru:focus,   #id_category_name_en:focus,

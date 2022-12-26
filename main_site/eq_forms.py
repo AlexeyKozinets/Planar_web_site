@@ -7,6 +7,7 @@ class Company_Form(forms.ModelForm):
         model = Company
         fields = (  'is_published', 'head_img',
                     'company_name_ru', 'company_name_en',
+                    'priority',
                     )
 
 

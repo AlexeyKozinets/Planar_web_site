@@ -5,17 +5,21 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/data_form_styles.css' %}">
 
-    {% if form.equipment_class and not form.equipment_category  %}
-        <h1 class="Add--chapterName--">{% trans 'Категория' %}</h1>
-    {% elif form.equipment_category %}
-            <h1 class="Add--chapterName--">{% trans 'Объект' %}</h1>
-    {% elif form.equipment %}
-        <h1 class="Add--chapterName--">{% trans 'Аксессуар' %}</h1>
-    {% else %}
-        <h1 class="Add--chapterName--">{% trans 'Класс' %}</h1>
-    {% endif %}
+    
 
     <div class="form_container">
+
+        {% if form.equipment_class and not form.equipment_category  %}
+            <h1>{% trans 'Категория' %}</h1>
+        {% elif form.equipment_category %}
+                <h1>{% trans 'Объект' %}</h1>
+        {% elif form.equipment %}
+            <h1>{% trans 'Аксессуар' %}</h1>
+        {% else %}
+            <h1>{% trans 'Класс' %}</h1>
+        {% endif %}
+
+
         <form   method="POST"
                 enctype="multipart/form-data"
                 id = "multiForm"

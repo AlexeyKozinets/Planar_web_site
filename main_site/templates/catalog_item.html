@@ -15,13 +15,13 @@
         <h1> {{item}} </h1>
 
         {% for accessory in accessories_list %}
-            <div class="accessory_container">
-                <div calss="accessory">
-                    
-                        {{ accessory }}
-                   
+            {% if accessory.is_published %}
+                <div class="accessory_container">
+                    <div calss="accessory">
+                            {{ accessory }}
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         {% endfor %}
 
     </div>

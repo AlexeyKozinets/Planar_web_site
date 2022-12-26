@@ -14,13 +14,15 @@
         {% endfor %}
 
         {% for category in categories_list %}
-            <div class="caregory_container">
-                <div calss="category">
-                    <a href="{% url 'Main_site:catalog_items' category.equipment_class.slug category.slug %}">
-                        {{ category }}
-                    </a>
+            {% if category.is_published %}
+                <div class="caregory_container">
+                    <div calss="category">
+                        <a href="{% url 'Main_site:catalog_items' category.equipment_class.slug category.slug %}">
+                            {{ category }}
+                        </a>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         {% endfor %}
 
     </div>

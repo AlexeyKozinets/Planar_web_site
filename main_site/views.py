@@ -13,7 +13,7 @@ def Home(request):
 #============================= SETTINGS =============================
 
 def Add_data(request,model_name):
-    print(request.POST)
+
     #                   ^ _______________________________ created argument, which come from edit_list.html thru urls.py
     if request.user.is_authenticated:               # checking in case that user is not log in
 
@@ -56,7 +56,7 @@ def Add_data(request,model_name):
                 if request.user.is_superuser == False:
                     new_data.company = request.user.company             # <- auto set of "company" field if user in not superuser(admin)
                 new_data.save()
-                if model_name == Equipment_Accessory._meta.verbose_name_plural:
+                if model_name == Equipment_Accessory.__name__:
                     form.save_m2m()     # <-- saving "many to many" fields (must be final step of savin the form)
 
                 return redirect(reverse('Main_site:edit_list', kwargs={ 'modelId': modelId })) #add modelId to request.path
@@ -71,7 +71,6 @@ def Add_data(request,model_name):
 
 
 def Edit_data(request,model_name,data_slug):
-    print('!!!!!!!!!!', request.POST)
     #                   ^_________^ _____________________________________ created arguments, which come from edit_list.html thru urls.py
     if request.user.is_authenticated:
         #_______________________________________________________________(
@@ -120,7 +119,6 @@ def Edit_data(request,model_name,data_slug):
                 upd_data.save()
                 if model_name == Equipment_Accessory.__name__:
                     form.save_m2m()
-                print('!!!!!!!!!!', request.POST)
                 return redirect(reverse('Main_site:edit_list', kwargs={ 'modelId': modelId })) #add modelId to request.path
                 # return redirect('Main_site:edit_list')
 
@@ -168,18 +166,34 @@ def Edit_list(request, modelId):
             #   |
             # models_list = [
             #                   [model_name,    class_metaVerboseName,  <filtered_class_names_set>],
-            #                   [cat_nam,       cat_metaVerboseName,    <filtered_cat_names_set>],
+            #                   [cat_name,      cat_metaVerboseName,    <filtered_cat_names_set>],
             #                   [item_name,     item_metaVerboseName,   <filtered_item_names_set>],
             #                   ....,
             #                   ]
         else:
-            models_list = [[i.__name__, i._meta.verbose_name_plural, i.objects.all().order_by('slug')] for i in models]  # need change all models names fields on "name"
+            models_list = [[i.__name__, i._meta.verbose_name_plural, i.objects.all()] for i in models]  # need change all models names fields on "name"
             # models_list = [                                                                           # instead "company_name", "class_name", etc
             #                   [model_name,    class_metaVerboseName,  <all_class_names_set>],
-            #                   [cat_nam,       cat_metaVerboseName,    <all_cat_names_set>],
+            #                   [cat_name,      cat_metaVerboseName,    <all_cat_names_set>],
             #                   [item_name,     item_metaVerboseName,   <all_item_names_set>],
             #                   ....,
             #                   ]
+
+
+        for data in models_list: #<- smart sorting
+            if data[0] == 'CustomUser':
+                data[2] = data[2].order_by('company__priority', 'username', )
+            elif data[0] == 'Company':
+                data[2] = data[2].order_by('priority')
+            elif data[0] == 'Equipment_Class':
+               data[2] = data[2].order_by('company__priority', 'class_name', )
+            elif data[0] == 'Equipment_Category':
+                data[2] = data[2].order_by('company__priority', 'equipment_class', 'category_name', )
+            elif data[0] == 'Equipment_Item':
+                data[2] = data[2].order_by('company__priority', 'equipment_class', 'equipment_category', 'item_name', )
+            elif data[0] == 'Equipment_Accessory':
+                data[2] = data[2].order_by('company__priority', 'accessory_name', )
+
 
         context = { 'mod_list': models_list,
                     }
@@ -187,16 +201,18 @@ def Edit_list(request, modelId):
         return render(request, 'edit_list.html', context)
     else:
         return redirect('Main_site:home')
-                        # ^___________________________ name of path in urls.py
+                        # ^___________________________ name of path in *app*.urls.py
 
 #============================= SETTINGS =============================
+
+
 
 
 #============================= CATALOG =============================
 
 def Catalog_home(request):
-    companies = Company.objects.all()
-    classes = Equipment_Class.objects.all()
+    companies = Company.objects.all().order_by('priority',)
+    classes = Equipment_Class.objects.all().order_by('class_name',)
     context = { 'classes_list' : classes,
                 'companies_list': companies,
                 }
@@ -205,21 +221,21 @@ def Catalog_home(request):
 
 
 def Catalog_categories(request, slug1):
-    categories = Equipment_Category.objects.filter(equipment_class__slug=slug1)
+    categories = Equipment_Category.objects.filter(equipment_class__slug=slug1).order_by('category_name', )
     context = {'categories_list' : categories,}
     return render(request, 'catalog_categories.html', context)
 
 
 
 def Catalog_items(request, slug1, slug2):
-    items = Equipment_Item.objects.filter(equipment_category__slug=slug2)
+    items = Equipment_Item.objects.filter(equipment_category__slug=slug2).order_by('item_name', )
     context = {'items_list' : items,}
     return render(request, 'catalog_items.html', context)
 
 
 def Catalog_item(request, slug1, slug2, slug3):
     item = Equipment_Item.objects.get(slug=slug3)
-    accessories = Equipment_Accessory.objects.filter(equipment__slug=slug3)
+    accessories = Equipment_Accessory.objects.filter(equipment__slug=slug3).order_by('accessory_name', )
     context = { 'item' : item,
                 'accessories_list':accessories
                 }

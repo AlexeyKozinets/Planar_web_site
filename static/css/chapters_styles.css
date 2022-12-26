@@ -206,8 +206,6 @@
 
 
 
-
-
 .content:hover .status_active{
     visibility: visible;
     background-color: rgb(0, 155, 77);
@@ -228,7 +226,19 @@
 }
 
 
+.status_on{
+    height: 100%;
+    width: 1em;
+    background-color: aquamarine;
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+}
 
+.status_off{
+    height: 100%;
+    width: 1em;
+    background-color: rgb(243, 15, 72);
+}
 
 .status_active_icon{
     margin: 0.75em 0.5em;
@@ -261,6 +271,13 @@
     background-color: rgb(0, 219, 110);
     transition-delay: 1s;
 }
+
+
+
+
+
+
+
 
 
 .data_content{

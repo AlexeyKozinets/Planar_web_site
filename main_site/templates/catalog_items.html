@@ -14,13 +14,15 @@
         {% endfor %}
 
         {% for item in items_list %}
-            <div class="item_container">
-                <div calss="item">
-                    <a href="{% url 'Main_site:catalog_item'  item.equipment_class.slug  item.equipment_category.slug  item.slug %}">
-                        {{ item }}
-                    </a>
+            {% if item.is_published %}
+                <div class="item_container">
+                    <div calss="item">
+                        <a href="{% url 'Main_site:catalog_item'  item.equipment_class.slug  item.equipment_category.slug  item.slug %}">
+                            {{ item }}
+                        </a>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         {% endfor %}
 
     </div>

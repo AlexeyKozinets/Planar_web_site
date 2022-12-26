@@ -8,7 +8,8 @@ class Company(models.Model):
     company_name = models.CharField(blank = False, max_length = 150, verbose_name = name_verb)
     slug = models.SlugField(max_length=150, unique=True, db_index=True, verbose_name="URL")
     head_img = models.ImageField(upload_to = 'companies_uploads', null=True, blank=True, verbose_name = img_verb,)
-    is_published = models.BooleanField(default=True, verbose_name = showing_verb)
+    is_published = models.BooleanField(default=True, verbose_name = showing_verb, help_text = publishing_help)
+    priority = models.DecimalField(blank = False, max_digits = 2, decimal_places=0, null = True, verbose_name = priority_verb, help_text = priority_help)
 
     def save(self, *args, **kwargs):  # new
         rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
@@ -41,7 +42,7 @@ class Equipment_Class(models.Model):
     short_description =  models.CharField(blank = False,max_length = 150, verbose_name = short_verb)
     full_description = models.TextField(blank = False, max_length = 1500, verbose_name = full_verb)
     head_img = models.ImageField(upload_to = 'classes_uploads', null=True, blank=True, verbose_name = img_verb,)
-    is_published = models.BooleanField(default=True, verbose_name = showing_verb)
+    is_published = models.BooleanField(default=True, verbose_name = showing_verb, help_text = publishing_help)
 
     def save(self, *args, **kwargs):  # new
         rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
@@ -66,7 +67,7 @@ class Equipment_Category(models.Model):
     short_description =  models.CharField(blank = False,max_length = 150, verbose_name = short_verb)
     full_description = models.TextField(blank = False, max_length = 1500, verbose_name = full_verb)
     head_img = models.ImageField(upload_to = 'categories_uploads', null=True, blank=True, verbose_name = img_verb,)
-    is_published = models.BooleanField(default=True, verbose_name = short_verb)
+    is_published = models.BooleanField(default=True, verbose_name = short_verb, help_text = publishing_help)
 
     def save(self, *args, **kwargs):
         rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
@@ -92,7 +93,7 @@ class Equipment_Item(models.Model):
     short_description =  models.CharField(blank = False,max_length = 150, verbose_name = short_verb)
     full_description = models.TextField(blank = False, max_length = 1500, verbose_name = full_verb)
     head_img = models.ImageField(upload_to = 'objects_uploads', null=True, blank=True, verbose_name = img_verb,)
-    is_published = models.BooleanField(default=True, verbose_name = showing_verb)
+    is_published = models.BooleanField(default=True, verbose_name = showing_verb, help_text = publishing_help)
     pass
 
     def save(self, *args, **kwargs):  # new
@@ -117,7 +118,7 @@ class Equipment_Accessory(models.Model):
     short_description =  models.CharField(blank = False,max_length = 150, verbose_name = short_verb)
     full_description = models.TextField(blank = False, max_length = 1500, verbose_name = full_verb)
     head_img = models.ImageField(upload_to = 'attributes_uploads', null=True, blank=True, verbose_name = img_verb,)
-    is_published = models.BooleanField(default=True, verbose_name = showing_verb)
+    is_published = models.BooleanField(default=True, verbose_name = showing_verb, help_text = publishing_help)
 
     def save(self, *args, **kwargs):  # new
         rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
