@@ -3,27 +3,47 @@
 {% load static %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/catalog_styles.css' %}">
 
-    <div class="catalog_container" style="margin: 0em 3em">
+    <div class="catalog_container">
 
         {% for category in categories_list|slice:":1" %}
-        <p>
-            <div>{{category.company}}</div>
-            <div>{{category.equipment_class}}</div>
-        </p>
+
+            <div class="company_bar">
+                <div class="company_logo_container">
+                    <img src="{{ category.company.head_img.url }}" class="company_logo">
+                </div>
+                <div class="company_name_container">
+                    {{category.company}}
+                </div>
+                <div class="company_class_container">
+                    {{category.equipment_class}}
+                </div>
+            </div>
+
         {% endfor %}
 
-        {% for category in categories_list %}
-            {% if category.is_published %}
-                <div class="caregory_container">
-                    <div calss="category">
-                        <a href="{% url 'Main_site:catalog_items' category.equipment_class.slug category.slug %}">
+
+        <div class="product_bar">
+            {% for category in categories_list %}
+                {% if category.is_published %}
+                    <div class="product_card">
+                    <a href="{% url 'Main_site:catalog_items' category.equipment_class.slug category.slug %}">
+
+                        <div class="product_img_container">
+                            <img src="{% static 'place_holders/place_holder.png' %}" class="product_img">
+                        </div>
+
+                        <div class="product_name">
                             {{ category }}
-                        </a>
+                        </div>
+                    </a>
                     </div>
-                </div>
-            {% endif %}
-        {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </div>
+
+
 
     </div>
 

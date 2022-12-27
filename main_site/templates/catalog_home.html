@@ -3,21 +3,41 @@
 {% load static %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/catalog_styles.css' %}">
 
-    <div class="catalog_container" style="margin: 0em 3em">
+    <div class="catalog_container">
         {% for Company in companies_list %}
             {% if Company.is_published %}
-                <div class="company_container">
-                <p>{{ Company }}</p>
-                {% for class in classes_list %}
-                    {% if class.company == Company and class.is_published %}
-                        <div calss="class">
-                            <a href="{% url 'Main_site:catalog_categories' class.slug %}">
-                                {{ class }}
-                            </a>
+                <div class="company_products_container">
+
+                    <div class="company_bar">
+                        <div class="company_logo_container">
+                            <img src="{{ Company.head_img.url }}" class="company_logo">
                         </div>
-                    {% endif %}
-                {% endfor %}
+                        <div class="company_name_container">
+                            {{ Company }}
+                        </div>
+                    </div>
+
+                    <div class="product_bar">
+                        {% for class in classes_list %}
+                            {% if class.company == Company and class.is_published %}
+                                <div class="product_card">
+                                <a href="{% url 'Main_site:catalog_categories' class.slug %}">
+
+                                    <div class="product_img_container">
+                                        <img src="{% static 'place_holders/place_holder.png' %}" class="product_img">
+                                    </div>
+
+                                    <div class="product_name">
+                                        {{ class }}
+                                    </div>
+                                </a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
                 </div>
             {% endif %}
         {% endfor %}

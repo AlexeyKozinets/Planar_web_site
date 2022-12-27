@@ -9,7 +9,7 @@
 
 
 
-        <div class="buttons_container">
+        <div class="buttons_bar">
             <!-- forloop.counter - var which exist in for-tag and means number of iteration (1,2,3,...,end).
                 There exist different vars ( https://docs.djangoproject.com/en/4.1/ref/templates/builtins/ )-->
 
@@ -20,35 +20,37 @@
                 When str(forloop.counter) in url.path or str(0) in url.path then >id="defaultOpen"< is added to
                  button properties and script toggle the button to active -->
             <!-- ???? need think about using js insted django ???? -->
-            {% for i in mod_list %}
-                {% if forloop.counter|stringformat:"i" in request.path or '0' in request.path %}
-                    <button class="tablinks" onclick="openDataList(event, '{% trans i.1 %}')" id="defaultOpen">
-                        <div class="tab_container">
-                            {% trans i.1 %}
-                            <div class="add_place_holder">
-                                {% if i.0 == 'CustomUser' %} <!-- 'CustomUser' is the model name from users/models.py -->
-                                    <a class="tab_add" class href="{% url 'Users:signUp' %}">+</a>
-                                {% else%}
-                                    <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">+</a>
-                                {% endif %}
+            <div class="buttons_container">
+                {% for i in mod_list %}
+                    {% if forloop.counter|stringformat:"i" in request.path or '0' in request.path %}
+                        <button class="tablinks" onclick="openDataList(event, '{% trans i.1 %}')" id="defaultOpen">
+                            <div class="tab_container">
+                                {% trans i.1 %}
+                                <div class="add_place_holder">
+                                    {% if i.0 == 'CustomUser' %} <!-- 'CustomUser' is the model name from users/models.py -->
+                                        <a class="tab_add" class href="{% url 'Users:signUp' %}">+</a>
+                                    {% else%}
+                                        <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">+</a>
+                                    {% endif %}
+                                </div>
                             </div>
-                        </div>
-                    </button>
-                {% else %}
-                    <button class="tablinks" onclick="openDataList(event, '{% trans i.1 %}')">
-                        <div class="tab_container">
-                            {% trans i.1 %}
-                            <div class="add_place_holder">
-                                 {% if i.0 == 'CustomUser' %} <!-- 'CustomUser' is the model name from users/models.py -->
-                                    <a class="tab_add" class href="{% url 'Users:signUp' %}">+</a>
-                                {% else%}
-                                    <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">+</a>
-                                {% endif %}
+                        </button>
+                    {% else %}
+                        <button class="tablinks" onclick="openDataList(event, '{% trans i.1 %}')">
+                            <div class="tab_container">
+                                {% trans i.1 %}
+                                <div class="add_place_holder">
+                                    {% if i.0 == 'CustomUser' %} <!-- 'CustomUser' is the model name from users/models.py -->
+                                        <a class="tab_add" class href="{% url 'Users:signUp' %}">+</a>
+                                    {% else%}
+                                        <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">+</a>
+                                    {% endif %}
+                                </div>
                             </div>
-                        </div>
-                    </button>
-                {% endif %}
-            {% endfor %}
+                        </button>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
 
 
