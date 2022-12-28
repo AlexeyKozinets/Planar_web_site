@@ -13,9 +13,10 @@ urlpatterns = [                                                 # <- multiLang:1
     path('settings:<str:modelId>/', views.Edit_list, name='edit_list'),
     path('sign/', views.Edit_list, name='edit_list'),
     path('catalog/', views.Catalog_home, name='catalog_home'),
-    path('catalog/<slug:slug1>/', views.Catalog_categories, name='catalog_categories'),
-    path('catalog/<slug:slug1>/<slug:slug2>/', views.Catalog_items, name='catalog_items'),
-    path('catalog/<slug:slug1>/<slug:slug2>/<slug:slug3>/', views.Catalog_item, name='catalog_item'),
+    path('catalog/<slug:company_slug>/', views.Catalog_classes, name='catalog_classes'),
+    path('catalog/<slug:company_slug>/<slug:class_slug>/', views.Catalog_categories, name='catalog_categories'),
+    path('catalog/<slug:company_slug>/<slug:class_slug>/<slug:category_slug>/', views.Catalog_items, name='catalog_items'),
+    path('catalog/<slug:company_slug>/<slug:class_slug>/<slug:category_slug>/<slug:item_slug>/', views.Catalog_item, name='catalog_item'),
 ]
 
 

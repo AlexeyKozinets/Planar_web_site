@@ -7,41 +7,33 @@
 
     <div class="catalog_container">
 
-        {% for item in items_list|slice:":1" %}
+        {% for class in classes_list|slice:":1" %}
 
             <div class="product_info_bar">
                 <div class="product_dir">
                     <div class="product_info_logo_container">
-                        <img src="{{ item.company.head_img.url }}" class="company_logo">
-                    </div>
-
-                    <div class="product_parent">
-                        <div class="product_grandparent">{{item.equipment_class}}</div>
-                        <div>{{item.equipment_category}}</div>
+                        <img src="{{ class.company.head_img.url }}" class="company_logo">
                     </div>
                 </div>
                 <div class="product_description">
-                    {{ item.equipment_category.full_description }}
+                    <!-- {{ class.full_description }} -->
                 </div>
             </div>
-
-
-
         {% endfor %}
 
 
         <div class="product_bar">
-            {% for item in items_list %}
-                {% if item.is_published %}
+            {% for class in classes_list %}
+                {% if class.is_published %}
                     <div class="product_card">
-                    <a href="{% url 'Main_site:catalog_item'  item.company.slug item.equipment_class.slug  item.equipment_category.slug  item.slug %}">
+                    <a href="{% url 'Main_site:catalog_categories' class.company.slug class.slug %}">
 
                         <div class="product_img_container">
                             <img src="{% static 'place_holders/eq_place_holder.jpg' %}" class="product_img">
                         </div>
 
                         <div class="product_name">
-                            {{ item }}
+                            {{ class }}
                         </div>
                     </a>
                     </div>

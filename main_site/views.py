@@ -219,23 +219,26 @@ def Catalog_home(request):
     return render(request, 'catalog_home.html', context)
 
 
+def Catalog_classes(request, company_slug):
+    classes = Equipment_Class.objects.filter(company__slug=company_slug).order_by('class_name', )
+    context = {'classes_list' : classes,}
+    return render(request, 'catalog_classes.html', context)
 
-def Catalog_categories(request, slug1):
-    categories = Equipment_Category.objects.filter(equipment_class__slug=slug1).order_by('category_name', )
+def Catalog_categories(request, company_slug, class_slug):
+    categories = Equipment_Category.objects.filter(equipment_class__slug=class_slug).order_by('category_name', )
     context = {'categories_list' : categories,}
     return render(request, 'catalog_categories.html', context)
 
 
-
-def Catalog_items(request, slug1, slug2):
-    items = Equipment_Item.objects.filter(equipment_category__slug=slug2).order_by('item_name', )
+def Catalog_items(request, company_slug, class_slug, category_slug):
+    items = Equipment_Item.objects.filter(equipment_category__slug=category_slug).order_by('item_name', )
     context = {'items_list' : items,}
     return render(request, 'catalog_items.html', context)
 
 
-def Catalog_item(request, slug1, slug2, slug3):
-    item = Equipment_Item.objects.get(slug=slug3)
-    accessories = Equipment_Accessory.objects.filter(equipment__slug=slug3).order_by('accessory_name', )
+def Catalog_item(request, company_slug, class_slug, category_slug, item_slug):
+    item = Equipment_Item.objects.get(slug=item_slug)
+    accessories = Equipment_Accessory.objects.filter(equipment__slug=item_slug).order_by('accessory_name', )
     context = { 'item' : item,
                 'accessories_list':accessories
                 }
