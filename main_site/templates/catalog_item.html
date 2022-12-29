@@ -3,16 +3,35 @@
 {% load static %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/catalog_styles.css' %}">
 
+    <div class="catalog_container">
 
-    <div class="catalog_container" style="margin: 0em 3em">
-        <p>
-            <div>{{item.company}}</div>
-            <div>{{item.equipment_class}}</div>
-            <div>{{item.equipment_category}}</div>
-        </p>
+        <div class="product_info_bar">
+            <div class="product_dir">
+                <div class="product_info_logo_container">
+                    <img src="{{ item.company.head_img.url }}" class="company_logo">
+                </div>
 
-        <h1> {{item}} </h1>
+                <div class="product_parent_container">
+                    <div class="product_grandparent">{{item.equipment_class}}</div>
+                    <div class="product_grandparent">{{item.equipment_category}}</div>
+                    <div class="product_parent">{{item}}</div>
+                </div>
+            </div>
+            <div class="product_description">
+                {{ item.full_description }}
+            </div>
+            <div class="product_img_container">
+                <img src="{% static 'place_holders/eq_place_holder.jpg' %}" class="product_img">
+            </div>
+            <div class="product_technical_specs">
+                {% if item.specifications %}
+                    {{ item.specifications|safe }}
+                {% endif %}
+            </div>
+        </div>
+
 
         {% for accessory in accessories_list %}
             {% if accessory.is_published %}

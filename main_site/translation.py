@@ -33,12 +33,12 @@ class Equipment_CategoryTranslationOptions(TranslationOptions):
 
 @register(Equipment_Item)
 class Equipment_CategoryTranslationOptions(TranslationOptions):
-    fields = ('item_name', 'short_description', 'full_description',)
+    fields = ('item_name', 'short_description', 'full_description', 'specifications')
     required_languages = ('ru', 'en')
 
 @register(Equipment_Accessory)
 class Equipment_AccessoryTranslationOptions(TranslationOptions):
-    fields = ('accessory_name', 'short_description', 'full_description',)
+    fields = ('accessory_name', 'short_description', 'full_description', 'specifications',)
     required_languages = ('ru', 'en')
 
 

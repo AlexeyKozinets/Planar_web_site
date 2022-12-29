@@ -38,6 +38,7 @@ full_verb = _('Полное описание')
 showing_verb = _('Отображение')
 img_verb =  _('Изображение')
 priority_verb = _('Приоритет отображения')
+spec_verb = _('Технические характеристики')
 
 #====== verbose names translation ======
 

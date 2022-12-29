@@ -14,7 +14,7 @@ class Company_Form(forms.ModelForm):
 class Equipment_Class_Form(forms.ModelForm):
     class Meta:
         model = Equipment_Class
-        fields = (  'is_published', 'company',
+        fields = (  'is_published', 'head_img', 'company',
                     'class_name_ru', 'class_name_en',                   # <- multiLang:16) now we can indicate model field
                     'short_description_ru', 'short_description_en',     # with different languages (next: create *app_name*/urls.py)
                     'full_description_ru', 'full_description_en',
@@ -33,7 +33,7 @@ class Equipment_Class_Form(forms.ModelForm):
 class Equipment_Category_Form(forms.ModelForm):
     class Meta:
         model = Equipment_Category
-        fields = (  'is_published', 'company','equipment_class',
+        fields = (  'is_published', 'head_img', 'company','equipment_class',
                     'category_name_ru', 'category_name_en',
                     'short_description_ru', 'short_description_en',
                     'full_description_ru', 'full_description_en',
@@ -73,10 +73,11 @@ class Equipment_Category_Form(forms.ModelForm):
 class Equipment_Item_Form(forms.ModelForm):
     class Meta:
         model = Equipment_Item
-        fields = (  'is_published', 'company','equipment_class', 'equipment_category',  #
+        fields = (  'is_published', 'head_img', 'company','equipment_class', 'equipment_category',  #
                     'item_name_ru', 'item_name_en',
                     'short_description_ru', 'short_description_en',
                     'full_description_ru', 'full_description_en',
+                    'specifications_ru', 'specifications_en', 
                     )
 
     def __init__(self,user,*args, **kwargs):
@@ -116,10 +117,11 @@ class Equipment_Item_Form(forms.ModelForm):
 class Equipment_Accessory_Form(forms.ModelForm):
     class Meta:
         model = Equipment_Accessory
-        fields = (  'is_published', 'company','equipment',
+        fields = (  'is_published', 'head_img', 'company','equipment',
                     'accessory_name_ru', 'accessory_name_en',
                     'short_description_ru', 'short_description_en',
                     'full_description_ru', 'full_description_en',
+                    'specifications_ru', 'specifications_en', 
                     )
         widgets = {     # <-- create list of all avalible "many to many" connections
             'equipment': forms.CheckboxSelectMultiple,

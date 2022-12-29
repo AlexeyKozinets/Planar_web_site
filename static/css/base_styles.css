@@ -1,11 +1,13 @@
 .base_header{
+    z-index: 2;
     justify-content: space-between;
     height: 5em;
     display: flex;
-    background: linear-gradient(to right, rgb(152, 47, 223), rgb(0, 149, 248));
-    min-width: 500px;
+    background: linear-gradient(to right, rgb(220, 40, 226), rgb(138, 16, 219), rgb(0, 149, 248),  rgb(93, 208, 253));
+    width: 100%;
     box-shadow: 0px  2px 10px rgb(168, 168, 168);
 }
+
 
 
 .header_href{
@@ -81,3 +83,28 @@ a{
     filter: invert(100%) sepia(7%) saturate(241%) hue-rotate(248deg) brightness(115%) contrast(100%);
 }
 
+
+
+
+
+.base_footer{
+    justify-content: space-between;
+    height: 3em;
+    display: flex;
+    background: linear-gradient(to right, rgb(220, 40, 226), rgb(138, 16, 219), rgb(0, 149, 248),  rgb(93, 208, 253));
+    min-width: 500px;
+    box-shadow: 0px  -2px 10px rgb(168, 168, 168);
+}
+
+
+
+/* https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/ */
+.site {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+.site-content {
+    flex: 1;
+  }

@@ -1,15 +1,16 @@
 {% load static %}
 {% load i18n %}
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Base</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/header_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base_styles.css' %}">
 </head>
-<body style="margin: 0px;">
-
+<body class="site" style="margin: 0px;">
 
     <div class="base_header">
         <div class="left_side">
@@ -92,9 +93,15 @@
             </div>
         </div>
 
+    </div>
+
+    <main class="site-content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <div class="base_footer">
 
     </div>
-    {% block content %}
-    {% endblock %}
 </body>
 </html>

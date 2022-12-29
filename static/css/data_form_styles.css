@@ -110,8 +110,8 @@ label{
 }
 
 
-#id_full_description_ru,
-#id_full_description_en{
+#id_full_description_ru, #id_full_description_en,
+#id_specifications_ru, #id_specifications_en{
     background-color: rgb(245, 245, 245);
     min-width: 100%;
     max-width: 100%;
@@ -123,13 +123,15 @@ label{
 }
 
 #id_short_description_ru:hover,   #id_short_description_en:hover,
-#id_full_description_ru:hover,    #id_full_description_en:hover{
+#id_full_description_ru:hover,    #id_full_description_en:hover,
+#id_specifications_ru:hover,      #id_specifications_en:hover{
     border-color: rgb(0, 140, 255);
     transition: 0.3s;
 }
 
 #id_short_description_ru:focus,   #id_short_description_en:focus,
-#id_full_description_ru:focus,    #id_full_description_en:focus{
+#id_full_description_ru:focus,    #id_full_description_en:focus,
+#id_specifications_ru:focus,      #id_specifications_en:focus{
     outline: none;
     border: solid 3px rgb(0, 140, 255);
 }

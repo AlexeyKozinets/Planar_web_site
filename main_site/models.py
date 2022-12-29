@@ -92,6 +92,7 @@ class Equipment_Item(models.Model):
     slug = models.SlugField(max_length=150, unique=True, db_index=True, verbose_name="URL")
     short_description =  models.CharField(blank = False,max_length = 150, verbose_name = short_verb)
     full_description = models.TextField(blank = False, max_length = 1500, verbose_name = full_verb)
+    specifications = models.TextField(blank = False, max_length = 3000, null=True, verbose_name = spec_verb)
     head_img = models.ImageField(upload_to = 'objects_uploads', null=True, blank=True, verbose_name = img_verb,)
     is_published = models.BooleanField(default=True, verbose_name = showing_verb, help_text = publishing_help)
     pass
@@ -117,6 +118,7 @@ class Equipment_Accessory(models.Model):
     slug = models.SlugField(max_length=150, unique=True, db_index=True, verbose_name="URL")
     short_description =  models.CharField(blank = False,max_length = 150, verbose_name = short_verb)
     full_description = models.TextField(blank = False, max_length = 1500, verbose_name = full_verb)
+    specifications = models.TextField(blank = True, max_length = 3000, null=True, verbose_name = spec_verb)
     head_img = models.ImageField(upload_to = 'attributes_uploads', null=True, blank=True, verbose_name = img_verb,)
     is_published = models.BooleanField(default=True, verbose_name = showing_verb, help_text = publishing_help)
 

@@ -15,7 +15,7 @@
 
 .company_products_container{
     /* border: 3px solid rgb(92, 92, 92); */
-    padding: 1em;
+    padding: 1em 0em;
     border-radius: 1em;
     -webkit-border-radius: 1em;
     -moz-border-radius: 1em;
@@ -43,13 +43,11 @@
     height: 100%;
 }
 
-.company_name_container,
-.company_class_container,
-.company_category_container{
+.company_name_container{
     display: flex;
     align-items: center;
     height: var(--company_heigth);
-    margin-right: 1em;
+    margin-left: 1em;
 }
 
 
@@ -79,8 +77,8 @@
 }
 
 .product_img_container{
-    width: 100%;
-    height: calc(var(--card_height) * 0.8);
+    margin: 1em;
+    /* border: 2px solid rgb(42, 3, 150) */
 }
 
 .product_img{
@@ -139,29 +137,39 @@
     /* border: 2px solid rgb(0, 124, 21); */
     display: flex;
     flex-direction: row;
+    align-items: center;
     margin-right: 1em;
+    height: fit-content;
+    width: 100%;
 }
 
-.product_parent{
+.product_parent_container{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: fit-content;
-    margin: 0.3em 0em;
-    font-size: 1.8em;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    margin-left: 1em;
     /* border: 2px solid rgb(124, 0, 0); */
 }
 
+.product_parent{
+    font-size: 1.4em;
+    font-weight: bold;
+    /* border: 2px solid rgb(3, 150, 22); */
+}
+
 .product_grandparent{
-    font-size: 0.6em;
-    color: rgb(204, 204, 204);
+    font-size: 1em;
+    color: rgb(83, 83, 83);
+    /* border: 2px solid rgb(0, 78, 124); */
 }
 
 .product_description{
     /* border: 2px solid rgb(124, 105, 0); */
-    padding: 0.5em;
+    padding: 0.5em 0em;
     width: 100%;
-    font-size: 0.8em;
+    font-size: 1em;
 }
 
 .product_info_logo_container{
@@ -171,6 +179,41 @@
     object-fit: scale-down;
 }
 
+.product_description_container{
+    display: flex;
+}
+
+.product_specification{
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    width: 100%;
+}
+
+
+.product_technical_specs{
+        width: 100%;
+}
+
+#test{
+    width: 40em;
+    margin-right: 1em;
+}
+
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 4px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #ececec;
+  }
 
 /* ############################################################# */
 
