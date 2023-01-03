@@ -149,9 +149,7 @@ AUTH_USER_MODEL = 'users.CustomUser'            # user!!!!!!!!!!!
 
 STATIC_URL = 'static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 
 MEDIA_URL = 'media/'                            ####?
@@ -164,3 +162,19 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom':[
+            [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', ],
+            [ 'NumberedList', 'BulletedList','-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',],
+            [ 'Image', 'Table', 'HorizontalRule', 'SpecialChar'],
+            [ 'Maximize', 'ShowBlocks' ],
+            [ 'Link', 'Unlink', ],
+            [ 'Styles', 'Format', 'Font', 'FontSize' ],
+            ['Source',],
+        ]
+    },
+}

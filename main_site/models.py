@@ -13,8 +13,10 @@ class Company(models.Model):
     priority = models.DecimalField(blank = False, max_digits = 2, decimal_places=0, null = True, verbose_name = priority_verb, help_text = priority_help)
 
     def save(self, *args, **kwargs):  # new
-        rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
-        unique_slugify(self, self.company_name_en + '-' + rand_code)
+        if not Company.objects.filter(slug=self.slug).exists() or not self.is_published:
+            rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
+            unique_slugify(self, self.item_name_en + '-' + rand_code)
+        return super().save(*args, **kwargs)
         #=====================================================(altrernate way without import)
         # if not self.slug:
         #     self.slug = slugify(self.company_name_en)     ##[from django.utils.text import slugify] <- onboard slugify import##
@@ -46,8 +48,9 @@ class Equipment_Class(models.Model):
     is_published = models.BooleanField(default=True, verbose_name = showing_verb, help_text = publishing_help)
 
     def save(self, *args, **kwargs):  # new
-        rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
-        unique_slugify(self, self.class_name_en + '-' + rand_code)
+        if not Equipment_Class.objects.filter(slug=self.slug).exists() or not self.is_published:
+            rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
+            unique_slugify(self, self.item_name_en + '-' + rand_code)
         return super().save(*args, **kwargs)
 
     def __str__(self):
@@ -71,8 +74,9 @@ class Equipment_Category(models.Model):
     is_published = models.BooleanField(default=True, verbose_name = short_verb, help_text = publishing_help)
 
     def save(self, *args, **kwargs):
-        rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
-        unique_slugify(self, self.category_name_en + '-' + rand_code)
+        if not Equipment_Category.objects.filter(slug=self.slug).exists() or not self.is_published:
+            rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
+            unique_slugify(self, self.item_name_en + '-' + rand_code)
         return super().save(*args, **kwargs)
 
     def __str__(self):
@@ -99,12 +103,13 @@ class Equipment_Item(models.Model):
     pass
 
     def save(self, *args, **kwargs):  # new
-        rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
-        unique_slugify(self, self.item_name_en + '-' + rand_code)
+        if not Equipment_Item.objects.filter(slug=self.slug).exists() or not self.is_published:
+            rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
+            unique_slugify(self, self.item_name_en + '-' + rand_code)
         return super().save(*args, **kwargs)
 
     def __str__(self):
-            return self.item_name
+        return self.item_name
 
     class Meta:
         verbose_name = item_meta_verb
@@ -124,8 +129,9 @@ class Equipment_Accessory(models.Model):
     is_published = models.BooleanField(default=True, verbose_name = showing_verb, help_text = publishing_help)
 
     def save(self, *args, **kwargs):  # new
-        rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
-        unique_slugify(self, self.accessory_name_en + '-' + rand_code)
+        if not Equipment_Accessory.objects.filter(slug=self.slug).exists() or not self.is_published:
+            rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
+            unique_slugify(self, self.item_name_en + '-' + rand_code)
         return super().save(*args, **kwargs)
 
     def __str__(self):
