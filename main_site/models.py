@@ -2,6 +2,7 @@ from django.db import models
 from django_unique_slugify import unique_slugify #<- installed module
 from random import randint
 from Planar.model_verbose_transtatios import *
+from ckeditor.fields import RichTextField
 
 
 class Company(models.Model):
@@ -92,7 +93,7 @@ class Equipment_Item(models.Model):
     slug = models.SlugField(max_length=150, unique=True, db_index=True, verbose_name="URL")
     short_description =  models.CharField(blank = False,max_length = 150, verbose_name = short_verb)
     full_description = models.TextField(blank = False, max_length = 1500, verbose_name = full_verb)
-    specifications = models.TextField(blank = False, max_length = 3000, null=True, verbose_name = spec_verb)
+    specifications = RichTextField(blank = False, null=True, verbose_name = spec_verb)
     head_img = models.ImageField(upload_to = 'objects_uploads', null=True, blank=True, verbose_name = img_verb,)
     is_published = models.BooleanField(default=True, verbose_name = showing_verb, help_text = publishing_help)
     pass
