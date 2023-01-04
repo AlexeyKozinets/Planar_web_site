@@ -23,7 +23,7 @@ urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
 
 urlpatterns += [path('accounts/', include('django.contrib.auth.urls'))]
 
-urlpatterns += [path('ckeditor/', include('ckeditor_uploader.urls')),]
+urlpatterns += [path('ckeditor/', include('ckeditor_uploader.urls')),] #CKeditor
 
 
                                                                     # multiLang:22) in templates instead {% url 'urls_name' i.0 %}

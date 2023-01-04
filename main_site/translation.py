@@ -10,6 +10,7 @@ from .models import (
     Equipment_Category,
     Equipment_Item,
     Equipment_Accessory,
+    News,
 )                                                                       # <- multiLang:9) import models from model.py which fields
                                                                         # is need to be tansladed  (next: translation.py)
 
@@ -42,3 +43,7 @@ class Equipment_AccessoryTranslationOptions(TranslationOptions):
     required_languages = ('ru', 'en')
 
 
+@register(News)
+class Equipment_AccessoryTranslationOptions(TranslationOptions):
+    fields = ('title', 'body1', 'body2',)
+    required_languages = ('ru', 'en')

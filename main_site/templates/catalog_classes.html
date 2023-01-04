@@ -28,8 +28,12 @@
                     <div class="product_card">
                     <a href="{% url 'Main_site:catalog_categories' class.company.slug class.slug %}">
 
-                        <div class="product_img_container">
-                            <img src="{% static 'place_holders/eq_place_holder.jpg' %}" class="product_img">
+                        <div class="product_img_container" id="product_img_container">
+                            {% if class.head_img %}
+                                <img src="{{ class.head_img.url }}" class="product_img">
+                            {% else %}
+                                <img src="{% static 'place_holders/eq_place_holder.jpg' %}" class="product_img">
+                            {% endif %}
                         </div>
 
                         <div class="product_name">

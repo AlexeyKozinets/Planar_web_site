@@ -1,5 +1,5 @@
 from django import forms
-from .models import Company, Equipment_Class, Equipment_Category, Equipment_Item, Equipment_Accessory
+from .models import Company, Equipment_Class, Equipment_Category, Equipment_Item, Equipment_Accessory, News
 
 
 class Company_Form(forms.ModelForm):
@@ -77,7 +77,7 @@ class Equipment_Item_Form(forms.ModelForm):
                     'item_name_ru', 'item_name_en',
                     'short_description_ru', 'short_description_en',
                     'full_description_ru', 'full_description_en',
-                    'specifications_ru', 'specifications_en', 
+                    'specifications_ru', 'specifications_en',
                     )
 
     def __init__(self,user,*args, **kwargs):
@@ -121,7 +121,7 @@ class Equipment_Accessory_Form(forms.ModelForm):
                     'accessory_name_ru', 'accessory_name_en',
                     'short_description_ru', 'short_description_en',
                     'full_description_ru', 'full_description_en',
-                    'specifications_ru', 'specifications_en', 
+                    'specifications_ru', 'specifications_en',
                     )
         widgets = {     # <-- create list of all avalible "many to many" connections
             'equipment': forms.CheckboxSelectMultiple,
@@ -134,3 +134,21 @@ class Equipment_Accessory_Form(forms.ModelForm):
             self.fields['equipment'].queryset = Equipment_Item.objects.filter(company=user.company_id)
             del self.fields['company']
 
+
+
+
+class News_Form(forms.ModelForm):
+    class Meta:
+        model = News
+        fields = (  'is_published', 'head_img', 'company',
+                    'title_ru', 'title_en',
+                    'body1_ru', 'body1_en',
+                    'additional_imgs',
+                    'body2_ru', 'body2_en',
+                    )
+
+    def __init__(self,user,*args, **kwargs):
+        super(News_Form,self).__init__(*args, **kwargs)
+
+        if user.is_superuser != True: # <-- condition that only superuser can see and edit 'company' field
+            del self.fields['company'] # <-- removing 'company' field from 'fields' (fields is dict)

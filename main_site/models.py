@@ -15,7 +15,7 @@ class Company(models.Model):
     def save(self, *args, **kwargs):  # new
         if not Company.objects.filter(slug=self.slug).exists() or not self.is_published:
             rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
-            unique_slugify(self, self.item_name_en + '-' + rand_code)
+            unique_slugify(self, self.company_name_en + '-' + rand_code)
         return super().save(*args, **kwargs)
         #=====================================================(altrernate way without import)
         # if not self.slug:
@@ -50,7 +50,7 @@ class Equipment_Class(models.Model):
     def save(self, *args, **kwargs):  # new
         if not Equipment_Class.objects.filter(slug=self.slug).exists() or not self.is_published:
             rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
-            unique_slugify(self, self.item_name_en + '-' + rand_code)
+            unique_slugify(self, self.class_name_en + '-' + rand_code)
         return super().save(*args, **kwargs)
 
     def __str__(self):
@@ -76,7 +76,7 @@ class Equipment_Category(models.Model):
     def save(self, *args, **kwargs):
         if not Equipment_Category.objects.filter(slug=self.slug).exists() or not self.is_published:
             rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
-            unique_slugify(self, self.item_name_en + '-' + rand_code)
+            unique_slugify(self, self.category_name_en + '-' + rand_code)
         return super().save(*args, **kwargs)
 
     def __str__(self):
@@ -131,7 +131,7 @@ class Equipment_Accessory(models.Model):
     def save(self, *args, **kwargs):  # new
         if not Equipment_Accessory.objects.filter(slug=self.slug).exists() or not self.is_published:
             rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
-            unique_slugify(self, self.item_name_en + '-' + rand_code)
+            unique_slugify(self, self.accessory_name_en + '-' + rand_code)
         return super().save(*args, **kwargs)
 
     def __str__(self):
@@ -141,3 +141,28 @@ class Equipment_Accessory(models.Model):
         verbose_name = accessory_meta_verb
         verbose_name_plural = accessory_meta_verb_plr
         ordering = ['accessory_name',]
+
+class News(models.Model):
+    company = models.ForeignKey('Company', on_delete=models.CASCADE,verbose_name = company_verb)
+    head_img = models.ImageField(upload_to = 'news_uploads', null=True, blank=True, verbose_name = img_verb,)
+    title = models.CharField(max_length=150, blank=False, verbose_name = title_verb)
+    slug = models.SlugField(max_length=150, unique=True, db_index=True, verbose_name="URL")
+    body1 = RichTextField(blank = False, null=True, verbose_name = body_verb, help_text = body_1_help)
+    additional_imgs = models.ImageField(upload_to = 'news_uploads', null=True, blank=True, verbose_name = imgs_verb,)
+    body2 = RichTextField(blank = True, null=True, verbose_name = body_verb, help_text = body_2_help)
+    file = models.FileField(upload_to ='news_uploads',null=True,blank=True)
+    issued = models.DateTimeField(blank=False)
+    is_published = models.BooleanField(default=True, verbose_name = showing_verb, help_text = publishing_help)
+
+    def save(self, *args, **kwargs):  # new
+        if not News.objects.filter(slug=self.slug).exists() or not self.is_published:
+            rand_code = ''.join([ chr([randint(48,57), randint(65,90), 45][randint(0,2)]) for i in range(randint(8,12))])
+            unique_slugify(self, self.title_en + '-' + rand_code)
+        return super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+    class Meta:
+        verbose_name = news_meta_verb
+        verbose_name_plural = news_meta_verb_plr
+        ordering = ['issued',]
