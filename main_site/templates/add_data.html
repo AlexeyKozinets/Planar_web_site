@@ -5,56 +5,40 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/data_form_styles.css' %}">
 
-    
+    <div class="form_frame">
 
-    <div class="form_container">
+        <div class="form_container">
 
-        {% if form.equipment_class and not form.equipment_category  %}
-            <h1>{% trans 'Категория' %}</h1>
-        {% elif form.equipment_category %}
+
+            {% if form.equipment_class and not form.equipment_category  %}
+                <h1>{% trans 'Категория' %}</h1>
+            {% elif form.equipment_category %}
                 <h1>{% trans 'Объект' %}</h1>
-        {% elif form.equipment %}
-            <h1>{% trans 'Аксессуар' %}</h1>
-        {% else %}
-            <h1>{% trans 'Класс' %}</h1>
-        {% endif %}
-
-
-        <form   method="POST"
-                enctype="multipart/form-data"
-                id = "multiForm"
-                data-class-url="{% url 'Main_site:ajax_load_classes' %}"
-                data-category-url="{% url 'Main_site:ajax_load_categories' %}"
-                class="form">
-
-
-            {% csrf_token %}
-            {{ form.media }}
-            {{ form.as_p }}
-
-
-            <!-- ++++++++ working ++++++++ -->
-            <!-- {{form.non_field_errors}}
-            {%if form.company %}
-                <div>
-                    {{ form.company.errors }}
-                    {{ form.company.label_tag }}
-                    {{ form.company }}
-                </div>
+            {% elif form.equipment %}
+                <h1>{% trans 'Аксессуар' %}</h1>
+            {% else %}
+                <h1>{% trans 'Класс' %}</h1>
             {% endif %}
-            {%if form.equipment_class %}
-                <div>
-                    {{ form.equipment_class.errors }}
-                    {{ form.equipment_class.label_tag }}
-                    {{ form.equipment_class }}
-                </div>
-            {% endif %} -->
-            <!-- ++++++++ +++++++ ++++++++ -->
 
-            <button class="formButton" type="submit">
-                Ok
-            </button>
-        </form>
+
+            <form   method="POST"
+                    enctype="multipart/form-data"
+                    id = "multiForm"
+                    data-class-url="{% url 'Main_site:ajax_load_classes' %}"
+                    data-category-url="{% url 'Main_site:ajax_load_categories' %}"
+                    class="form">
+
+
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_p }}
+
+
+                <button class="formButton" type="submit">
+                    Ok
+                </button>
+            </form>
+        </div>
     </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

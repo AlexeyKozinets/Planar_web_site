@@ -146,9 +146,14 @@ class News_Form(forms.ModelForm):
                     'additional_imgs',
                     'body2_ru', 'body2_en',
                     )
+        widgets = {
+            'additional_imgs': forms.ClearableFileInput(attrs={'multiple': True}),
+        } # <- https://stackoverflow.com/questions/37419608/how-to-add-a-multiple-attribute-to-input-type-file-in-django-modelform
+
+
 
     def __init__(self,user,*args, **kwargs):
         super(News_Form,self).__init__(*args, **kwargs)
 
-        if user.is_superuser != True: # <-- condition that only superuser can see and edit 'company' field
-            del self.fields['company'] # <-- removing 'company' field from 'fields' (fields is dict)
+        if user.is_superuser != True:
+            del self.fields['company']

@@ -144,10 +144,10 @@ class Equipment_Accessory(models.Model):
 
 class News(models.Model):
     company = models.ForeignKey('Company', on_delete=models.CASCADE,verbose_name = company_verb)
-    head_img = models.ImageField(upload_to = 'news_uploads', null=True, blank=True, verbose_name = img_verb,)
+    head_img = models.ImageField(upload_to = 'news_uploads', blank=False, verbose_name = img_verb,)
     title = models.CharField(max_length=150, blank=False, verbose_name = title_verb)
     slug = models.SlugField(max_length=150, unique=True, db_index=True, verbose_name="URL")
-    body1 = RichTextField(blank = False, null=True, verbose_name = body_verb, help_text = body_1_help)
+    body1 = RichTextField(blank = True, null=True, verbose_name = body_verb, help_text = body_1_help)
     additional_imgs = models.ImageField(upload_to = 'news_uploads', null=True, blank=True, verbose_name = imgs_verb,)
     body2 = RichTextField(blank = True, null=True, verbose_name = body_verb, help_text = body_2_help)
     file = models.FileField(upload_to ='news_uploads',null=True,blank=True)

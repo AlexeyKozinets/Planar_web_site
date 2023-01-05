@@ -173,8 +173,10 @@ CKEDITOR_CONFIGS = {
             [ 'Image', 'Table', 'HorizontalRule', 'SpecialChar'],
             [ 'Maximize', 'ShowBlocks' ],
             [ 'Link', 'Unlink', ],
+            [ 'Maximize', 'ShowBlocks' ],
             [ 'Styles', 'Format', 'Font', 'FontSize' ],
             ['Source',],
-        ]
+        ],
+        'width': 'full', # + .django-ckeditor-widget{width: 100%;}
     },
 }

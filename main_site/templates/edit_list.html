@@ -28,9 +28,9 @@
                                 {% trans i.1 %}
                                 <div class="add_place_holder">
                                     {% if i.0 == 'CustomUser' %} <!-- 'CustomUser' is the model name from users/models.py -->
-                                        <a class="tab_add" class href="{% url 'Users:signUp' %}">+</a>
+                                        <a class="tab_add" href="{% url 'Users:signUp' %}">+</a>
                                     {% else%}
-                                        <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">+</a>
+                                        <a class="tab_add" href="{% url 'Main_site:add_data' i.0 %}">+</a>
                                     {% endif %}
                                 </div>
                             </div>
@@ -41,9 +41,9 @@
                                 {% trans i.1 %}
                                 <div class="add_place_holder">
                                     {% if i.0 == 'CustomUser' %} <!-- 'CustomUser' is the model name from users/models.py -->
-                                        <a class="tab_add" class href="{% url 'Users:signUp' %}">+</a>
+                                        <a class="tab_add" href="{% url 'Users:signUp' %}">+</a>
                                     {% else%}
-                                        <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">+</a>
+                                        <a class="tab_add" href="{% url 'Main_site:add_data' i.0 %}">+</a>
                                     {% endif %}
                                 </div>
                             </div>

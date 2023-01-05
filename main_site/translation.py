@@ -46,4 +46,4 @@ class Equipment_AccessoryTranslationOptions(TranslationOptions):
 @register(News)
 class Equipment_AccessoryTranslationOptions(TranslationOptions):
     fields = ('title', 'body1', 'body2',)
-    required_languages = ('ru', 'en')
+    required_languages = {'default':('title',)} # <- multiLang) https://django-modeltranslation.readthedocs.io/en/latest/registration.html

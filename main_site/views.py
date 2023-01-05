@@ -9,6 +9,7 @@ from users.models import CustomUser
 
 def Home(request):
     #       ^ ___________________________________________ httpRequest object that contains metadata about the request
+    print('^^^^^^^^^^^^^^^^^^^^^^^')
     return render(request, 'base.html')
 
 #============================= SETTINGS =============================
@@ -64,7 +65,7 @@ def Add_data(request,model_name):
                     new_data.company = request.user.company # <- auto set of "company" field if user in not superuser(admin)
 
                 if model_name == News.__name__:
-                    new_data.issued = datetime.now()        # <- auto set of "issued" field if model name is "News"
+                    new_data.issued = datetime.now()       # <- auto set of "issued" field if model name is "News"
 
                 new_data.save()
 
@@ -153,6 +154,7 @@ def Edit_data(request,model_name,data_slug):
     else:
         return redirect('Main_site:home')
 
+
 #++++++++++++++++++++++++++++++++++++++++++
 def load_classes(request):
     company_id = request.GET.get('company_id')
@@ -179,8 +181,6 @@ def Edit_list(request, modelId):
         Equipment_Accessory,
         News,
     ]
-
-    print('!!!!!!!!!!!!!!!!!!!!',News)
 
     if request.user.is_superuser == False:
         selected_models = models[2:]
