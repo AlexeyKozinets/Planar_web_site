@@ -1,8 +1,29 @@
-.form_container{
-    margin: 5em 5em;
+.form_frame{
+    display: flex;
+    margin: 5em 2em;
     margin-top: 2em;
+    min-width: calc(400px + 2em);
+    justify-content: center;
+    /* border: 2px solid rgb(255, 0, 0) */
+
+}
+
+
+
+
+.form_container{
+    margin: 0em 2em;
     min-width: 400px;
+    max-width: 80em;
     font-family: Calibri;
+    padding: 1em;
+    /* border: 2px solid rgb(0, 140, 255); */
+    border-radius: 1em;
+    box-shadow: 0px 1px 10px rgb(224, 213, 213);
+    -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
+    -ms-border-radius: 1em;
+    -o-border-radius: 1em;
 }
 
 #id_is_published{
@@ -64,7 +85,8 @@ label{
 #id_class_name_ru,      #id_class_name_en,
 #id_category_name_ru,   #id_category_name_en,
 #id_item_name_ru,       #id_item_name_en,
-#id_accessory_name_ru,   #id_accessory_name_en{
+#id_accessory_name_ru,  #id_accessory_name_en,
+#id_title_ru,           #id_title_en{
     background-color: rgb(245, 245, 245);
     width: 100%;
     box-sizing: border-box;
@@ -80,7 +102,8 @@ label{
 #id_class_name_ru:hover,      #id_class_name_en:hover,
 #id_category_name_ru:hover,   #id_category_name_en:hover,
 #id_item_name_ru:hover,       #id_item_name_en:hover,
-#id_accessory_name_ru:hover,   #id_accessory_name_en:hover{
+#id_accessory_name_ru:hover,   #id_accessory_name_en:hover,
+#id_title_ru:hover,           #id_title_en:hover{
     border-color: rgb(0, 140, 255);
     transition: 0.3s;
 }
@@ -90,7 +113,8 @@ label{
 #id_class_name_ru:focus,      #id_class_name_en:focus,
 #id_category_name_ru:focus,   #id_category_name_en:focus,
 #id_item_name_ru:focus,       #id_item_name_en:focus,
-#id_accessory_name_ru:focus,   #id_accessory_name_en:focus{
+#id_accessory_name_ru:focus,  #id_accessory_name_en:focus,
+#id_title_ru:focus,           #id_title_en:focus{
     outline: none;
     border: solid 3px rgb(0, 140, 255);
 }
@@ -153,3 +177,61 @@ label{
     color: white;
     transition: 0.3s;
 }
+
+
+/* ############ multiple imgs ############ */
+
+/* #id_additional_imgs > input{
+    multiple
+} */
+
+/* ############ multiple imgs ############ */
+
+
+/* ############ CKeditor ############ */
+.django-ckeditor-widget{
+    box-sizing: border-box;
+    width: 100%;
+    border: solid 3px white;
+    border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    -moz-border-radius: 0.5em;
+    -ms-border-radius: 0.5em;
+    -o-border-radius: 0.5em;
+}
+
+
+
+.django-ckeditor-widget:hover{
+    border: solid 3px rgb(0, 140, 255);
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+}
+
+
+#cke_id_specifications_ru,
+.cke_reset{
+    border-radius: 0.3em;
+    -webkit-border-radius: 0.3em;
+    -moz-border-radius: 0.3em;
+    -ms-border-radius: 0.3em;
+    -o-border-radius: 0.3em;
+}
+
+
+#cke_1_top,
+#cke_2_top{
+    border-top-left-radius: 0.3em;
+    border-top-right-radius: 0.3em;
+}
+
+#cke_1_bottom,
+#cke_2_bottom{
+    border-bottom-left-radius: 0.3em;
+    border-bottom-right-radius: 0.3em;
+}
+
+/* ############ CKeditor ############ */

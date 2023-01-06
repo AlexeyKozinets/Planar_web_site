@@ -1,0 +1,249 @@
+
+.news_container{
+    --catalog_container_width: 50em;
+    display: flex;
+    flex-direction: column;
+    /* border: 3px solid rgb(255, 0, 0); */
+    max-width: var(--catalog_container_width);
+    margin-top: 3em;
+    margin-left: max(2em, calc(50% - var(--catalog_container_width) / 2 ));
+    margin-right: 2em;
+    font-family: Calibri;
+    font-size: 1em;
+    padding: 1em;
+}
+
+
+.news_card,
+.news_body{
+    /* border: 2px solid rgb(124, 124, 124); */
+    box-shadow: 0px 1px 10px rgb(224, 213, 213);
+    margin-bottom: 2em;
+    padding: 0.5em 0em;
+    border-radius: 1em;
+    -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
+    -ms-border-radius: 1em;
+    -o-border-radius: 1em;
+}
+
+.news_card:hover{
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+    transform: scale(1.02);
+    box-shadow: 0px 1px 15px rgb(124, 113, 113);
+    -webkit-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+    -o-transform: scale(1.02);
+}
+
+.company_bar{
+    --company_heigth: 2em;
+    z-index: -1;
+    display: flex;
+    /* border: 2px solid rgb(255, 209, 2); */
+    height: var(--company_heigth);
+    margin-left: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.company_logo_container{
+    width: var(--company_heigth);
+    height: var(--company_heigth);
+    /* border: 2px solid rgb(0, 60, 255); */
+}
+
+.company_logo{
+    height: 100%;
+    border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    -moz-border-radius: 0.5em;
+    -ms-border-radius: 0.5em;
+    -o-border-radius: 0.5em;
+    /* border: 2px solid rgb(9, 255, 0); */
+}
+
+
+.company_name_container{
+    display: flex;
+    align-items: center;
+    height: var(--company_heigth);
+    margin-left: 1em;
+    /* border: 2px solid rgb(255, 0, 234); */
+}
+
+
+.issued_container{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    height: var(--company_heigth);
+    margin-right: 0.5em;
+    color: rgb(75, 75, 75);
+    /* border: 2px solid rgb(255, 0, 234); */
+}
+
+.list_head_img_container{
+    height: 15em;
+    display: flex;
+    justify-content: center;
+    /* border: 2px solid rgb(42, 3, 150); */
+    margin-bottom: 1em;
+}
+
+.news_head_img_container{
+  display: flex;
+  justify-content: center;
+  /* border: 2px solid rgb(42, 3, 150); */
+  margin-bottom: 1em;
+}
+
+.head_img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.title_bar{
+    margin: 0em 0.5em;
+}
+
+.title{
+    font-size: 1.2em;
+    /* border: 2px solid rgb(42, 3, 150); */
+}
+
+.body_bar{
+  /* border: 2px solid rgb(42, 3, 150); */
+  margin: 1em;
+}
+
+
+.multi_imgs{
+  height: 20em;
+  width: 100%;
+  object-fit: scale-down;
+}
+
+/* ################### w3 ################### */
+
+* {box-sizing: border-box}
+body {font-family: Verdana, sans-serif; margin:0}
+.mySlides {display: none}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #616161;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+
+
+/* ################### w3 ################### */
+
+
+
+/* Large desktop */
+@media (min-width: 1200px) {
+
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+
+}

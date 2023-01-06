@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'ckeditor',
+    'ckeditor_uploader',
+
     'main_site',
     'users'
 ]
@@ -145,16 +148,35 @@ AUTH_USER_MODEL = 'users.CustomUser'            # user!!!!!!!!!!!
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 
 MEDIA_URL = 'media/'                            ####?
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')    ####? read more info about
 
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom':[
+            [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', ],
+            [ 'NumberedList', 'BulletedList','-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Outdent', 'Indent',],
+            [ 'Image', 'Table', 'HorizontalRule', 'SpecialChar'],
+            [ 'Maximize', 'ShowBlocks' ],
+            [ 'Link', 'Unlink', ],
+            [ 'Maximize', 'ShowBlocks' ],
+            [ 'Styles', 'Format', 'Font', 'FontSize' ],
+            ['Source',],
+        ],
+        'width': 'full', # + .django-ckeditor-widget{width: 100%;}
+    },
+}

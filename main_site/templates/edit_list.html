@@ -28,9 +28,11 @@
                                 {% trans i.1 %}
                                 <div class="add_place_holder">
                                     {% if i.0 == 'CustomUser' %} <!-- 'CustomUser' is the model name from users/models.py -->
-                                        <a class="tab_add" class href="{% url 'Users:signUp' %}">+</a>
+                                        <a class="tab_add" href="{% url 'Users:signUp' %}">+</a>
+                                    {% elif i.0 == 'News' %}
+                                        <a class="tab_add" href="{% url 'Main_site:add_news' %}">+</a>
                                     {% else%}
-                                        <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">+</a>
+                                        <a class="tab_add" href="{% url 'Main_site:add_data' i.0 %}">+</a>
                                     {% endif %}
                                 </div>
                             </div>
@@ -41,9 +43,11 @@
                                 {% trans i.1 %}
                                 <div class="add_place_holder">
                                     {% if i.0 == 'CustomUser' %} <!-- 'CustomUser' is the model name from users/models.py -->
-                                        <a class="tab_add" class href="{% url 'Users:signUp' %}">+</a>
+                                        <a class="tab_add" href="{% url 'Users:signUp' %}">+</a>
+                                    {% elif i.0 == 'News' %}
+                                        <a class="tab_add" href="{% url 'Main_site:add_news' %}">+</a>
                                     {% else%}
-                                        <a class="tab_add" class href="{% url 'Main_site:add_data' i.0 %}">+</a>
+                                        <a class="tab_add" href="{% url 'Main_site:add_data' i.0 %}">+</a>
                                     {% endif %}
                                 </div>
                             </div>
@@ -61,6 +65,8 @@
 
                         {% if i.0 == 'CustomUser' %}
                             <a class="href" href="{% url 'Users:signUpEditMult' j.id  %}" >href</a>
+                        {% elif i.0 == 'News' %}
+                            <a class="href" href="{% url 'Main_site:edit_news' j.slug %}" >href</a>
                         {% else %}
                             <a class="href" href="{% url 'Main_site:edit_data' i.0 j.slug %}" >href</a>
                         {% endif %}
@@ -153,10 +159,41 @@
                                         <div class="status_not_active">данные не активны</div>
                                     {% endif %}
                                 {% endif %}
+
+                                {% if i.0 == 'News' %} <!-- 'News' is the model name from users/models.py -->
+                                    {% if j.is_published and j.company.is_published %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_active_icon">
+                                        <div class="status_active">{% trans 'данные активны' %}</div>
+                                    {% elif j.is_published and not j.company.is_published %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_hide_icon">
+                                        <div class="status_hide">данные скрыты: компания не активна</div>
+                                    {% else %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_not_active_icon">
+                                        <div class="status_not_active">данные не активны</div>
+                                    {% endif %}
+                                {% endif %}
+
+                                {% if i.0 == 'Contacts' %} <!-- 'News' is the model name from users/models.py -->
+                                    {% if j.is_published and j.company.is_published %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_active_icon">
+                                        <div class="status_active">{% trans 'данные активны' %}</div>
+                                    {% elif j.is_published and not j.company.is_published %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_hide_icon">
+                                        <div class="status_hide">данные скрыты: компания не активна</div>
+                                    {% else %}
+                                        <img src="{% static 'icons/radio_button_unchecked_FILL1_wght400_GRAD0_opsz48.svg' %}" class="status_not_active_icon">
+                                        <div class="status_not_active">данные не активны</div>
+                                    {% endif %}
+                                {% endif %}
+
                             </div>
 
                             <div class="data_name">
-                                {{j}}
+                                {% if i.0 == 'Contacts' %}
+                                    {{j.company}}
+                                {% else %}
+                                    {{j}}
+                                {% endif %}
                             </div>
                             <div class="data_path">
 

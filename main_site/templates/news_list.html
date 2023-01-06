@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/news_styles.css' %}">
+
+    <div class="news_container">
+        {% for news in news_list %}
+            {% if news.company.is_published and news.is_published %}
+                <a href="{% url 'Main_site:news' news.slug %}">
+                    <div class="news_card">
+                        <div class="company_bar">
+                            <div class="company_logo_container">
+                                <img src="{{ news.company.company_head_img.url }}" class="company_logo">
+                            </div>
+                            <div class="company_name_container">
+                                {{ news.company }}
+                            </div>
+                        </div>
+
+                        <div class="list_head_img_container">
+                            <img src="{{ news.news_head_img.url }}" class="head_img">
+                        </div>
+
+                        <div class="title_bar">
+                            <div class="title">
+                                {{news}}
+                            </div>
+                        </div>
+
+                        <div class="issued_container">
+                            {{ news.issued }}
+                        </div>
+                    </div>
+                </a>
+            {% endif %}
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

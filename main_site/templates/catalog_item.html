@@ -10,20 +10,30 @@
         <div class="product_info_bar">
             <div class="product_dir">
                 <div class="product_info_logo_container">
-                    <img src="{{ item.company.head_img.url }}" class="company_logo">
+                    <a href=" {% url 'Main_site:catalog_classes' item.company.slug %}">
+                        <img src="{{ item.company.company_head_img.url }}" class="company_logo">
+                    </a>
                 </div>
 
                 <div class="product_parent_container">
-                    <div class="product_grandparent">{{item.equipment_class}}</div>
-                    <div class="product_grandparent">{{item.equipment_category}}</div>
+                    <a href=" {% url 'Main_site:catalog_categories' item.company.slug item.equipment_class.slug %}">
+                        <div class="product_grandparent">{{item.equipment_class}}</div>
+                    </a>
+                    <a href=" {% url 'Main_site:catalog_items' item.company.slug item.equipment_class.slug item.equipment_category.slug %}">
+                        <div class="product_grandparent">{{item.equipment_category}}</div>
+                    </a>
                     <div class="product_parent">{{item}}</div>
                 </div>
             </div>
             <div class="product_description">
-                {{ item.full_description }}
+                {{ item.full_description|safe }}
             </div>
             <div class="product_img_container">
-                <img src="{% static 'place_holders/eq_place_holder.jpg' %}" class="product_img">
+                {% if item.product_head_img %}
+                    <img src="{{ item.product_head_img.url }}" class="product_img">
+                {% else %}
+                    <img src="{% static 'place_holders/eq_place_holder.jpg' %}" class="product_img">
+                {% endif %}
             </div>
             <div class="product_technical_specs">
                 {% if item.specifications %}

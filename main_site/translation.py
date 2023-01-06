@@ -10,6 +10,8 @@ from .models import (
     Equipment_Category,
     Equipment_Item,
     Equipment_Accessory,
+    News,
+    Contacts,
 )                                                                       # <- multiLang:9) import models from model.py which fields
                                                                         # is need to be tansladed  (next: translation.py)
 
@@ -42,3 +44,13 @@ class Equipment_AccessoryTranslationOptions(TranslationOptions):
     required_languages = ('ru', 'en')
 
 
+@register(News)
+class Equipment_AccessoryTranslationOptions(TranslationOptions):
+    fields = ('title', 'body1', 'body2',)
+    required_languages = {'default':('title',)} # <- multiLang) https://django-modeltranslation.readthedocs.io/en/latest/registration.html
+
+
+@register(Contacts)
+class ContactsTranslationOptions(TranslationOptions):
+    fields = ('contact_data',)
+    required_languages = ('ru', 'en')

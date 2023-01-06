@@ -1,7 +1,14 @@
 
 from django.contrib import admin
 
-from .models import  Company, Equipment_Class, Equipment_Category, Equipment_Item, Equipment_Accessory
+from .models import  (  Company,
+                        Equipment_Class,
+                        Equipment_Category,
+                        Equipment_Item,
+                        Equipment_Accessory,
+                        News,
+                        News_Images
+                    )
 from modeltranslation.admin import TranslationAdmin                 # <- multiLang:13) import TranslationAdmin (next: admin.py)
 
 
@@ -47,8 +54,18 @@ class Equipment_AccessoryAdmin(TranslationAdmin):
     prepopulated_fields = {"slug": ("accessory_name", )}
 
 
+class NewsAdmin(TranslationAdmin):
+    list_display = ('id', 'title', 'company', 'is_published')
+    list_display_links = ('id','title',)
+    list_editable = ('is_published',)
+    list_filter = ('company','issued',)
+    prepopulated_fields = {"slug": ("title", )}
+
+
 admin.site.register(Company,CompanyAdmin)                           # <- multiLang:15) add *model_name*Admin to register
-admin.site.register(Equipment_Class,Equipment_ClassAdmin)           # (also can be simpy decorated) (next: forms.py)
+admin.site.register(Equipment_Class,Equipment_ClassAdmin)           # (also can be simply decorated) (next: forms.py)
 admin.site.register(Equipment_Category,Equipment_CategoryAdmin)
 admin.site.register(Equipment_Item,Equipment_ItemAdmin)
 admin.site.register(Equipment_Accessory,Equipment_AccessoryAdmin)
+admin.site.register(News,NewsAdmin)
+admin.site.register(News_Images)

@@ -1,6 +1,23 @@
+from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
-from .eq_forms import Company_Form, Equipment_Class_Form, Equipment_Category_Form, Equipment_Item_Form, Equipment_Accessory_Form
-from .models import  Company, Equipment_Class, Equipment_Category, Equipment_Item, Equipment_Accessory
+from .eq_forms import ( Company_Form,
+                        Equipment_Class_Form,
+                        Equipment_Category_Form,
+                        Equipment_Item_Form,
+                        Equipment_Accessory_Form,
+                        News_Form,
+                        News_Images_Form,
+                        Contacts_Form,
+                    )
+from .models import  (  Company,
+                        Equipment_Class,
+                        Equipment_Category,
+                        Equipment_Item,
+                        Equipment_Accessory,
+                        News,
+                        News_Images,
+                        Contacts,
+                    )
 from django.urls import reverse
 from users.models import CustomUser
 
@@ -30,6 +47,8 @@ def Add_data(request,model_name):
             form = Equipment_Item_Form(request.user)
         elif model_name == Equipment_Accessory.__name__:
             form = Equipment_Accessory_Form(request.user)
+        elif model_name == Contacts.__name__:
+            form = Contacts_Form(request.user)
         #_______________________________________________________________)
 
         if request.method == 'POST':
@@ -49,13 +68,19 @@ def Add_data(request,model_name):
             elif model_name == Equipment_Accessory.__name__:
                 form = Equipment_Accessory_Form(request.user,request.POST, request.FILES)
                 modelId=4 if request.user.is_superuser == False else 6
+            elif model_name == Contacts.__name__:
+                form = Contacts_Form(request.user,request.POST, request.FILES)
+                modelId=6 if request.user.is_superuser == False else 8
             #_______________________________________________________________)
 
             if form.is_valid():
                 new_data = form.save(commit=False)
+
                 if request.user.is_superuser == False:
-                    new_data.company = request.user.company             # <- auto set of "company" field if user in not superuser(admin)
+                    new_data.company = request.user.company # <- auto set of "company" field if user in not superuser(admin)
+
                 new_data.save()
+
                 if model_name == Equipment_Accessory.__name__:
                     form.save_m2m()     # <-- saving "many to many" fields (must be final step of savin the form)
 
@@ -89,6 +114,9 @@ def Edit_data(request,model_name,data_slug):
         elif model_name == Equipment_Accessory.__name__:
             editable = Equipment_Accessory.objects.get(slug=data_slug)
             form = Equipment_Accessory_Form(request.user,instance=editable)
+        elif model_name == Contacts.__name__:
+            editable = Contacts.objects.get(slug=data_slug)
+            form = Contacts_Form(request.user,instance=editable)
         else:
              return redirect('Main_site:home')
             #_______________________________________________________________)
@@ -110,16 +138,23 @@ def Edit_data(request,model_name,data_slug):
             elif model_name == Equipment_Accessory.__name__:
                 form = Equipment_Accessory_Form(request.user,request.POST, request.FILES, instance=editable)
                 modelId=4 if request.user.is_superuser == False else 6
+            elif model_name == Contacts.__name__:
+                form = Contacts_Form(request.user,request.POST, request.FILES, instance=editable)
+                modelId=6 if request.user.is_superuser == False else 8
             #_______________________________________________________________)
 
             if form.is_valid():
                 upd_data = form.save(commit=False)
+
                 if request.user.is_superuser == False:
                     upd_data.company = request.user.company
+
                 upd_data.save()
+
                 if model_name == Equipment_Accessory.__name__:
                     form.save_m2m()
-                return redirect(reverse('Main_site:edit_list', kwargs={ 'modelId': modelId })) #add modelId to request.path
+
+                return redirect(reverse('Main_site:edit_list', kwargs={ 'modelId': modelId })) #adds modelId to request.path
                 # return redirect('Main_site:edit_list')
 
         context = {'form':form}
@@ -127,6 +162,74 @@ def Edit_data(request,model_name,data_slug):
         return render(request, 'add_data.html', context)
     else:
         return redirect('Main_site:home')
+
+
+
+
+
+
+def Add_news(request):
+    if request.user.is_authenticated:
+        form = News_Form(request.user)
+        form2 = News_Images_Form()
+        if request.method == 'POST':
+            form = News_Form(request.user,request.POST, request.FILES)
+            form2 = News_Images_Form(request.POST, request.FILES)
+            images = request.FILES.getlist('additional_imgs')
+            modelId=5 if request.user.is_superuser == False else 7
+            if form.is_valid() and form2.is_valid():
+                add_news_data = form.save(commit=False)
+                if request.user.is_superuser == False:
+                    add_news_data.company = request.user.company
+                add_news_data.issued = datetime.now()
+                add_news_data.save()
+                for image in images:
+                    News_Images.objects.create(news = add_news_data, additional_imgs = image)
+                return redirect(reverse('Main_site:edit_list', kwargs={ 'modelId': modelId }))
+        context = { 'form':form,
+                    'form2':form2,
+                    }
+        return render(request, 'add_news.html', context)
+    else:
+        return redirect('Main_site:home')
+
+
+
+def Edit_news(request,news_slug):
+    if request.user.is_authenticated:
+        news_editable = News.objects.get(slug=news_slug)
+        news_imgs_editable = News_Images.objects.filter(news__slug=news_slug)
+        form = News_Form(request.user,instance=news_editable)
+        form2 = News_Images_Form()
+        if request.method == 'POST':
+            form = News_Form(request.user,request.POST, request.FILES, instance=news_editable)
+            form2 = News_Images_Form()
+            images = request.FILES.getlist('additional_imgs')
+            modelId=5 if request.user.is_superuser == False else 7
+            if form.is_valid():
+                upd_news_data = form.save(commit=False)
+                if request.user.is_superuser == False:
+                    upd_news_data.company = request.user.company
+                upd_news_data.issued = datetime.now()
+                upd_news_data.save()
+                if images:
+                    News_Images.objects.filter(news__slug=news_slug).delete()
+                for image in images:
+                    News_Images.objects.create(news = upd_news_data, additional_imgs = image)
+                return redirect(reverse('Main_site:edit_list', kwargs={ 'modelId': modelId }))
+        context = { 'form':form,
+                    'form2':form2,
+                    }
+        return render(request, 'add_news.html', context)
+    else:
+        return redirect('Main_site:home')
+
+
+
+
+
+
+
 
 #++++++++++++++++++++++++++++++++++++++++++
 def load_classes(request):
@@ -152,8 +255,9 @@ def Edit_list(request, modelId):
         Equipment_Category,
         Equipment_Item,
         Equipment_Accessory,
+        News,
+        Contacts,
     ]
-
 
     if request.user.is_superuser == False:
         selected_models = models[2:]
@@ -193,6 +297,8 @@ def Edit_list(request, modelId):
                 data[2] = data[2].order_by('company__priority', 'equipment_class', 'equipment_category', 'item_name', )
             elif data[0] == 'Equipment_Accessory':
                 data[2] = data[2].order_by('company__priority', 'accessory_name', )
+            elif data[0] == 'News':
+                data[2] = data[2].order_by('company__priority', 'issued', )
 
 
         context = { 'mod_list': models_list,
@@ -246,3 +352,36 @@ def Catalog_item(request, company_slug, class_slug, category_slug, item_slug):
 
 
 #============================= CATALOG =============================
+
+
+
+#============================= NEWS =============================
+
+def Companys_News(request):
+    news_list = News.objects.all().order_by('-issued')
+    context = {'news_list': news_list}
+    return render(request,'news_list.html', context )
+
+def Company_News(request, news_slug):
+    news = News.objects.get(slug = news_slug)
+    multiple_imgs = News_Images.objects.filter(news__slug = news_slug)
+    context = { 'news': news,
+                'multiple_imgs' : multiple_imgs
+                }
+    return render(request,'news.html', context )
+
+
+#============================= NEWS =============================
+
+
+
+#============================= CONTACTS =============================
+
+def Contacts_data(request):
+    contacts = Contacts.objects.all().order_by('company__priority')
+    context = {
+        'contacts':contacts
+    }
+    return render(request, 'contacts.html', context)
+
+#============================= CONTACTS =============================
