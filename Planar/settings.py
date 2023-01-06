@@ -169,7 +169,7 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'Custom',
         'toolbar_Custom':[
             [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', ],
-            [ 'NumberedList', 'BulletedList','-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',],
+            [ 'NumberedList', 'BulletedList','-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Outdent', 'Indent',],
             [ 'Image', 'Table', 'HorizontalRule', 'SpecialChar'],
             [ 'Maximize', 'ShowBlocks' ],
             [ 'Link', 'Unlink', ],

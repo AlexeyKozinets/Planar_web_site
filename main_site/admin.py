@@ -1,7 +1,14 @@
 
 from django.contrib import admin
 
-from .models import  Company, Equipment_Class, Equipment_Category, Equipment_Item, Equipment_Accessory, News
+from .models import  (  Company,
+                        Equipment_Class,
+                        Equipment_Category,
+                        Equipment_Item,
+                        Equipment_Accessory,
+                        News,
+                        News_Images
+                    )
 from modeltranslation.admin import TranslationAdmin                 # <- multiLang:13) import TranslationAdmin (next: admin.py)
 
 
@@ -61,3 +68,4 @@ admin.site.register(Equipment_Category,Equipment_CategoryAdmin)
 admin.site.register(Equipment_Item,Equipment_ItemAdmin)
 admin.site.register(Equipment_Accessory,Equipment_AccessoryAdmin)
 admin.site.register(News,NewsAdmin)
+admin.site.register(News_Images)

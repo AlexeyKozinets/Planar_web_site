@@ -12,13 +12,23 @@ urlpatterns = [                                                 # <- multiLang:1
                     # ^_______________^___variables from edit_list.html, which relate with views.py
     path('settings_<str:modelId>/', views.Edit_list, name='edit_list'),
     path('sign/', views.Edit_list, name='edit_list'),
-    path('news/', views.Companys_News, name='news_list'),
-    path('news/<slug:news_slug>/', views.Company_News, name='news'),
+
+    path('settings/adding_news/', views.Add_news, name='add_news'),
+    path('settings/editind_news_<slug:news_slug>/', views.Edit_news, name='edit_news'),
+
     path('catalog/', views.Catalog_home, name='catalog_home'),
     path('catalog/<slug:company_slug>/', views.Catalog_classes, name='catalog_classes'),
     path('catalog/<slug:company_slug>/<slug:class_slug>/', views.Catalog_categories, name='catalog_categories'),
     path('catalog/<slug:company_slug>/<slug:class_slug>/<slug:category_slug>/', views.Catalog_items, name='catalog_items'),
     path('catalog/<slug:company_slug>/<slug:class_slug>/<slug:category_slug>/<slug:item_slug>/', views.Catalog_item, name='catalog_item'),
+
+    path('news/', views.Companys_News, name='news_list'),
+    path('news/<slug:news_slug>/', views.Company_News, name='news'),
+
+    path('contacts/', views.Contacts_data, name='companies_contacts'),
+
+
+
 ]
 
 

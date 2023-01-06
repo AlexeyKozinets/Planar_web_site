@@ -24,6 +24,13 @@ user_meta_verb_plr = _('Пользователи')
 news_meta_verb = _('Новость')
 news_meta_verb_plr = _('Новости')
 
+news_images_meta_verb = _('Изображения новсти')
+news_images_meta_verb_plr = _('Изображения новстей')
+
+contacts_meta_verb = _('Контактные данные')
+contacts_meta_verb_plr = _('Контактные данные')
+
+
 #====== Meta attr translation ======
 
 
@@ -45,6 +52,12 @@ imgs_verb =  _('Дополнительные зображения')
 priority_verb = _('Приоритет отображения')
 spec_verb = _('Технические характеристики')
 body_verb = _('Содержание статьи')
+news_verb = _('Новость')
+product_head_img_help =  _('Изображение класса, категории или самой продукции (если не выбрано, то используется "заглушка")')
+news_head_img_verb = _('Заглавное изображение в новости')
+additional_imgs_verb = _('Дополнительные изображения в новости')
+contacts_verb = _('Контактные данные')
+
 
 #====== verbose names translation ======
 

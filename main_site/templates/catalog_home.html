@@ -7,12 +7,12 @@
 
     <div class="catalog_container">
         {% for Company in companies_list %}
-            {% if Company.is_published %}
+            {% if Company.is_published and classes_list %}
                 <div class="company_products_container">
 
                     <div class="company_bar">
                         <div class="company_logo_container">
-                            <img src="{{ Company.head_img.url }}" class="company_logo">
+                            <img src="{{ Company.company_head_img.url }}" class="company_logo">
                         </div>
                         <div class="company_name_container">
                             {{ Company }}
@@ -26,8 +26,8 @@
                                     <a class="product_href" href="{% url 'Main_site:catalog_categories' class.company.slug class.slug %}">
 
                                         <div class="product_img_container" id="product_img_container">
-                                            {% if class.head_img %}
-                                                <img src="{{ class.head_img.url }}" class="product_img">
+                                            {% if class.product_head_img %}
+                                                <img src="{{ class.product_head_img.url }}" class="product_img">
                                             {% else %}
                                                 <img src="{% static 'place_holders/eq_place_holder.jpg' %}" class="product_img">
                                             {% endif %}

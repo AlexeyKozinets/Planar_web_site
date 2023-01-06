@@ -12,7 +12,7 @@
             <div class="product_info_bar">
                 <div class="product_dir">
                     <div class="product_info_logo_container">
-                        <img src="{{ class.company.head_img.url }}" class="company_logo">
+                        <img src="{{ class.company.company_head_img.url }}" class="company_logo">
                     </div>
                 </div>
                 <div class="product_description">
@@ -29,8 +29,8 @@
                     <a href="{% url 'Main_site:catalog_categories' class.company.slug class.slug %}">
 
                         <div class="product_img_container" id="product_img_container">
-                            {% if class.head_img %}
-                                <img src="{{ class.head_img.url }}" class="product_img">
+                            {% if class.product_head_img %}
+                                <img src="{{ class.product_head_img.url }}" class="product_img">
                             {% else %}
                                 <img src="{% static 'place_holders/eq_place_holder.jpg' %}" class="product_img">
                             {% endif %}

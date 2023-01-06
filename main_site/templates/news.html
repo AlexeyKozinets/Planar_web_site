@@ -9,51 +9,59 @@
         <div class="news_body">
             <div class="company_bar">
                 <div class="company_logo_container">
-                    <img src="{{ news.company.head_img.url }}" class="company_logo">
+                    <img src="{{ news.company.company_head_img.url }}" class="company_logo">
                 </div>
                 <div class="company_name_container">
                     {{ news.company }}
                 </div>
             </div>
 
-            <div class="head_img_container">
-                <img src="{{ news.head_img.url }}" class="head_img">
+            <div class="news_head_img_container">
+                <img src="{{ news.news_head_img.url }}" class="head_img">
             </div>
 
-            <div class="title_bar">
+            <div class="body_bar">
                 <div class="title">
-                    {{ news }}
+                        {{ news }}
                 </div>
+
                 <div class="body1">
-                    {{ news.body1|safe }}
+                    {% if news.body1 %}
+                        {{ news.body1|safe }}
+                    {% endif %}
                 </div>
-            </div>
 
-            <!-- {% if news.additional_imgs %}
-                <div class="slideshow-container">
-                    {% for img in news.additional_imgs %}
-                        <div class="mySlides fade">
-                            <div class="numbertext">1 / 3</div>
-                            <img src="{{ img.url }}" style="width:100%">
-                            <div class="text">Caption Text</div>
-                        </div>
-                    {% endfor %}
+                {% if multiple_imgs %}
+                    <div class="slideshow-container">
+                        {% for img in multiple_imgs %}
+                            <div class="mySlides fade">
+                                <div class="numbertext">{{ forloop.counter }} / {{ multiple_imgs|length }}</div>
+                                <img src="{{ img.additional_imgs.url }}" class="multi_imgs">
+                                <!-- <div class="text">Caption Text</div> -->
+                            </div>
+                        {% endfor %}
 
-                    <a class="prev" onclick="plusSlides(-1)">❮</a>
-                    <a class="next" onclick="plusSlides(1)">❯</a>
+                        <a class="prev" onclick="plusSlides(-1)">❮</a>
+                        <a class="next" onclick="plusSlides(1)">❯</a>
 
+                    </div>
+                    <br>
+                    <div style="text-align:center">
+                        {% for img in multiple_imgs %}
+                            <span class="dot" onclick="currentSlide({{ forloop.counter }})"></span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="body2">
+                    {% if news.body2 %}
+                        {{ news.body2|safe }}
+                    {% endif %}
                 </div>
-                <br>
-                <div style="text-align:center">
-                    {% for img in news.additional_imgs %}
-                    <span class="dot" onclick="currentSlide({{ forloop.counter }})"></span>
 
-                    {% endfor %}
+                <div class="issued_container">
+                    {{ news.issued }}
                 </div>
-            {% endif %} -->
-
-            <div class="issued_container">
-                {{ news.issued }}
             </div>
         </div>
 

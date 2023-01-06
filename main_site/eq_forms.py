@@ -1,11 +1,19 @@
 from django import forms
-from .models import Company, Equipment_Class, Equipment_Category, Equipment_Item, Equipment_Accessory, News
+from .models import (   Company,
+                        Equipment_Class,
+                        Equipment_Category,
+                        Equipment_Item,
+                        Equipment_Accessory,
+                        News,
+                        News_Images,
+                        Contacts,
+                    )
 
 
 class Company_Form(forms.ModelForm):
     class Meta:
         model = Company
-        fields = (  'is_published', 'head_img',
+        fields = (  'is_published', 'company_head_img',
                     'company_name_ru', 'company_name_en',
                     'priority',
                     )
@@ -14,7 +22,7 @@ class Company_Form(forms.ModelForm):
 class Equipment_Class_Form(forms.ModelForm):
     class Meta:
         model = Equipment_Class
-        fields = (  'is_published', 'head_img', 'company',
+        fields = (  'is_published', 'company', 'product_head_img',
                     'class_name_ru', 'class_name_en',                   # <- multiLang:16) now we can indicate model field
                     'short_description_ru', 'short_description_en',     # with different languages (next: create *app_name*/urls.py)
                     'full_description_ru', 'full_description_en',
@@ -33,7 +41,7 @@ class Equipment_Class_Form(forms.ModelForm):
 class Equipment_Category_Form(forms.ModelForm):
     class Meta:
         model = Equipment_Category
-        fields = (  'is_published', 'head_img', 'company','equipment_class',
+        fields = (  'is_published', 'company', 'equipment_class', 'product_head_img',
                     'category_name_ru', 'category_name_en',
                     'short_description_ru', 'short_description_en',
                     'full_description_ru', 'full_description_en',
@@ -73,7 +81,7 @@ class Equipment_Category_Form(forms.ModelForm):
 class Equipment_Item_Form(forms.ModelForm):
     class Meta:
         model = Equipment_Item
-        fields = (  'is_published', 'head_img', 'company','equipment_class', 'equipment_category',  #
+        fields = (  'is_published', 'company','equipment_class', 'equipment_category', 'product_head_img',  #
                     'item_name_ru', 'item_name_en',
                     'short_description_ru', 'short_description_en',
                     'full_description_ru', 'full_description_en',
@@ -117,7 +125,7 @@ class Equipment_Item_Form(forms.ModelForm):
 class Equipment_Accessory_Form(forms.ModelForm):
     class Meta:
         model = Equipment_Accessory
-        fields = (  'is_published', 'head_img', 'company','equipment',
+        fields = (  'is_published', 'company','equipment', 'product_head_img',
                     'accessory_name_ru', 'accessory_name_en',
                     'short_description_ru', 'short_description_en',
                     'full_description_ru', 'full_description_en',
@@ -140,20 +148,39 @@ class Equipment_Accessory_Form(forms.ModelForm):
 class News_Form(forms.ModelForm):
     class Meta:
         model = News
-        fields = (  'is_published', 'head_img', 'company',
+        fields = (  'is_published', 'company', 'news_head_img',
                     'title_ru', 'title_en',
                     'body1_ru', 'body1_en',
-                    'additional_imgs',
                     'body2_ru', 'body2_en',
                     )
-        widgets = {
-            'additional_imgs': forms.ClearableFileInput(attrs={'multiple': True}),
-        } # <- https://stackoverflow.com/questions/37419608/how-to-add-a-multiple-attribute-to-input-type-file-in-django-modelform
 
 
 
     def __init__(self,user,*args, **kwargs):
         super(News_Form,self).__init__(*args, **kwargs)
+
+        if user.is_superuser != True:
+            del self.fields['company']
+
+
+class News_Images_Form(forms.ModelForm):
+    class Meta:
+        model = News_Images
+        fields = [  'additional_imgs'] # <- can be both list and tupple
+        widgets = {
+            'additional_imgs' : forms.ClearableFileInput(attrs={'multiple': True}),
+        } # <- https://stackoverflow.com/questions/37419608/how-to-add-a-multiple-attribute-to-input-type-file-in-django-modelform
+
+
+class Contacts_Form(forms.ModelForm):
+    class Meta:
+        model = Contacts
+        fields = (  'is_published', 'company',
+                    'contact_data_ru', 'contact_data_en',
+                    )
+
+    def __init__(self,user,*args, **kwargs):
+        super(Contacts_Form,self).__init__(*args, **kwargs)
 
         if user.is_superuser != True:
             del self.fields['company']
