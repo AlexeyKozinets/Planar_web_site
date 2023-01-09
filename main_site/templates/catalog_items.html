@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/catalog_styles.css' %}">
+
+    <div class="catalog_container">
+
+        {% for item in items_list|slice:":1" %}
+
+            <div class="product_info_bar">
+                <div class="product_dir">
+                    <div class="product_info_logo_container">
+                        <a href=" {% url 'Main_site:catalog_classes' item.company.slug %}">
+                            <img src="{{ item.company.company_head_img.url }}" class="company_logo">
+                        </a>
+                    </div>
+
+                    <div class="product_parent_container">
+                        <a href=" {% url 'Main_site:catalog_categories' item.company.slug item.equipment_class.slug %}">
+                            <div class="product_grandparent">{{item.equipment_class}}</div>
+                        </a>
+                        <div class="product_parent">{{item.equipment_category}}</div>
+                    </div>
+                </div>
+                <div class="product_description">
+                    {{ item.equipment_category.full_description|safe }}
+                </div>
+            </div>
+
+
+
+        {% endfor %}
+
+
+        <div class="product_bar">
+            {% for item in items_list %}
+                {% if item.is_published %}
+                    <div class="product_card">
+                    <a href="{% url 'Main_site:catalog_item'  item.company.slug item.equipment_class.slug  item.equipment_category.slug  item.slug %}">
+
+                        <div class="product_img_container" id="product_img_container">
+                            {% if item.product_head_img %}
+                                <img src="{{ item.product_head_img.url }}" class="product_img">
+                            {% else %}
+                                <img src="{% static 'place_holders/eq_place_holder.jpg' %}" class="product_img">
+                            {% endif %}
+                        </div>
+
+                        <div class="product_name">
+                            {{ item }}
+                        </div>
+                    </a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/user_form_styles.css' %}">
+    <div class="form_frame">
+        <div class="forms_container">
+            <h1> {% trans 'Регистрация профиля' %}</h1>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button  class="addFormButton" type="submit">
+                    Ok
+                </button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

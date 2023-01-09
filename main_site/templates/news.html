@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/news_styles.css' %}">
+
+    <div class="news_container">
+        <div class="news_body">
+            <div class="company_bar">
+                <div class="company_logo_container">
+                    <img src="{{ news.company.company_head_img.url }}" class="company_logo">
+                </div>
+                <div class="company_name_container">
+                    {{ news.company }}
+                </div>
+            </div>
+
+            <div class="news_head_img_container">
+                <img src="{{ news.news_head_img.url }}" class="head_img">
+            </div>
+
+            <div class="body_bar">
+                <div class="title" id="news_title">
+                        {{ news }}
+                </div>
+
+                <div class="body1">
+                    {% if news.body1 %}
+                        {{ news.body1|safe }}
+                    {% endif %}
+                </div>
+
+                {% if multiple_imgs %}
+                    <div class="slideshow-container">
+                        {% for img in multiple_imgs %}
+                            <div class="mySlides fade">
+                                <div class="numbertext">{{ forloop.counter }} / {{ multiple_imgs|length }}</div>
+                                <img src="{{ img.additional_imgs.url }}" class="multi_imgs">
+                                <!-- <div class="text">Caption Text</div> -->
+                            </div>
+                        {% endfor %}
+
+                        <a class="prev" onclick="plusSlides(-1)">❮</a>
+                        <a class="next" onclick="plusSlides(1)">❯</a>
+
+                    </div>
+                    <br>
+                    <div style="text-align:center">
+                        {% for img in multiple_imgs %}
+                            <span class="dot" onclick="currentSlide({{ forloop.counter }})"></span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="body2">
+                    {% if news.body2 %}
+                        {{ news.body2|safe }}
+                    {% endif %}
+                </div>
+
+                <div class="issued_container">
+                    {{ news.issued }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+          showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+          showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+          let i;
+          let slides = document.getElementsByClassName("mySlides");
+          let dots = document.getElementsByClassName("dot");
+          if (n > slides.length) {slideIndex = 1}
+          if (n < 1) {slideIndex = slides.length}
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+          }
+          for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex-1].style.display = "block";
+          dots[slideIndex-1].className += " active";
+        }
+    </script>
+
+
+{% endblock %}

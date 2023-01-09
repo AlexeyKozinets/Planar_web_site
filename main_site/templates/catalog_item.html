@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/catalog_styles.css' %}">
+
+    <div class="catalog_container">
+
+        <div class="product_info_bar">
+            <div class="product_dir">
+                <div class="product_info_logo_container">
+                    <a href=" {% url 'Main_site:catalog_classes' item.company.slug %}">
+                        <img src="{{ item.company.company_head_img.url }}" class="company_logo">
+                    </a>
+                </div>
+
+                <div class="product_parent_container">
+                    <a href=" {% url 'Main_site:catalog_categories' item.company.slug item.equipment_class.slug %}">
+                        <div class="product_grandparent">{{item.equipment_class}}</div>
+                    </a>
+                    <a href=" {% url 'Main_site:catalog_items' item.company.slug item.equipment_class.slug item.equipment_category.slug %}">
+                        <div class="product_grandparent">{{item.equipment_category}}</div>
+                    </a>
+                    <div class="product_parent">{{item}}</div>
+                </div>
+            </div>
+            <div class="product_description">
+                {{ item.full_description|safe }}
+            </div>
+            <div class="product_img_container">
+                {% if item.product_head_img %}
+                    <img src="{{ item.product_head_img.url }}" class="product_img">
+                {% else %}
+                    <img src="{% static 'place_holders/eq_place_holder.jpg' %}" class="product_img">
+                {% endif %}
+            </div>
+            <div class="product_technical_specs">
+                {% if item.specifications %}
+                    {{ item.specifications|safe }}
+                {% endif %}
+            </div>
+        </div>
+
+        {% if accessories_list %}
+            <p> <b>Аксессуары</b> </p>
+            <div class="product_bar">
+                {% for accessory in accessories_list %}
+                    <div class="product_card">
+                        <a class="product_href" href="{% url 'Main_site:catalog_accessory' accessory.company.slug accessory.slug %}">
+                            <div class="product_img_container" id="product_img_container">
+                                {% if accessory.product_head_img %}
+                                    <img src="{{ accessory.product_head_img.url }}" class="product_img">
+                                {% else %}
+                                    <img src="{% static 'place_holders/place_holder.png' %}" class="product_img">
+                                {% endif %}
+                            </div>
+
+                            <div class="product_name">
+                                {{accessory}}
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+    </div>
+
+
+{% endblock %}

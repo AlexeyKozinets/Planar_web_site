@@ -1,0 +1,295 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-09 18:25+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\Planar\model_verbose_transtatios.py:5
+#: .\Planar\model_verbose_transtatios.py:41
+#: .\main_site\templates\add_data.html:13
+msgid "Компания"
+msgstr "Company"
+
+#: .\Planar\model_verbose_transtatios.py:6
+msgid "Компании"
+msgstr "Companies"
+
+#: .\Planar\model_verbose_transtatios.py:9
+msgid "Класс данных"
+msgstr "Data class"
+
+#: .\Planar\model_verbose_transtatios.py:10
+msgid "Классы данных"
+msgstr "Data classes"
+
+#: .\Planar\model_verbose_transtatios.py:12
+msgid "Категория данных"
+msgstr "Data category"
+
+#: .\Planar\model_verbose_transtatios.py:13
+msgid "Категории данных"
+msgstr "Data categories"
+
+#: .\Planar\model_verbose_transtatios.py:15
+msgid "Объект данных"
+msgstr "Data object"
+
+#: .\Planar\model_verbose_transtatios.py:16
+msgid "Объекты данных"
+msgstr "Data objects"
+
+#: .\Planar\model_verbose_transtatios.py:18
+msgid "Аксессуар объекта"
+msgstr "Object accessory"
+
+#: .\Planar\model_verbose_transtatios.py:19
+msgid "Аксессуары объектов"
+msgstr "Objects accessories"
+
+#: .\Planar\model_verbose_transtatios.py:21
+msgid "Пользователь"
+msgstr "User"
+
+#: .\Planar\model_verbose_transtatios.py:22 .\users\apps.py:8
+msgid "Пользователи"
+msgstr "Users"
+
+#: .\Planar\model_verbose_transtatios.py:24
+#: .\Planar\model_verbose_transtatios.py:55
+#: .\main_site\templates\add_news.html:13
+msgid "Новость"
+msgstr "News"
+
+#: .\Planar\model_verbose_transtatios.py:25
+msgid "Новости"
+msgstr "News"
+
+#: .\Planar\model_verbose_transtatios.py:27
+msgid "Изображения новсти"
+msgstr "News image"
+
+#: .\Planar\model_verbose_transtatios.py:28
+msgid "Изображения новстей"
+msgstr "News images"
+
+#: .\Planar\model_verbose_transtatios.py:30
+#: .\Planar\model_verbose_transtatios.py:31
+#: .\Planar\model_verbose_transtatios.py:59
+msgid "Контактные данные"
+msgstr "Contact data"
+
+#: .\Planar\model_verbose_transtatios.py:42
+#: .\main_site\templates\add_data.html:20
+msgid "Класс"
+msgstr "Class"
+
+#: .\Planar\model_verbose_transtatios.py:43
+#: .\main_site\templates\add_data.html:14
+msgid "Категория"
+msgstr "Category"
+
+#: .\Planar\model_verbose_transtatios.py:44
+msgid "Oборудование"
+msgstr "Equipment"
+
+#: .\Planar\model_verbose_transtatios.py:45
+msgid "Название"
+msgstr "Name"
+
+#: .\Planar\model_verbose_transtatios.py:46
+msgid "Заголовок"
+msgstr "Title"
+
+#: .\Planar\model_verbose_transtatios.py:47
+msgid "Предназанчение"
+msgstr "Purpose"
+
+#: .\Planar\model_verbose_transtatios.py:48
+msgid "Полное описание"
+msgstr "Full description"
+
+#: .\Planar\model_verbose_transtatios.py:49
+msgid "Отображение"
+msgstr "Display"
+
+#: .\Planar\model_verbose_transtatios.py:50
+msgid "Главное изображение"
+msgstr "Main image"
+
+#: .\Planar\model_verbose_transtatios.py:51
+msgid "Дополнительные зображения"
+msgstr "Additional images"
+
+#: .\main_site\templates\add_data.html:19
+msgid "Объект"
+msgstr "Object"
+
+#: .\main_site\templates\add_data.html:21
+msgid "Аксессуар"
+msgstr "Accessory"
+
+#: .\main_site\templates\registration\login.html:9
+msgid "Вход"
+msgstr "Login"
+
+#: .\users\templates\edit_sign.html:9
+msgid "Настройка профиля"
+msgstr "Profile settings"
+
+#: .\users\templates\edit_sign.html:11
+msgid "Данные пользователя"
+msgstr "User data"
+
+#: .\users\templates\edit_sign.html:23
+msgid "Пароль"
+msgstr "Password"
+
+#: .\users\templates\signup.html:8
+msgid "Регистрация профиля"
+msgstr "Profile registration"
+
+#: .\Planar\model_verbose_transtatios.py:52
+msgid "Приоритет отображения"
+msgstr "Display priority"
+
+#: .\Planar\model_verbose_transtatios.py:53
+msgid "Технические характеристики"
+msgstr "Specifications"
+
+#: .\Planar\model_verbose_transtatios.py:54
+msgid "Содержание статьи"
+msgstr "Article content"
+
+#: .\Planar\model_verbose_transtatios.py:56
+msgid ""
+"Изображение класса, категории или самой продукции (если не выбрано, то "
+"используется \"заглушка\")"
+msgstr "Image of data class, data category or data itself (if not selected, then used \"placeholder\")"
+
+#: .\Planar\model_verbose_transtatios.py:57
+msgid "Заглавное изображение в новости"
+msgstr "Main news image"
+
+#: .\Planar\model_verbose_transtatios.py:58
+msgid "Дополнительные изображения в новости"
+msgstr "Additional news images"
+
+#: .\Planar\model_verbose_transtatios.py:70
+msgid "Отображение данных на странице сайта."
+msgstr "Dispaly data on the web page"
+
+#: .\Planar\model_verbose_transtatios.py:71
+msgid ""
+"Определяет очередность отображения информации на странице сайта (1 - 99)."
+msgstr "Determines the order in which information is displayed on the site page (1 - 99)."
+
+#: .\Planar\model_verbose_transtatios.py:72
+msgid "Тескт статьи до карусели дополнительных изображений"
+msgstr "Article content before additional images carousel"
+
+#: .\Planar\model_verbose_transtatios.py:73
+msgid "Тескт статьи после карусели дополнительных изображений"
+msgstr "Article content after additional images carousel"
+
+#: .\Planar\settings.py:123
+msgid "Russian"
+msgstr ""
+
+#: .\Planar\settings.py:124
+msgid "English"
+msgstr ""
+
+
+#: .\main_site\apps.py:8
+msgid "Компании и оборудование"
+msgstr "Companies and equipments"
+
+
+#: .\main_site\templates\base.html:19
+msgid "КАТАЛОГ"
+msgstr "CATALOG"
+
+#: .\main_site\templates\base.html:26
+msgid "НОВОСТИ"
+msgstr "NEWS"
+
+#: .\main_site\templates\base.html:32
+msgid "КОНТАКТЫ"
+msgstr "CONTACTS"
+
+#: .\main_site\templates\base.html:39
+msgid "НАСТРОЙКИ"
+msgstr "SETTINGS"
+
+#: .\main_site\templates\base.html:61
+msgid "Выйти"
+msgstr "Logout"
+
+#: .\main_site\templates\base.html:68
+#: .\main_site\templates\registration\login.html:14
+msgid "Войти"
+msgstr "Login"
+
+#: .\main_site\templates\catalog_accessories.html:20
+#: .\main_site\templates\catalog_accessory.html:20
+#: .\main_site\templates\catalog_classes.html:61
+#: .\main_site\templates\catalog_home.html:64
+msgid "Аксессуары"
+msgstr "Accessories"
+
+#: .\main_site\templates\edit_list.html:85
+#: .\main_site\templates\edit_list.html:95
+#: .\main_site\templates\edit_list.html:105
+#: .\main_site\templates\edit_list.html:118
+#: .\main_site\templates\edit_list.html:134
+#: .\main_site\templates\edit_list.html:153
+#: .\main_site\templates\edit_list.html:166
+#: .\main_site\templates\edit_list.html:179
+msgid "данные активны"
+msgstr "data is active"
+
+#: .\main_site\templates\edit_list.html:88
+#: .\main_site\templates\edit_list.html:98
+#: .\main_site\templates\edit_list.html:111
+#: .\main_site\templates\edit_list.html:127
+#: .\main_site\templates\edit_list.html:146
+#: .\main_site\templates\edit_list.html:159
+#: .\main_site\templates\edit_list.html:172
+#: .\main_site\templates\edit_list.html:185
+msgid "данные не активны"
+msgstr "data is not active"
+
+#: .\main_site\templates\edit_list.html:108
+#: .\main_site\templates\edit_list.html:121
+#: .\main_site\templates\edit_list.html:137
+#: .\main_site\templates\edit_list.html:156
+#: .\main_site\templates\edit_list.html:169
+#: .\main_site\templates\edit_list.html:182
+msgid "данные скрыты: компания не активна"
+msgstr "data is hide: company is not active"
+
+#: .\main_site\templates\edit_list.html:124
+#: .\main_site\templates\edit_list.html:140
+msgid "данные скрыты: класс не активен"
+msgstr "data is hide: class is not active"
+
+#: .\main_site\templates\edit_list.html:143
+msgid "данные скрыты: категория не активна"
+msgstr "data is hide: category is not active"
+
+#: .\users\templates\edit_sign.html:16 .\users\templates\edit_sign.html:28
+msgid "Обновить"
+msgstr "Update"

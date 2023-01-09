@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/data_form_styles.css' %}">
+
+    <div class="form_frame">
+
+        <div class="form_container">
+
+
+            <h1>{% trans 'Новость' %}</h1>
+
+            <form   method="POST"
+                    enctype="multipart/form-data"
+                    class="form">
+
+
+                {% csrf_token %}
+                {{ form.media }}
+
+                <!-- https://docs.djangoproject.com/en/4.1/topics/forms/ -->
+                {% for field in form %}
+                    {% if field.name == 'body1_en' %}
+                        <p class="fieldWrapper">
+                            {{ field.errors }}
+                            {{ field.label_tag }} {{ field }}
+                            {% if field.help_text %}
+                                <span class="help">{{ field.help_text|safe }}</span>
+                            {% endif %}
+                        </p>
+
+                        <br>
+                        <p class="fieldWrapper2">
+                            {{ form2.additional_imgs.errors }}
+                            {{ form2.additional_imgs.label_tag }} {{ form2.additional_imgs }}
+                            {% if form2.additional_imgs.help_text %}
+                                <span class="help">{{ field.help_text|safe }}</span>
+                            {% endif %}
+                        </p>
+                        <br>
+
+                    {% else %}
+                        <p class="fieldWrapper">
+                            {{ field.errors }}
+                            {{ field.label_tag }} {{ field }}
+                            {% if field.help_text %}
+                                <span class="help">{{ field.help_text|safe }}</span>
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                {% endfor %}
+
+                <button class="formButton" type="submit">
+                    Ok
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

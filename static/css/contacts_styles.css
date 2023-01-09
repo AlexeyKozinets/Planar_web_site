@@ -1,0 +1,101 @@
+
+.contacts_container{
+    --catalog_container_width: 50em;
+    display: flex;
+    flex-direction: column;
+    /* border: 3px solid rgb(255, 0, 0); */
+    max-width: var(--catalog_container_width);
+    margin-top: 3em;
+    margin-left: max(2em, calc(50% - var(--catalog_container_width) / 2 ));
+    margin-right: 2em;
+    font-family: Calibri;
+    font-size: 1em;
+    padding: 1em;
+}
+
+
+.contact_card{
+    /* border: 2px solid rgb(124, 124, 124); */
+    box-shadow: 0px 1px 10px rgb(224, 213, 213);
+    margin-bottom: 2em;
+    padding: 1em 0em;
+    border-radius: 1em;
+    -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
+    -ms-border-radius: 1em;
+    -o-border-radius: 1em;
+}
+
+.contact_card:hover{
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+    transform: scale(1.02);
+    box-shadow: 0px 1px 15px rgb(124, 113, 113);
+    -webkit-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+    -o-transform: scale(1.02);
+}
+
+.company_bar{
+    --company_heigth: 2em;
+    z-index: -1;
+    display: flex;
+    /* border: 2px solid rgb(255, 209, 2); */
+    height: var(--company_heigth);
+    margin-left: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.company_logo_container{
+    width: var(--company_heigth);
+    height: var(--company_heigth);
+    /* border: 2px solid rgb(0, 60, 255); */
+}
+
+.company_logo{
+    height: 100%;
+    border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    -moz-border-radius: 0.5em;
+    -ms-border-radius: 0.5em;
+    -o-border-radius: 0.5em;
+    /* border: 2px solid rgb(9, 255, 0); */
+}
+
+
+.company_name_container{
+    display: flex;
+    align-items: center;
+    height: var(--company_heigth);
+    margin-left: 1em;
+    /* border: 2px solid rgb(255, 0, 234); */
+}
+
+
+.contact_data{
+  margin: 0em 1em;
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+
+}

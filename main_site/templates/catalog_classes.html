@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/catalog_styles.css' %}">
+
+    <div class="catalog_container">
+
+        {% for class in classes_list|slice:":1" %}
+
+            <div class="product_info_bar">
+                <div class="product_dir">
+                    <div class="product_info_logo_container">
+                        <img src="{{ class.company.company_head_img.url }}" class="company_logo">
+                    </div>
+                </div>
+                <div class="product_description">
+                    <!-- {{ class.full_description }} -->
+                </div>
+            </div>
+        {% endfor %}
+
+
+        <div class="product_bar">
+            {% for class in classes_list %}
+                {% if class.is_published %}
+                    <div class="product_card">
+                    <a href="{% url 'Main_site:catalog_categories' class.company.slug class.slug %}">
+
+                        <div class="product_img_container" id="product_img_container">
+                            {% if class.product_head_img %}
+                                <img src="{{ class.product_head_img.url }}" class="product_img">
+                            {% else %}
+                                <img src="{% static 'place_holders/eq_place_holder.jpg' %}" class="product_img">
+                            {% endif %}
+                        </div>
+
+                        <div class="product_name">
+                            {{ class }}
+                        </div>
+                    </a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+
+            <!-- accessories -->
+            {% for accessory in accessories_list|slice:":1" %}
+                    <div class="product_card">
+                        <a class="product_href" href="{% url 'Main_site:catalog_accessories' accessory.company.slug %}">
+                            <div class="product_img_container" id="product_img_container">
+                                {% if accessory.product_head_img %}
+                                    <img src="{{ accessory.product_head_img.url }}" class="product_img">
+                                {% else %}
+                                    <img src="{% static 'place_holders/place_holder.png' %}" class="product_img">
+                                {% endif %}
+                            </div>
+
+                            <div class="product_name">
+                                {% trans 'Аксессуары' %}
+                            </div>
+                        </a>
+                    </div>
+            {% endfor %}
+            <!-- accessories -->
+
+
+        </div>
+
+
+
+    </div>
+
+{% endblock %}

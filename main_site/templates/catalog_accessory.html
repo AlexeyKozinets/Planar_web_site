@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/catalog_styles.css' %}">
+
+    <div class="catalog_container">
+
+        <div class="product_info_bar">
+            <div class="product_dir">
+                <div class="product_info_logo_container">
+                    <a href=" {% url 'Main_site:catalog_classes' accessory.company.slug %}">
+                        <img src="{{ accessory.company.company_head_img.url }}" class="company_logo">
+                    </a>
+                </div>
+
+                <div class="product_parent_container">
+                    <a href=" {% url 'Main_site:catalog_accessories' accessory.company.slug %}">
+                        <div class="product_grandparent">{% trans 'Аксессуары' %}</div>
+                    </a>
+                    <div class="product_parent">{{accessory}}</div>
+                </div>
+            </div>
+            <div class="product_description">
+                {{ accessory.full_description|safe }}
+            </div>
+            <div class="product_img_container">
+                {% if accessory.product_head_img %}
+                    <img src="{{ accessory.product_head_img.url }}" class="product_img">
+                {% else %}
+                    <img src="{% static 'place_holders/eq_place_holder.jpg' %}" class="product_img">
+                {% endif %}
+            </div>
+            <div class="product_technical_specs">
+                {% if accessory.specifications %}
+                    {{ accessory.specifications|safe }}
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}

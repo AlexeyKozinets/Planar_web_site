@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/user_form_styles.css' %}">
+    <div class="form_frame">
+        <div class="forms_container">
+            <h1>{% trans 'Настройка профиля' %}</h1>
+            <div class="user_data">
+                <h3 class="form_name">{% trans 'Данные пользователя' %}</h3>
+                <form method="POST" >
+                    {% csrf_token %}
+                    {{ user_form.as_p }}
+                    <button class="editFormButton" type="submit">
+                        {% trans 'Обновить' %}
+                    </button>
+                </form>
+
+            </div>
+
+            <div class="user_password">
+                <h3 class="form_name" >{% trans 'Пароль' %}</h3>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ password_form.as_p }}
+                        <button class="editFormButton" type="submit">
+                            {% trans 'Обновить' %}
+                        </button>
+                    </form>
+            </div>
+
+            <a href = "{% url 'Main_site:edit_list' 0 %}" class="formRef">
+                <div class="formRef">
+                    Ok
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+
+{% endblock %}
