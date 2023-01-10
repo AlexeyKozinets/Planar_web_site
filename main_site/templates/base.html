@@ -1,7 +1,9 @@
 {% load static %}
 {% load i18n %}
 
-
+<script src="{% static 'js/jquery-3.6.3.min.js' %}"></script>
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/infinite.min.js' %}"></script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +28,7 @@
                     {% trans 'НОВОСТИ' %}
                 </a>
             </div>
+
 
             <div class="left_side_hrefs">
                 <a class="header_href" href = "{% url 'Main_site:companies_contacts' %}">

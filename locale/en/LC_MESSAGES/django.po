@@ -234,6 +234,7 @@ msgstr "CONTACTS"
 msgid "НАСТРОЙКИ"
 msgstr "SETTINGS"
 
+
 #: .\main_site\templates\base.html:61
 msgid "Выйти"
 msgstr "Logout"
@@ -243,10 +244,14 @@ msgstr "Logout"
 msgid "Войти"
 msgstr "Login"
 
+
+
+
 #: .\main_site\templates\catalog_accessories.html:20
 #: .\main_site\templates\catalog_accessory.html:20
 #: .\main_site\templates\catalog_classes.html:61
 #: .\main_site\templates\catalog_home.html:64
+#: .\main_site\templates\catalog_item.html:46
 msgid "Аксессуары"
 msgstr "Accessories"
 

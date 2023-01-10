@@ -1,5 +1,8 @@
 from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.urls import reverse
+from users.models import CustomUser
 from .eq_forms import ( Company_Form,
                         Equipment_Class_Form,
                         Equipment_Category_Form,
@@ -18,9 +21,6 @@ from .models import  (  Company,
                         News_Images,
                         Contacts,
                     )
-from django.urls import reverse
-from users.models import CustomUser
-
 
 
 def Home(request):
@@ -90,7 +90,7 @@ def Add_data(request,model_name):
 
         return render(request, 'add_data.html', context)
     else:
-        return redirect('Main_site:home')
+        return redirect('Main_site:catalog_home')
 
 
 
@@ -161,7 +161,7 @@ def Edit_data(request,model_name,data_slug):
 
         return render(request, 'add_data.html', context)
     else:
-        return redirect('Main_site:home')
+        return redirect('Main_site:catalog_home')
 
 
 
@@ -191,7 +191,7 @@ def Add_news(request):
                     }
         return render(request, 'add_news.html', context)
     else:
-        return redirect('Main_site:home')
+        return redirect('Main_site:catalog_home')
 
 
 
@@ -222,7 +222,7 @@ def Edit_news(request,news_slug):
                     }
         return render(request, 'add_news.html', context)
     else:
-        return redirect('Main_site:home')
+        return redirect('Main_site:catalog_home')
 
 
 
@@ -306,7 +306,7 @@ def Edit_list(request, modelId):
 
         return render(request, 'edit_list.html', context)
     else:
-        return redirect('Main_site:home')
+        return redirect('Main_site:catalog_home')
                         # ^___________________________ name of path in *app*.urls.py
 
 #============================= SETTINGS =============================
@@ -376,9 +376,19 @@ def Catalog_accessory(request, company_slug, accessory_slug):
 #============================= NEWS =============================
 
 def Companys_News(request):
-    news_list = News.objects.all().order_by('-issued')
-    context = {'news_list': news_list}
-    return render(request,'news_list.html', context )
+    news_list = News.objects.filter(company__is_published=True, is_published=True).order_by('-issued')
+    page = request.GET.get('page',1)
+    paginator = Paginator(news_list,2)
+    try:
+        pages = paginator.page(page)
+    except PageNotAnInteger:
+        pages = paginator.page(1)
+    except EmptyPage:
+        pages = paginator.page(paginator.num_pages)
+
+    context = {'pages': pages}
+    return render(request, 'news_list.html', context)
+
 
 def Company_News(request, news_slug):
     news = News.objects.get(slug = news_slug)
@@ -388,9 +398,7 @@ def Company_News(request, news_slug):
                 }
     return render(request,'news.html', context )
 
-
 #============================= NEWS =============================
-
 
 
 #============================= CONTACTS =============================

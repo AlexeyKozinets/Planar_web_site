@@ -4,39 +4,48 @@
 
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/news_styles.css' %}">
-
-    <div class="news_container">
-        {% for news in news_list %}
-            {% if news.company.is_published and news.is_published %}
-                <a href="{% url 'Main_site:news' news.slug %}">
-                    <div class="news_card">
+        <div class="news_container" >
+            {% for page in pages %}
+                <a href="{% url 'Main_site:news' page.slug %}" class="infinite-item">
+                    <div class="news_card" >
                         <div class="company_bar">
                             <div class="company_logo_container">
-                                <img src="{{ news.company.company_head_img.url }}" class="company_logo">
+                                <img src="{{ page.company.company_head_img.url }}" class="company_logo">
                             </div>
                             <div class="company_name_container">
-                                {{ news.company }}
+                                {{ page.company }}
                             </div>
                         </div>
 
                         <div class="list_head_img_container">
-                            <img src="{{ news.news_head_img.url }}" class="head_img">
+                            <img src="{{ page.news_head_img.url }}" class="head_img">
                         </div>
 
                         <div class="title_bar">
                             <div class="title">
-                                {{news}}
+                                {{page}}
                             </div>
                         </div>
 
                         <div class="issued_container">
-                            {{ news.issued }}
+                            {{ page.issued }}
                         </div>
                     </div>
                 </a>
-            {% endif %}
-        {% endfor %}
+            {% endfor %}
+        </div>
 
-    </div>
+    {% if pages.has_next %}
+        <a class="infinite-more-link" href="?page={{ pages.next_page_number }}">More</a>
+    {% endif %}
+
+
+    <script>
+        var infinite = new Waypoint.Infinite({
+          element: $('.news_container')[0]
+        });
+    </script>
+
+
 
 {% endblock %}
